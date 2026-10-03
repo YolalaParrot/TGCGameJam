@@ -1,7 +1,8 @@
 extends Area2D
 
+
 @export_file("*.tscn") var destination_scene: String
-@export var destination_spawn_id: String = ""
+@export var destination_spawn: String = ""
 
 var teleporting := false
 
@@ -14,11 +15,12 @@ func _on_body_entered(body: Node2D) -> void:
 	if teleporting:
 		return
 
-	if not body is CharacterBody2D:
+	if not body.is_in_group("player"):
 		return
 
 	teleporting = true
 
-	Global.set_player_spawn(destination_spawn_id)
-
-	get_tree().change_scene_to_file(destination_scene)
+	Global.teleport_player(
+		destination_scene,
+		destination_spawn
+	)

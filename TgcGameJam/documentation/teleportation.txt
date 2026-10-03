@@ -1,0 +1,16 @@
+working
+
+
+Town 1
+   ↓
+trigger_town_two
+   ↓
+change scene
+   ↓
+Town 2
+   ↓
+find_child("Spawn_From_Town1")
+   ↓
+player.global_position
+        =
+Spawn_From_Town1.global_position
