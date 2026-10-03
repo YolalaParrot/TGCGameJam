@@ -3,11 +3,14 @@ extends Node
 var flags := {
 	"met_friend":false
 }
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
 
+var gameState := {
+	"in_dialogue":false
+}
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+#Initial Dialogues(We will be changing these)
+var dialogues := {
+	"npc1":{"counter":0,"dialogues":{0:["Bro , Did you hear the news, the world is about to end!!!!!!!!
+","In 16hrsss!!!!"],1:["Quickly , Come out , We have to go to the hill"],
+}}
+}

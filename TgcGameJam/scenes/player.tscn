@@ -289,7 +289,6 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_giyli"]
-radius = 9.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vj8al"]
 radius = 18.027756
@@ -300,7 +299,7 @@ script = ExtResource("1_g2els")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1108039948]
 sprite_frames = SubResource("SpriteFrames_bde3n")
 animation = &"side_walk"
-frame_progress = 0.40119
+frame_progress = 0.79575676
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1165888745]
 position = Vector2(0, 11)

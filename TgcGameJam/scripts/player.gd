@@ -31,7 +31,7 @@ const SPEED = 100.0
 var current_dir = "none"
 
 @onready var interact_sensor: Area2D = $InteractSensor
-var current_interactable:Area2D = null
+@export var current_interactable:Area2D = null
 
 
 func _ready() -> void:
@@ -39,6 +39,8 @@ func _ready() -> void:
 	
 
 func _physics_process(delta: float) -> void:
+	if GameState.gameState.in_dialogue:
+		return
 	player_movement(delta)
 	find_best_interactable()
 
@@ -103,16 +105,24 @@ func find_best_interactable():
 	var best:Area2D = null
 	for area in interactable_areas:
 		if area.is_in_group("interactable"):
-			var d := global_position.distance_to(area.global_position)
-			if d<best_dist:
-				best_dist = d
-				best = area
+			if not (area.is_in_group("npc") and area.npc.NPC_Name not in GameState.dialogues):
+				var d := global_position.distance_to(area.global_position)
+				if d<best_dist:
+					best_dist = d
+					best = area
 	if best==current_interactable:
 		return
+	if current_interactable:
+		current_interactable.unfocus()
 	current_interactable = best
+	if current_interactable:
+		current_interactable.focus()
 
 func _unhandled_input(event: InputEvent) -> void:
+	if GameState.gameState.in_dialogue:
+		return
 	if event.is_action_pressed("interact") and current_interactable:
-		print("Bro , Did you hear , the world is about to end!!!!!!!!")
+		current_interactable.interact()
+		get_viewport().set_input_as_handled() 
 				
 				
