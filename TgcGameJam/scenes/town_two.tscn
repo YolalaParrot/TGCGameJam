@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://cnofrbn6kspow"]
+
+[node name="townTwo" type="Node2D" unique_id=1135322753]
+
+[node name="Spawn_From_Town1" type="Marker2D" parent="." unique_id=744649786]
