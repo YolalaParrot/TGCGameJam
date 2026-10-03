@@ -13,6 +13,8 @@ font_size = 6
 outline_size = 1
 outline_color = Color(0.30738604, 0.0709007, 0.055149846, 1)
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_5m8cj"]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_4wlns"]
 
 [node name="npc" type="AnimatableBody2D" unique_id=987617997 groups=["npc"]]
@@ -37,6 +39,7 @@ horizontal_alignment = 1
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=236355110]
 position = Vector2(0, -4)
 scale = Vector2(1.25, 1.4375001)
+sprite_frames = SubResource("SpriteFrames_5m8cj")
 autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=643911397]

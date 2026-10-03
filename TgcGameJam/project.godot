@@ -17,6 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+Transition="*uid://clr8dai2lygvc"
+Global="*uid://boj1pepofmtt0"
 GameState="*uid://r0vtbm1elera"
 DialogueBox="*uid://bspsx1u2wouwo"
 
