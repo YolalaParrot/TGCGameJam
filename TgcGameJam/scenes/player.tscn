@@ -289,7 +289,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_giyli"]
-radius = 9.0
+radius = 11.0
 
 [node name="player" type="CharacterBody2D" unique_id=1772785746]
 script = ExtResource("1_g2els")
