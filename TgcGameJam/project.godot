@@ -11,8 +11,14 @@ config_version=5
 [application]
 
 config/name="TGCGameJam"
+run/main_scene="uid://bxcmvk48bcfuv"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Transition="*uid://clr8dai2lygvc"
+Global="*uid://boj1pepofmtt0"
 
 [display]
 
@@ -29,4 +35,5 @@ project/assembly_name="TGCGameJam"
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
