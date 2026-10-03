@@ -3,6 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://j54lupoylhq8" path="res://scenes/player.tscn" id="1_nnsk1"]
 [ext_resource type="Texture2D" uid="uid://c13j1knb38xse" path="res://assets-temp/tilesets/decor_8x8.png" id="2_4wyf3"]
 [ext_resource type="Texture2D" uid="uid://drjmjyodgguar" path="res://assets-temp/tilesets/grass.png" id="3_k0juu"]
+[ext_resource type="PackedScene" uid="uid://chuvimfq0blnm" path="res://scenes/npc.tscn" id="4_71j4m"]
+[ext_resource type="Texture2D" uid="uid://cvcc2sducawnn" path="res://assets-temp/boy_idle_4x1.png" id="5_qfnet"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_71j4m"]
 texture = ExtResource("2_4wyf3")
@@ -14,6 +16,45 @@ texture = ExtResource("3_k0juu")
 [sub_resource type="TileSet" id="TileSet_giyli"]
 sources/1 = SubResource("TileSetAtlasSource_71j4m")
 sources/2 = SubResource("TileSetAtlasSource_qfnet")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i7141"]
+atlas = ExtResource("5_qfnet")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4mrxx"]
+atlas = ExtResource("5_qfnet")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7r4gi"]
+atlas = ExtResource("5_qfnet")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w7kh3"]
+atlas = ExtResource("5_qfnet")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e3hyu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i7141")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4mrxx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7r4gi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w7kh3")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_giyli"]
+radius = 9.0
 
 [node name="world" type="Node2D" unique_id=399076867]
 
@@ -32,3 +73,18 @@ position = Vector2(-4, -1)
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="collisions" unique_id=830799348]
 position = Vector2(-130.6101, -128.49072)
 polygon = PackedVector2Array(3.6101074, -0.50927734, 45.610107, 0.49072266, 88.61011, 0.49072266, 150.6101, 0.49072266, 205.6101, 0.49072266, 257.6101, 0.49072266, 259.6101, -0.50927734, 258.6101, 18.490723, 259.6101, 67.49072, 258.6101, 101.49072, 279.6101, 101.49072, 278.6101, 150.49072, 259.6101, 151.49072, 259.6101, 181.49072, 258.6101, 217.49072, 259.6101, 239.49072, 259.6101, 256.49072, 230.6101, 256.49072, 153.6101, 256.49072, 89.61011, 256.49072, 47.610107, 256.49072, 2.6101074, 255.49072, 2.6101074, 255.49072, 3.6101074, 193.49072, 1.6101074, 159.49072, -12.389893, 159.49072, -21.389893, 158.49072, -21.389893, 103.49072, 1.6101074, 103.49072, 1.6101074, 36.490723, 2.6101074, -13.509277, -9.389893, 40.490723, -7.3898926, 96.49072, -27.389893, 98.49072, -26.389893, 162.49072, -5.3898926, 167.49072, -4.3898926, 266.49072, 264.6101, 264.49072, 263.6101, 154.49072, 287.6101, 153.49072, 279.6101, 88.49072, 263.6101, 90.49072, 261.6101, -7.5092773, 4.6101074, -5.5092773)
+
+[node name="NPCs" type="Node" parent="." unique_id=794647156]
+
+[node name="npc1" parent="NPCs" unique_id=987617997 instance=ExtResource("4_71j4m")]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="NPCs/npc1" unique_id=680245748]
+position = Vector2(57, 4)
+scale = Vector2(1.25, 1.4375001)
+sprite_frames = SubResource("SpriteFrames_e3hyu")
+autoplay = "default"
+frame_progress = 0.5916376
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NPCs/npc1" unique_id=441172648]
+position = Vector2(57, 8)
+shape = SubResource("CircleShape2D_giyli")

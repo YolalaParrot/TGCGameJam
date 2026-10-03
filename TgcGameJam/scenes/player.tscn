@@ -289,7 +289,10 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_giyli"]
-radius = 11.0
+radius = 9.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vj8al"]
+radius = 18.027756
 
 [node name="player" type="CharacterBody2D" unique_id=1772785746]
 script = ExtResource("1_g2els")
@@ -297,8 +300,15 @@ script = ExtResource("1_g2els")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1108039948]
 sprite_frames = SubResource("SpriteFrames_bde3n")
 animation = &"side_walk"
-frame_progress = 0.42686877
+frame_progress = 0.40119
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1165888745]
-position = Vector2(0, 8)
+position = Vector2(0, 11)
 shape = SubResource("CircleShape2D_giyli")
+
+[node name="InteractSensor" type="Area2D" parent="." unique_id=534083677]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractSensor" unique_id=2109266089]
+position = Vector2(0, 10)
+shape = SubResource("CircleShape2D_vj8al")

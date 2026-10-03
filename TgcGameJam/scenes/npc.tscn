@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://chuvimfq0blnm"]
+
+[ext_resource type="Script" uid="uid://bjamdicy1rmb7" path="res://scripts/npc.gd" id="1_abqhh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7n8xq"]
+radius = 16.03122
+
+[node name="npc" type="AnimatableBody2D" unique_id=987617997]
+script = ExtResource("1_abqhh")
+
+[node name="Interactable" type="Area2D" parent="." unique_id=1725258466 groups=["interactable"]]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable" unique_id=818352050]
+position = Vector2(57, 8)
+shape = SubResource("CircleShape2D_7n8xq")
+
+[connection signal="body_entered" from="Interactable" to="." method="on_enter"]

@@ -27,16 +27,20 @@
 
 extends CharacterBody2D
 
-
 const SPEED = 100.0
 var current_dir = "none"
+
+@onready var interact_sensor: Area2D = $InteractSensor
+var current_interactable:Area2D = null
 
 
 func _ready() -> void:
 	$AnimatedSprite2D.play("front_idle")
+	
 
 func _physics_process(delta: float) -> void:
 	player_movement(delta)
+	find_best_interactable()
 
 
 func player_movement(delta: float) -> void:
@@ -92,3 +96,23 @@ func play_animation(movement: int) -> void:
 			anim.play("back_walk")
 		elif movement == 0:
 			anim.play("back_idle")
+
+func find_best_interactable():
+	var interactable_areas = interact_sensor.get_overlapping_areas()
+	var best_dist := INF
+	var best:Area2D = null
+	for area in interactable_areas:
+		if area.is_in_group("interactable"):
+			var d := global_position.distance_to(area.global_position)
+			if d<best_dist:
+				best_dist = d
+				best = area
+	if best==current_interactable:
+		return
+	current_interactable = best
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("interact") and current_interactable:
+		print("Bro , Did you hear , the world is about to end!!!!!!!!")
+				
+				
