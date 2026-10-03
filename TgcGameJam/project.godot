@@ -24,7 +24,6 @@ Global="*uid://boj1pepofmtt0"
 
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
-window/stretch/scale=4.0
 
 [dotnet]
 

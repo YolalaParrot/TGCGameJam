@@ -5,21 +5,22 @@
 [ext_resource type="PackedScene" uid="uid://j54lupoylhq8" path="res://scenes/player.tscn" id="3_rl0pi"]
 [ext_resource type="Script" uid="uid://dr8pkkxgjvkii" path="res://scripts/teleportation.gd" id="4_2dp04"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ogo75"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fwuwm"]
 texture = ExtResource("1_fwuwm")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qv2pw"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v1baj"]
 texture = ExtResource("2_v1baj")
 0:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_uvgno"]
-sources/1 = SubResource("TileSetAtlasSource_ogo75")
-sources/2 = SubResource("TileSetAtlasSource_qv2pw")
+sources/1 = SubResource("TileSetAtlasSource_fwuwm")
+sources/2 = SubResource("TileSetAtlasSource_v1baj")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t6cyu"]
 size = Vector2(20, 79)
 
 [node name="hillside" type="Node2D" unique_id=854784106]
+position = Vector2(-160, -144)
 
 [node name="TileMap" type="TileMap" parent="." unique_id=677866552]
 tile_set = SubResource("TileSet_uvgno")
@@ -46,4 +47,4 @@ rotation = 1.5707964
 shape = SubResource("RectangleShape2D_t6cyu")
 
 [node name="Spawn_From_Town2_To_Hillside" type="Marker2D" parent="." unique_id=1189767681]
-position = Vector2(162, 253)
+position = Vector2(161, 254)

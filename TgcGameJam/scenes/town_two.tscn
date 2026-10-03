@@ -20,6 +20,7 @@ sources/2 = SubResource("TileSetAtlasSource_dg0mw")
 size = Vector2(26, 71)
 
 [node name="townTwo" type="Node2D" unique_id=1135322753]
+position = Vector2(-160, -144)
 
 [node name="TileMap" type="TileMap" parent="." unique_id=322881452]
 tile_set = SubResource("TileSet_dq7sv")
