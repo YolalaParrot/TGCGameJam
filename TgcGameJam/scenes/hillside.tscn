@@ -3,7 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://c13j1knb38xse" path="res://assets-temp/tilesets/decor_8x8.png" id="1_fwuwm"]
 [ext_resource type="Texture2D" uid="uid://drjmjyodgguar" path="res://assets-temp/tilesets/grass.png" id="2_v1baj"]
 [ext_resource type="PackedScene" uid="uid://j54lupoylhq8" path="res://scenes/player.tscn" id="3_rl0pi"]
-[ext_resource type="Script" uid="uid://dr8pkkxgjvkii" path="res://scripts/teleportation.gd" id="4_2dp04"]
+[ext_resource type="PackedScene" uid="uid://bt3lpqrk2xw4e" path="res://scenes/teleporter.tscn" id="4_2dp04"]
+[ext_resource type="PackedScene" uid="uid://chuvimfq0blnm" path="res://scenes/npc.tscn" id="5_rl0pi"]
+[ext_resource type="Texture2D" uid="uid://cvcc2sducawnn" path="res://assets-temp/boy_idle_4x1.png" id="6_2dp04"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fwuwm"]
 texture = ExtResource("1_fwuwm")
@@ -18,6 +20,42 @@ sources/2 = SubResource("TileSetAtlasSource_v1baj")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t6cyu"]
 size = Vector2(20, 79)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kfime"]
+atlas = ExtResource("6_2dp04")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wu7dk"]
+atlas = ExtResource("6_2dp04")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_55ilf"]
+atlas = ExtResource("6_2dp04")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d5g2i"]
+atlas = ExtResource("6_2dp04")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ogo75"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kfime")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wu7dk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_55ilf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d5g2i")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}]
 
 [node name="hillside" type="Node2D" unique_id=854784106]
 position = Vector2(-160, -144)
@@ -36,8 +74,7 @@ position = Vector2(186, 225)
 position = Vector2(32.03731, 15.703709)
 polygon = PackedVector2Array(-0.037311554, 0.29629135, 255.96269, 0.29629135, 255.96269, 256.2963, 164.96269, 256.2963, 165.96269, 276.2963, 83.96269, 275.2963, 85.96269, 257.2963, 81.96269, 256.2963, 71.96269, 256.2963, -1.0373116, 256.2963, -0.037311554, -7.7037086, -3.0373116, -7.7037086, -5.0373116, 262.2963, 78.96269, 262.2963, 84.96269, 283.2963, 171.96269, 282.2963, 170.96269, 262.2963, 263.96268, 264.2963, 258.96268, -7.7037086, 1.9626884, -5.7037086)
 
-[node name="town_two_transition" type="Area2D" parent="." unique_id=62904960]
-script = ExtResource("4_2dp04")
+[node name="town_two_transition" parent="." unique_id=62904960 instance=ExtResource("4_2dp04")]
 destination_scene = "uid://cnofrbn6kspow"
 destination_spawn = "Spawn_From_Hillside"
 
@@ -48,3 +85,8 @@ shape = SubResource("RectangleShape2D_t6cyu")
 
 [node name="Spawn_From_Town2_To_Hillside" type="Marker2D" parent="." unique_id=1189767681]
 position = Vector2(161, 254)
+
+[node name="npc1" parent="." unique_id=987617997 instance=ExtResource("5_rl0pi")]
+position = Vector2(80, 75)
+NPC_Name = "npc1"
+frames = SubResource("SpriteFrames_ogo75")

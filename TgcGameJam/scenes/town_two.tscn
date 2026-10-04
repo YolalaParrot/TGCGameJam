@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://j54lupoylhq8" path="res://scenes/player.tscn" id="1_hp5pe"]
 [ext_resource type="Texture2D" uid="uid://c13j1knb38xse" path="res://assets-temp/tilesets/decor_8x8.png" id="2_m6nlh"]
 [ext_resource type="Texture2D" uid="uid://drjmjyodgguar" path="res://assets-temp/tilesets/grass.png" id="3_dg0mw"]
-[ext_resource type="Script" uid="uid://dr8pkkxgjvkii" path="res://scripts/teleportation.gd" id="4_m6nlh"]
+[ext_resource type="PackedScene" uid="uid://bt3lpqrk2xw4e" path="res://scenes/teleporter.tscn" id="4_m6nlh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m6nlh"]
 texture = ExtResource("2_m6nlh")
@@ -19,7 +19,7 @@ sources/2 = SubResource("TileSetAtlasSource_dg0mw")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bde3n"]
 size = Vector2(26, 71)
 
-[node name="townTwo" type="Node2D" unique_id=1135322753]
+[node name="town_two" type="Node2D" unique_id=1135322753]
 position = Vector2(-160, -144)
 
 [node name="TileMap" type="TileMap" parent="." unique_id=322881452]
@@ -36,8 +36,7 @@ position = Vector2(66, 131)
 position = Vector2(31.963741, 12.372334)
 polygon = PackedVector2Array(1.0362587, 2.6276665, 0.036258698, 3.6276665, 115.036255, 3.6276665, 116.036255, -22.372334, 186.03625, -20.372334, 186.03625, 3.6276665, 255.03625, 2.6276665, 256.03625, 258.62766, -2.9637413, 258.62766, 0.036258698, 257.62766, 0.036258698, 161.62767, -16.963741, 162.62767, -18.963741, 105.62767, -0.9637413, 105.62767, 0.036258698, 3.6276665, -0.9637413, 0.6276665, 1.0362587, -19.372334, -3.9637413, -20.372334, -3.9637413, 101.62767, -21.963741, 100.62767, -17.963741, 165.62767, -8.963741, 165.62767, -2.9637413, 164.62767, -1.9637413, 263.62766, 260.03625, 262.62766, 259.03625, -3.3723335, 187.03625, -4.3723335, 189.03625, -31.372334, 109.036255, -29.372334, 110.036255, -0.37233353, 14.036259, -3.3723335, 1.0362587, -19.372334, 3.0362587, 0.6276665)
 
-[node name="town_one_transition" type="Area2D" parent="." unique_id=845347112]
-script = ExtResource("4_m6nlh")
+[node name="town_one_transition" parent="." unique_id=845347112 groups=["teleporter"] instance=ExtResource("4_m6nlh")]
 destination_scene = "uid://bxcmvk48bcfuv"
 destination_spawn = "Spawn_From_Town2"
 
@@ -45,8 +44,7 @@ destination_spawn = "Spawn_From_Town2"
 position = Vector2(23, 147)
 shape = SubResource("RectangleShape2D_bde3n")
 
-[node name="hillside_transition" type="Area2D" parent="." unique_id=2016450678]
-script = ExtResource("4_m6nlh")
+[node name="hillside_transition" parent="." unique_id=2016450678 groups=["teleporter"] instance=ExtResource("4_m6nlh")]
 destination_scene = "uid://bb3bapmtugcwp"
 destination_spawn = "Spawn_From_Town2_To_Hillside"
 

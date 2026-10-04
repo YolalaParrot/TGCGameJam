@@ -1,12 +1,10 @@
 [gd_scene format=3 uid="uid://bxcmvk48bcfuv"]
 
 [ext_resource type="Texture2D" uid="uid://c13j1knb38xse" path="res://assets-temp/tilesets/decor_8x8.png" id="1_dlxhk"]
-[ext_resource type="PackedScene" uid="uid://chuvimfq0blnm" path="res://scenes/npc.tscn" id="1_kfime"]
 [ext_resource type="Texture2D" uid="uid://drjmjyodgguar" path="res://assets-temp/tilesets/grass.png" id="2_187fi"]
-[ext_resource type="Texture2D" uid="uid://cvcc2sducawnn" path="res://assets-temp/boy_idle_4x1.png" id="2_wu7dk"]
 [ext_resource type="PackedScene" uid="uid://j54lupoylhq8" path="res://scenes/player.tscn" id="3_kfime"]
-[ext_resource type="Script" uid="uid://dr8pkkxgjvkii" path="res://scripts/teleportation.gd" id="4_wu7dk"]
 [ext_resource type="Script" uid="uid://0dsu1akojwp0" path="res://scripts/cutscene_trigger.gd" id="4_187fi"]
+[ext_resource type="PackedScene" uid="uid://bt3lpqrk2xw4e" path="res://scenes/teleporter.tscn" id="4_wu7dk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qfnet"]
 texture = ExtResource("1_dlxhk")
@@ -19,41 +17,8 @@ texture = ExtResource("2_187fi")
 sources/1 = SubResource("TileSetAtlasSource_qfnet")
 sources/2 = SubResource("TileSetAtlasSource_i7141")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_kfime"]
-atlas = ExtResource("2_wu7dk")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wu7dk"]
-atlas = ExtResource("2_wu7dk")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_55ilf"]
-atlas = ExtResource("2_wu7dk")
-region = Rect2(32, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_d5g2i"]
-atlas = ExtResource("2_wu7dk")
-region = Rect2(48, 0, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_rv78h"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kfime")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wu7dk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_55ilf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_d5g2i")
-}],
-"loop": 1,
-"name": &"idle",
-"speed": 5.0
-}]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_euywh"]
+size = Vector2(40, 33)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_giyli"]
 size = Vector2(20, 49)
@@ -61,20 +26,12 @@ size = Vector2(20, 49)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bde3n"]
 size = Vector2(24, 56)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_euywh"]
-size = Vector2(40, 33)
-
 [node name="town_one" type="Node2D" unique_id=399076867]
 
 [node name="TileMap" type="TileMap" parent="." unique_id=1230093861]
 tile_set = SubResource("TileSet_giyli")
 format = 2
 layer_0/tile_data = PackedInt32Array(-131070, 2, 0, -262144, 2, 0, -262143, 2, 0, -262142, 2, 0, -262141, 2, 0, -262140, 2, 0, -196604, 2, 0, -196603, 2, 0, -131067, 2, 0, -65531, 2, 0, -65530, 2, 0, 6, 2, 0, 65542, 2, 0, 65541, 2, 0, 131077, 2, 0, 196613, 2, 0, 196612, 2, 0, 131075, 2, 0, 65539, 2, 0, 3, 2, 0, -65533, 2, 0, -65532, 2, 0, 5, 2, 0, 4, 2, 0, 65540, 2, 0, 131074, 2, 0, 131073, 2, 0, 131072, 2, 0, 196607, 2, 0, 131070, 2, 0, 131069, 2, 0, 65533, 2, 0, -3, 2, 0, -65539, 2, 0, -131074, 2, 0, -131073, 2, 0, -196608, 2, 0, -196607, 2, 0, -196606, 2, 0, -131069, 2, 0, 196606, 2, 0, 196605, 2, 0, 196604, 2, 0, 131067, 2, 0, 131066, 2, 0, 65530, 2, 0, 65529, 2, 0, -7, 2, 0, -65543, 2, 0, -131079, 2, 0, -196615, 2, 0, -196614, 2, 0, -262149, 2, 0, -262148, 2, 0, -262147, 2, 0, -262146, 2, 0, -262145, 2, 0, -196605, 2, 0, 196609, 2, 0, 196608, 2, 0, 262143, 2, 0, 262142, 2, 0, 262141, 2, 0, 262140, 2, 0, 196603, 2, 0, 65531, 2, 0, 65532, 2, 0, -2, 2, 0, -1, 2, 0, -65536, 2, 0, -65535, 2, 0, -65534, 2, 0, 65538, 2, 0, 65537, 2, 0, 65536, 2, 0, 0, 2, 0, 1, 2, 0, 131071, 2, 0, 65534, 2, 0, 65535, 2, 0, 2, 2, 0, -131071, 2, 0, -131072, 2, 0, -65537, 2, 0, -65538, 2, 0, -65540, 2, 0, -65541, 2, 0, -131068, 2, 0, -4, 2, 0, -5, 2, 0, -6, 2, 0, -65542, 2, 0, -131077, 2, 0, -131076, 2, 0, -131075, 2, 0, -131078, 2, 0, -196613, 2, 0, -196612, 2, 0, -196611, 2, 0, -327680, 2, 0, -327679, 2, 0, -327678, 2, 0, -327677, 2, 0, -196609, 2, 0, -196610, 2, 0, -262139, 2, 0, -262138, 2, 0, -262137, 2, 0, -196616, 2, 0, -262152, 2, 0, -262151, 2, 0, -262150, 2, 0, -131080, 2, 0, -65544, 2, 0, -8, 2, 0, -327676, 2, 0, -327675, 2, 0, -327674, 2, 0, -327673, 2, 0, -65529, 2, 0, -131065, 2, 0, -196601, 2, 0, -393209, 2, 0, -458745, 2, 0, -524281, 2, 0, -458760, 2, 0, -393224, 2, 0, -327688, 2, 0, -458759, 2, 0, -458758, 2, 0, -458757, 2, 0, -458756, 2, 0, -458755, 2, 0, -458754, 2, 0, -458753, 2, 0, -524288, 2, 0, -458751, 2, 0, -458750, 2, 0, -458749, 2, 0, -458748, 2, 0, -458747, 2, 0, -458746, 2, 0, -524282, 2, 0, -524283, 2, 0, -524284, 2, 0, -524285, 2, 0, -524286, 2, 0, -524287, 2, 0, 7, 2, 0, 65543, 2, 0, 131079, 2, 0, 196615, 2, 0, 262151, 2, 0, 327687, 2, 0, 393223, 2, 0, 458759, 2, 0, 458758, 2, 0, 458757, 2, 0, 458756, 2, 0, 458755, 2, 0, 458754, 2, 0, 458753, 2, 0, 458752, 2, 0, 524287, 2, 0, 524286, 2, 0, 524285, 2, 0, 524284, 2, 0, 524283, 2, 0, 524282, 2, 0, 524281, 2, 0, 524280, 2, 0, 65528, 2, 0, 131064, 2, 0, 196600, 2, 0, 262136, 2, 0, 327672, 2, 0, 393208, 2, 0, 458744, 2, 0, 131065, 2, 0, 196601, 2, 0, 262137, 2, 0, 327673, 2, 0, 393209, 2, 0, 458745, 2, 0, 458746, 2, 0, 458747, 2, 0, 393211, 2, 0, 393212, 2, 0, 393213, 2, 0, 393214, 2, 0, 458750, 2, 0, 458751, 2, 0, 393216, 2, 0, 393217, 2, 0, 393218, 2, 0, 393219, 2, 0, 393220, 2, 0, 393221, 2, 0, 393222, 2, 0, 327686, 2, 0, 262150, 2, 0, 196614, 2, 0, 131078, 2, 0, 262148, 2, 0, 131076, 2, 0, 196611, 2, 0, 262146, 2, 0, 262145, 2, 0, 196610, 2, 0, 262144, 2, 0, 327679, 2, 0, 327678, 2, 0, 327677, 2, 0, 327676, 2, 0, 131068, 2, 0, 262139, 2, 0, 327675, 2, 0, 327674, 2, 0, 393210, 2, 0, 196602, 2, 0, 262138, 2, 0, 458749, 2, 0, 458748, 2, 0, 393215, 2, 0, 327680, 2, 0, 327681, 2, 0, 327682, 2, 0, 327683, 2, 0, 327684, 2, 0, 327685, 2, 0, 262149, 2, 0, 262147, 2, 0, -131066, 2, 0, -196602, 2, 0, -393210, 2, 0, -393211, 2, 0, -393212, 2, 0, -393213, 2, 0, -393214, 2, 0, -393215, 2, 0, -393216, 2, 0, -327681, 2, 0, -327682, 2, 0, -327683, 2, 0, -327684, 2, 0, -327685, 2, 0, -327686, 2, 0, -327687, 2, 0, -393223, 2, 0, -393222, 2, 0, -393221, 2, 0, -393220, 2, 0, -393219, 2, 0, -393218, 2, 0, -393217, 2, 0, -458752, 2, 0)
-
-[node name="npc1" parent="." unique_id=987617997 instance=ExtResource("1_kfime")]
-position = Vector2(78, -13)
-NPC_Name = "npc1"
-frames = SubResource("SpriteFrames_rv78h")
 
 [node name="player" parent="." unique_id=1772785746 instance=ExtResource("3_kfime")]
 position = Vector2(-1, -23)
@@ -93,8 +50,7 @@ cutscene_id = "town1_intro"
 position = Vector2(4, 80)
 shape = SubResource("RectangleShape2D_euywh")
 
-[node name="town_two_transition" type="Area2D" parent="." unique_id=707145697]
-script = ExtResource("4_wu7dk")
+[node name="town_two_transition" parent="." unique_id=707145697 groups=["teleporter"] instance=ExtResource("4_wu7dk")]
 destination_scene = "uid://cnofrbn6kspow"
 destination_spawn = "Spawn_From_Town1"
 
@@ -102,8 +58,7 @@ destination_spawn = "Spawn_From_Town1"
 position = Vector2(138, -2.5)
 shape = SubResource("RectangleShape2D_giyli")
 
-[node name="farm_transition" type="Area2D" parent="." unique_id=1980557838]
-script = ExtResource("4_wu7dk")
+[node name="farm_transition" parent="." unique_id=1980557838 groups=["teleporter"] instance=ExtResource("4_wu7dk")]
 destination_scene = "uid://bx7oxrgvxhkk6"
 destination_spawn = "Spawn_From_Town1_To_Farm"
 

@@ -41,5 +41,3 @@ autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=643911397]
 shape = SubResource("CircleShape2D_4wlns")
-
-[connection signal="body_entered" from="Interactable" to="." method="on_enter"]

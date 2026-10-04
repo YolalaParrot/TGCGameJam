@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://c13j1knb38xse" path="res://assets-temp/tilesets/decor_8x8.png" id="1_k3ns2"]
 [ext_resource type="Texture2D" uid="uid://drjmjyodgguar" path="res://assets-temp/tilesets/grass.png" id="2_7byxm"]
 [ext_resource type="PackedScene" uid="uid://j54lupoylhq8" path="res://scenes/player.tscn" id="3_5q3ck"]
-[ext_resource type="Script" uid="uid://dr8pkkxgjvkii" path="res://scripts/teleportation.gd" id="4_6buwl"]
+[ext_resource type="PackedScene" uid="uid://bt3lpqrk2xw4e" path="res://scenes/teleporter.tscn" id="4_6buwl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fq2vd"]
 texture = ExtResource("1_k3ns2")
@@ -37,8 +37,7 @@ position = Vector2(32, 272)
 rotation = -1.5707964
 polygon = PackedVector2Array(-0.037311554, 0.29629135, 255.96269, 0.29629135, 255.96269, 256.2963, 164.96269, 256.2963, 165.96269, 276.2963, 83.96269, 275.2963, 85.96269, 257.2963, 81.96269, 256.2963, 71.96269, 256.2963, -1.0373116, 256.2963, -0.037311554, -7.7037086, -3.0373116, -7.7037086, -5.0373116, 262.2963, 78.96269, 262.2963, 84.96269, 283.2963, 171.96269, 282.2963, 170.96269, 262.2963, 263.96268, 264.2963, 258.96268, -7.7037086, 1.9626884, -5.7037086)
 
-[node name="town_one_transition" type="Area2D" parent="." unique_id=840987843]
-script = ExtResource("4_6buwl")
+[node name="town_one_transition" parent="." unique_id=840987843 instance=ExtResource("4_6buwl")]
 destination_scene = "uid://bxcmvk48bcfuv"
 destination_spawn = "Spawn_From_Farm"
 
