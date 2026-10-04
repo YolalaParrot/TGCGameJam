@@ -290,18 +290,18 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fwuwm"]
-size = Vector2(13, 20)
+size = Vector2(8, 20)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vj8al"]
 radius = 18.0
 
 [node name="player" type="CharacterBody2D" unique_id=1772785746 groups=["player"]]
+collision_layer = 3
 script = ExtResource("1_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1108039948]
 sprite_frames = SubResource("SpriteFrames_bde3n")
 animation = &"side_walk"
-frame_progress = 0.42686877
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1165888745]
 position = Vector2(0.5, 7)
