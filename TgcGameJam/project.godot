@@ -21,6 +21,13 @@ GameState="*uid://r0vtbm1elera"
 DialogueBox="*uid://bspsx1u2wouwo"
 Transition="*uid://clr8dai2lygvc"
 Global="*uid://boj1pepofmtt0"
+<<<<<<< Updated upstream
+=======
+GameState="*uid://r0vtbm1elera"
+DialogueBox="*uid://bspsx1u2wouwo"
+CutsceneManager="*uid://bx1lcbcdmfdbx"
+CutsceneRegistry="*uid://12rlg8q3ntla"
+>>>>>>> Stashed changes
 
 [display]
 
