@@ -46,4 +46,4 @@ rotation = 1.5707964
 shape = SubResource("RectangleShape2D_t6cyu")
 
 [node name="Spawn_From_Town2_To_Hillside" type="Marker2D" parent="." unique_id=1189767681]
-position = Vector2(161, 254)
+position = Vector2(160, 168)

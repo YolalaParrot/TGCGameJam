@@ -296,6 +296,7 @@ size = Vector2(10, 18)
 radius = 18.0
 
 [node name="player" type="CharacterBody2D" unique_id=1772785746 groups=["player"]]
+scale = Vector2(3, 3)
 collision_layer = 3
 script = ExtResource("1_g2els")
 
@@ -308,10 +309,11 @@ position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_fwuwm")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1036130193]
-limit_left = -128
-limit_top = -128
-limit_right = 128
-limit_bottom = 128
+position = Vector2(4, 0)
+limit_left = -1000
+limit_top = -496
+limit_right = 1000
+limit_bottom = 480
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 
@@ -328,5 +330,4 @@ autostart = true
 
 [node name="GuidanceArrow" type="Sprite2D" parent="." unique_id=1166762082]
 position = Vector2(18.5, 7)
-scale = Vector2(0.5625, 0.625)
 texture = ExtResource("3_qhqgy")

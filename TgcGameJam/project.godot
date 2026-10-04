@@ -28,7 +28,6 @@ CutsceneRegistry="*uid://12rlg8q3ntla"
 
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
-window/stretch/scale=4.0
 
 [dotnet]
 

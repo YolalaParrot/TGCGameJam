@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const SPEED = 5000.0
+const SPEED = 15000.0
 var current_dir = "none"
 
 @onready var interact_sensor: Area2D = $InteractSensor
