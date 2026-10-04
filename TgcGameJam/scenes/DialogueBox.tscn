@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bspsx1u2wouwo"]
 
-[ext_resource type="Script" uid="uid://d341pr8a5htw7" path="res://scenes/dialogue_box.gd" id="1_r2og1"]
+[ext_resource type="Script" uid="uid://d341pr8a5htw7" path="res://scripts/dialogue_box.gd" id="1_r2og1"]
 [ext_resource type="FontFile" uid="uid://bknfx4r2aon3s" path="res://assets-temp/m5x7.ttf" id="2_giuoe"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_r2og1"]

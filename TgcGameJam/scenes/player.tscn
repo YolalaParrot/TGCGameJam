@@ -288,26 +288,35 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_giyli"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fwuwm"]
+size = Vector2(13, 20)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vj8al"]
-radius = 18.027756
+radius = 18.0
 
-[node name="player" type="CharacterBody2D" unique_id=1772785746]
+[node name="player" type="CharacterBody2D" unique_id=1772785746 groups=["player"]]
 script = ExtResource("1_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1108039948]
 sprite_frames = SubResource("SpriteFrames_bde3n")
 animation = &"side_walk"
-frame_progress = 0.79575676
+frame_progress = 0.42686877
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1165888745]
-position = Vector2(0, 11)
-shape = SubResource("CircleShape2D_giyli")
+position = Vector2(0.5, 7)
+shape = SubResource("RectangleShape2D_fwuwm")
 
-[node name="InteractSensor" type="Area2D" parent="." unique_id=534083677]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1036130193]
+limit_left = -128
+limit_top = -128
+limit_right = 128
+limit_bottom = 128
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+
+[node name="InteractSensor" type="Area2D" parent="." unique_id=1621195266]
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractSensor" unique_id=2109266089]
-position = Vector2(0, 10)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractSensor" unique_id=388965279]
+position = Vector2(0, 7)
 shape = SubResource("CircleShape2D_vj8al")
