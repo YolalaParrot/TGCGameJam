@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cvcc2sducawnn" path="res://assets-temp/boy_idle_4x1.png" id="2_wu7dk"]
 [ext_resource type="PackedScene" uid="uid://j54lupoylhq8" path="res://scenes/player.tscn" id="3_kfime"]
 [ext_resource type="Script" uid="uid://dr8pkkxgjvkii" path="res://scripts/teleportation.gd" id="4_wu7dk"]
+[ext_resource type="Script" uid="uid://0dsu1akojwp0" path="res://scripts/cutscene_trigger.gd" id="4_187fi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qfnet"]
 texture = ExtResource("1_dlxhk")
@@ -60,6 +61,9 @@ size = Vector2(20, 49)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bde3n"]
 size = Vector2(24, 56)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_euywh"]
+size = Vector2(40, 33)
+
 [node name="town_one" type="Node2D" unique_id=399076867]
 
 [node name="TileMap" type="TileMap" parent="." unique_id=1230093861]
@@ -112,6 +116,3 @@ position = Vector2(111, 0)
 
 [node name="Spawn_From_Farm" type="Marker2D" parent="." unique_id=1141174396]
 position = Vector2(-97, 0)
-
-[connection signal="body_entered" from="town_two_transition" to="." method="_on_town_two_transition_body_entered"]
-[connection signal="body_exited" from="town_two_transition" to="." method="_on_town_two_transition_body_exited"]
