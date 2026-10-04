@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://bxcmvk48bcfuv"]
 
-[ext_resource type="Script" uid="uid://i5ssl3ye8g23" path="res://scripts/world.gd" id="1_k0juu"]
 [ext_resource type="PackedScene" uid="uid://j54lupoylhq8" path="res://scenes/player.tscn" id="1_nnsk1"]
 [ext_resource type="Texture2D" uid="uid://c13j1knb38xse" path="res://assets-temp/tilesets/decor_8x8.png" id="2_4wyf3"]
 [ext_resource type="Texture2D" uid="uid://drjmjyodgguar" path="res://assets-temp/tilesets/grass.png" id="3_k0juu"]
@@ -20,7 +19,7 @@ sources/2 = SubResource("TileSetAtlasSource_qfnet")
 size = Vector2(20, 49)
 
 [node name="world" type="Node2D" unique_id=399076867]
-script = ExtResource("1_k0juu")
+position = Vector2(0, -1)
 
 [node name="TileMap" type="TileMap" parent="." unique_id=1230093861]
 tile_set = SubResource("TileSet_giyli")
