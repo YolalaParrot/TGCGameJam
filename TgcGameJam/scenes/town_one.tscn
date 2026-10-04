@@ -5,8 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://drjmjyodgguar" path="res://assets-temp/tilesets/grass.png" id="2_187fi"]
 [ext_resource type="Texture2D" uid="uid://cvcc2sducawnn" path="res://assets-temp/boy_idle_4x1.png" id="2_wu7dk"]
 [ext_resource type="PackedScene" uid="uid://j54lupoylhq8" path="res://scenes/player.tscn" id="3_kfime"]
-[ext_resource type="Script" uid="uid://dr8pkkxgjvkii" path="res://scripts/teleportation.gd" id="4_wu7dk"]
 [ext_resource type="Script" uid="uid://0dsu1akojwp0" path="res://scripts/cutscene_trigger.gd" id="4_187fi"]
+[ext_resource type="Script" uid="uid://dr8pkkxgjvkii" path="res://scripts/teleportation.gd" id="4_wu7dk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qfnet"]
 texture = ExtResource("1_dlxhk")
@@ -55,14 +55,14 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_euywh"]
+size = Vector2(40, 33)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_giyli"]
 size = Vector2(20, 49)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bde3n"]
 size = Vector2(24, 56)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_euywh"]
-size = Vector2(40, 33)
 
 [node name="town_one" type="Node2D" unique_id=399076867]
 
@@ -88,6 +88,7 @@ polygon = PackedVector2Array(3.6101074, -0.50927734, 45.610107, 0.49072266, 88.6
 [node name="CutsceneTrigger" type="Area2D" parent="." unique_id=969233625]
 script = ExtResource("4_187fi")
 cutscene_id = "town1_intro"
+play_once = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CutsceneTrigger" unique_id=1965274357]
 position = Vector2(4, 80)

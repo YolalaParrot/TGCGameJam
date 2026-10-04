@@ -1,9 +1,13 @@
 extends Node2D
 
+@onready var comic_cutscene = $ComicCutscene
+
 
 func play() -> void:
 	print("Cutscene started: ", get_parent().name)
 
-	await get_tree().create_timer(2.0).timeout
+	comic_cutscene.visible = true
+
+	await comic_cutscene.play()
 
 	print("Cutscene finished: ", get_parent().name)
