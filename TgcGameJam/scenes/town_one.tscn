@@ -43,6 +43,7 @@ polygon = PackedVector2Array(3.6101074, -0.50927734, 45.610107, 0.49072266, 88.6
 [node name="CutsceneTrigger" type="Area2D" parent="." unique_id=969233625]
 script = ExtResource("4_187fi")
 cutscene_id = "town1_intro"
+play_once = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CutsceneTrigger" unique_id=1965274357]
 position = Vector2(4, 80)
