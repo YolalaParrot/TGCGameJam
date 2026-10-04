@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const SPEED = 100.0
+const SPEED = 4000.0
 var current_dir = "none"
 
 @onready var interact_sensor: Area2D = $InteractSensor
@@ -34,11 +34,12 @@ func show_arrow() -> void:
 	guidance_arrow.visible = target_item != null
 	if target_item:
 		next_task_target = target_item
+		
+		# Small Fading Animation for Arrow
 		if arrow_tween:
 			arrow_tween.kill()
 		guidance_arrow.visible = true
 		guidance_arrow.modulate.a = 0.0
-
 		arrow_tween = create_tween()
 		arrow_tween.tween_property(guidance_arrow, "modulate:a", 1.0, 0.3)
 		arrow_tween.tween_interval(1.5)
@@ -85,27 +86,35 @@ func _physics_process(delta: float) -> void:
 	find_best_interactable()
 
 func player_movement(delta: float) -> void:
-	if Input.is_action_pressed("ui_right"):
-		current_dir = "right"
+	var is_right = Input.is_action_pressed("ui_right")
+	var is_left = Input.is_action_pressed("ui_left")
+	var is_down = Input.is_action_pressed("ui_down")
+	var is_up = Input.is_action_pressed("ui_up")
+	if is_right:
+		if not (is_up or is_down):
+			velocity.y = 0
+			current_dir = "right"
 		play_animation(1)
-		velocity.x = SPEED
-		velocity.y = 0
-	elif Input.is_action_pressed("ui_left"):
-		current_dir = "left"
+		velocity.x = SPEED*delta
+	if is_left:
+		if not (is_up or is_down):
+			velocity.y = 0
+			current_dir = "left"
 		play_animation(1)
-		velocity.x = -SPEED
-		velocity.y = 0
-	elif Input.is_action_pressed("ui_down"):
-		current_dir = "down"
+		velocity.x = -SPEED*delta
+	if is_down:
+		if not (is_left or is_right):
+			velocity.x = 0
+			current_dir = "down"
 		play_animation(1)
-		velocity.y = SPEED
-		velocity.x = 0
-	elif Input.is_action_pressed("ui_up"):
-		current_dir = "up"
+		velocity.y = SPEED*delta
+	if Input.is_action_pressed("ui_up"):
+		if not (is_left or is_right):
+			velocity.x = 0
+			current_dir = "up"
 		play_animation(1)
-		velocity.y = -SPEED
-		velocity.x = 0
-	else:
+		velocity.y = -SPEED*delta
+	if not (is_left or is_up or is_down or is_right):
 		play_animation(0)
 		velocity = Vector2.ZERO
 	move_and_slide()
