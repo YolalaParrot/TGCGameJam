@@ -2468,9 +2468,14 @@ shadow_enabled = true
 texture = SubResource("GradientTexture2D_ky188")
 texture_scale = 1.75
 
-[node name="Camera2D" type="Camera2D" parent="player" unique_id=988624478]
+[node name="Camera2D" parent="player"]
 position = Vector2(1, 8)
-scale = Vector2(1, 0.99999994)
+limit_left = -10000000
+limit_top = -10000000
+limit_right = 10000000
+limit_bottom = 10000000
+drag_horizontal_enabled = false
+drag_vertical_enabled = false
 position_smoothing_enabled = true
 
 [node name="Labels" type="Node" parent="player" unique_id=574027798]
@@ -2521,3 +2526,5 @@ scale = Vector2(0.195, 0.195)
 
 [node name="TileMapLayer3" type="TileMapLayer" parent="." unique_id=1786250024]
 tile_set = SubResource("TileSet_51nrd")
+
+[editable path="player"]

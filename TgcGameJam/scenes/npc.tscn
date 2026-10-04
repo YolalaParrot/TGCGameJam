@@ -9,7 +9,7 @@ radius = 16.03122
 
 [sub_resource type="LabelSettings" id="LabelSettings_nh2m4"]
 font = ExtResource("2_abqhh")
-font_size = 6
+font_size = 7
 outline_size = 1
 outline_color = Color(0.30738604, 0.0709007, 0.055149846, 1)
 
@@ -29,9 +29,9 @@ shape = SubResource("CircleShape2D_7n8xq")
 
 [node name="Label" type="Label" parent="Interactable" unique_id=751770322]
 offset_left = -8.0
-offset_top = -20.0
+offset_top = -22.0
 offset_right = 9.0
-offset_bottom = -14.0
+offset_bottom = -13.0
 label_settings = SubResource("LabelSettings_nh2m4")
 horizontal_alignment = 1
 
