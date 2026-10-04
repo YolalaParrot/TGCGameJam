@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://bxcmvk48bcfuv"]
 
 [ext_resource type="Texture2D" uid="uid://c13j1knb38xse" path="res://assets-temp/tilesets/decor_8x8.png" id="1_dlxhk"]
+[ext_resource type="PackedScene" uid="uid://chuvimfq0blnm" path="res://scenes/npc.tscn" id="1_kfime"]
 [ext_resource type="Texture2D" uid="uid://drjmjyodgguar" path="res://assets-temp/tilesets/grass.png" id="2_187fi"]
+[ext_resource type="Texture2D" uid="uid://cvcc2sducawnn" path="res://assets-temp/boy_idle_4x1.png" id="2_wu7dk"]
 [ext_resource type="PackedScene" uid="uid://j54lupoylhq8" path="res://scenes/player.tscn" id="3_kfime"]
 [ext_resource type="Script" uid="uid://0dsu1akojwp0" path="res://scripts/cutscene_trigger.gd" id="4_187fi"]
 [ext_resource type="PackedScene" uid="uid://bt3lpqrk2xw4e" path="res://scenes/teleporter.tscn" id="4_wu7dk"]
@@ -25,6 +27,42 @@ size = Vector2(20, 49)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bde3n"]
 size = Vector2(24, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kfime"]
+atlas = ExtResource("2_wu7dk")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wu7dk"]
+atlas = ExtResource("2_wu7dk")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_55ilf"]
+atlas = ExtResource("2_wu7dk")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d5g2i"]
+atlas = ExtResource("2_wu7dk")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wu7dk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kfime")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wu7dk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_55ilf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d5g2i")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}]
 
 [node name="town_one" type="Node2D" unique_id=399076867]
 
@@ -71,3 +109,8 @@ position = Vector2(111, 0)
 
 [node name="Spawn_From_Farm" type="Marker2D" parent="." unique_id=1141174396]
 position = Vector2(-97, 0)
+
+[node name="npc1" parent="." unique_id=987617997 instance=ExtResource("1_kfime")]
+position = Vector2(80, 50)
+NPC_Name = "npc1"
+frames = SubResource("SpriteFrames_wu7dk")

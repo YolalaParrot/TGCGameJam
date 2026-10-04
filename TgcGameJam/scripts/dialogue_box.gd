@@ -2,6 +2,7 @@ extends CanvasLayer
 @onready var panel: PanelContainer = $PanelContainer
 
 @onready var dialogue: Label = $PanelContainer/VBoxContainer/Dialogue
+@onready var name_label: Label = $PanelContainer/VBoxContainer/Name
 var index:=0
 var speaker:String = ""
 var dialogues: Array = []
@@ -33,7 +34,9 @@ func show_current_dialogue():
 	if index>=dialogues.size():
 		close_box()
 		return
-	dialogue.text = dialogues[index]
+	var line: Dictionary = dialogues[index]
+	name_label.text = line.keys()[0]
+	dialogue.text = line.values()[0]
 
 func close_box():
 	if speaker and speaker in GameState.dialogues and index>=dialogues.size():
@@ -50,6 +53,7 @@ func show_dialogues(new_speaker: String,new_dialogues: Array):
 	dialogues = new_dialogues
 	index = 0
 	if dialogues.is_empty():
+		name_label.text = ""
 		dialogue.text = "..."
 	else:
 		show_current_dialogue()

@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const SPEED = 4000.0
+const SPEED = 5000.0
 var current_dir = "none"
 
 @onready var interact_sensor: Area2D = $InteractSensor
@@ -14,7 +14,6 @@ var arrow_tween:Tween
 
 func _ready() -> void:
 	$AnimatedSprite2D.play("front_idle")
-	arrow_timer.timeout.connect(show_arrow)
 	arrow_radius = guidance_arrow.position.length()
 	guidance_arrow.visible = false
 
@@ -171,6 +170,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	if event.is_action_pressed("interact") and current_interactable:
 		current_interactable.interact()
-		get_viewport().set_input_as_handled() 
+		get_viewport().set_input_as_handled()
+	if event.is_action_pressed("guide"):
+		show_arrow()
 				
 				

@@ -6,7 +6,7 @@ extends Area2D
 signal interacted
 
 func focus():
-	if owner.NPC_Name in GameState.dialogues:
+	if owner.NPC_Name in GameState.dialogues and not GameState.get_dialogue(owner.NPC_Name).is_empty():
 		label.text = "Talk"
 	else:
 		label.text = ""

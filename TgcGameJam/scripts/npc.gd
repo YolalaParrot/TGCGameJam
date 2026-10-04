@@ -13,12 +13,14 @@ func _ready() -> void:
 
 
 func _on_interacted():
-	var npc_dialogue_data = GameState.dialogues[NPC_Name]
-	var npc_dialogues = npc_dialogue_data.dialogues
-	var npc_counter = npc_dialogue_data.counter%npc_dialogues.size()
+	var npc_count = GameState.dialogues[NPC_Name].counter
+	var npc_dialogues = GameState.get_dialogue(NPC_Name)
+	if npc_dialogues.size()==0:
+		DialogueBox.show_dialogues(NPC_Name,[])
+		return
+	var npc_counter = npc_count%npc_dialogues.size()
 	print(npc_dialogues[npc_counter])
-	if npc_counter in npc_dialogues:
+	if npc_counter<npc_dialogues.size():
 		DialogueBox.show_dialogues(NPC_Name,npc_dialogues[npc_counter])
 	else:
 		print("")
-	print("Bro , Did you hear , the world is about to end!!!!!!!!")
