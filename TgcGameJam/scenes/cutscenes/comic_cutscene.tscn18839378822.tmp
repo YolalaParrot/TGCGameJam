@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://cyg7jppqcnuq8"]
 
 [ext_resource type="Script" uid="uid://e7hviaegvnhn" path="res://scripts/cutscenes/comic_cutscene.gd" id="1_240vi"]
+[ext_resource type="Texture2D" uid="uid://g4jtgl3r0aub" path="res://assets-temp/hitler_gamejam.jpeg" id="2_xqs4p"]
+[ext_resource type="Texture2D" uid="uid://cu6ewcbg2vxdq" path="res://icon.svg" id="3_l8fuw"]
 
 [node name="ComicCutscene" type="CanvasLayer" unique_id=1577575772]
 layer = 10
@@ -37,35 +39,38 @@ layout_mode = 2
 
 [node name="TopHolder" type="Control" parent="Page/PageContent" unique_id=312260758]
 layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-grow_horizontal = 2
+anchors_preset = 0
+metadata/_edit_use_anchors_ = true
 
 [node name="TopPanel" type="TextureRect" parent="Page/PageContent/TopHolder" unique_id=1176501235]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 0.5
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -5.0
 grow_horizontal = 2
-grow_vertical = 2
+texture = ExtResource("2_xqs4p")
 expand_mode = 1
 stretch_mode = 6
 
 [node name="BottomHolder" type="Control" parent="Page/PageContent" unique_id=1995236800]
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 0
+anchors_preset = 0
 
 [node name="BottomPanel" type="TextureRect" parent="Page/PageContent/BottomHolder" unique_id=1218409272]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
+anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 5.0
+offset_right = -10.0
+offset_bottom = -10.0
 grow_horizontal = 2
-grow_vertical = 2
+texture = ExtResource("3_l8fuw")
 expand_mode = 1
 stretch_mode = 6

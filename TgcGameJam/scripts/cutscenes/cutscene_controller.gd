@@ -6,8 +6,6 @@ extends Node2D
 func play() -> void:
 	print("Cutscene started: ", get_parent().name)
 
-	comic_cutscene.visible = true
-
 	await comic_cutscene.play()
 
 	print("Cutscene finished: ", get_parent().name)

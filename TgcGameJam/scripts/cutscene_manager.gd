@@ -1,6 +1,5 @@
 extends Node
 
-
 var playing := false
 
 
@@ -23,6 +22,9 @@ func play_cutscene(cutscene_id: String) -> void:
 
 	player.set_physics_process(false)
 
+	# Fade gameplay to black.
+	await Transition.fade_out(0.8)
+
 	var cutscene_data := CutsceneRegistry.get_cutscene(cutscene_id)
 	var scene_path: String = cutscene_data.get("scene", "")
 
@@ -30,6 +32,7 @@ func play_cutscene(cutscene_id: String) -> void:
 		push_error("CUTSCENE HAS NO SCENE: " + cutscene_id)
 		player.set_physics_process(true)
 		playing = false
+		await Transition.fade_in(0.8)
 		return
 
 	var cutscene_scene := load(scene_path)
@@ -38,6 +41,7 @@ func play_cutscene(cutscene_id: String) -> void:
 		push_error("FAILED TO LOAD CUTSCENE: " + scene_path)
 		player.set_physics_process(true)
 		playing = false
+		await Transition.fade_in(0.8)
 		return
 
 	var cutscene_instance: Node = cutscene_scene.instantiate()
@@ -47,6 +51,9 @@ func play_cutscene(cutscene_id: String) -> void:
 	await cutscene_instance.get_node("CutsceneController").play()
 
 	cutscene_instance.queue_free()
+
+	# Fade from black back into gameplay.
+	await Transition.fade_in(0.8)
 
 	player.set_physics_process(true)
 
