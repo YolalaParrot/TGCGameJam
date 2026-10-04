@@ -2,7 +2,28 @@ extends CanvasLayer
 
 signal finished
 
+@export_category("Comic Panels")
+
 @export var sequence: Array[Texture2D] = []
+
+@export_category("Animation")
+
+@export_range(0.05, 2.0, 0.05)
+var panel_animation_time: float = 0.35
+
+@export_range(0.0, 1.0, 0.01)
+var panel_gap: float = 0.08
+
+@export_category("Page Layout")
+
+@export_range(0.0, 50.0, 1.0)
+var horizontal_margin: float = 10.0
+
+@export_range(0.0, 50.0, 1.0)
+var vertical_margin: float = 10.0
+
+@export_range(0.0, 50.0, 1.0)
+var middle_gap: float = 10.0
 
 @onready var background: ColorRect = $Background
 
@@ -20,10 +41,6 @@ var animating: bool = false
 
 var top_rest_position: Vector2 = Vector2.ZERO
 var bottom_rest_position: Vector2 = Vector2.ZERO
-
-
-const PANEL_ANIMATION_TIME: float = 0.35
-const PANEL_GAP: float = 0.08
 
 
 func _ready() -> void:
@@ -48,11 +65,9 @@ func _setup_holders() -> void:
 	var page_width_value: float = page_content.get_size().x
 	var page_height_value: float = page_content.get_size().y
 
-	var horizontal_margin: float = 10.0
-	var vertical_margin: float = 10.0
-	var middle_gap: float = 10.0
-
-	var panel_width: float = page_width_value - (horizontal_margin * 2.0)
+	var panel_width: float = (
+		page_width_value - (horizontal_margin * 2.0)
+	)
 
 	var half_height: float = page_height_value / 2.0
 
@@ -61,10 +76,6 @@ func _setup_holders() -> void:
 		- vertical_margin
 		- (middle_gap / 2.0)
 	)
-
-	# --------------------------------
-	# TOP HOLDER
-	# --------------------------------
 
 	top_holder.position = Vector2(
 		horizontal_margin,
@@ -75,10 +86,6 @@ func _setup_holders() -> void:
 		panel_width,
 		panel_height
 	)
-
-	# --------------------------------
-	# BOTTOM HOLDER
-	# --------------------------------
 
 	bottom_holder.position = Vector2(
 		horizontal_margin,
@@ -180,7 +187,7 @@ func _enter_top_panel() -> void:
 	await _move_panel(
 		top_holder,
 		top_rest_position,
-		PANEL_ANIMATION_TIME
+		panel_animation_time
 	)
 
 
@@ -199,7 +206,7 @@ func _enter_bottom_panel() -> void:
 	await _move_panel(
 		bottom_holder,
 		bottom_rest_position,
-		PANEL_ANIMATION_TIME
+		panel_animation_time
 	)
 
 
@@ -214,7 +221,7 @@ func _change_page() -> void:
 			page_width(),
 			-page_height()
 		),
-		PANEL_ANIMATION_TIME
+		panel_animation_time
 	)
 
 	var bottom_tween: Tween = _move_panel(
@@ -223,14 +230,14 @@ func _change_page() -> void:
 			-page_width(),
 			page_height()
 		),
-		PANEL_ANIMATION_TIME
+		panel_animation_time
 	)
 
 	await top_tween.finished
 	await bottom_tween.finished
 
 	# Tiny pause between pages.
-	await get_tree().create_timer(PANEL_GAP).timeout
+	await get_tree().create_timer(panel_gap).timeout
 
 	# --------------------------------
 	# CLEAR OLD PAGE
@@ -257,7 +264,7 @@ func _change_page() -> void:
 	await _move_panel(
 		top_holder,
 		top_rest_position,
-		PANEL_ANIMATION_TIME
+		panel_animation_time
 	)
 
 
@@ -272,7 +279,7 @@ func _finish_cutscene() -> void:
 			page_width(),
 			-page_height()
 		),
-		PANEL_ANIMATION_TIME
+		panel_animation_time
 	)
 
 	var bottom_tween: Tween = _move_panel(
@@ -281,7 +288,7 @@ func _finish_cutscene() -> void:
 			-page_width(),
 			page_height()
 		),
-		PANEL_ANIMATION_TIME
+		panel_animation_time
 	)
 
 	await top_tween.finished

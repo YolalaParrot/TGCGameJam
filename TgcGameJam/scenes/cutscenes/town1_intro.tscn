@@ -11,4 +11,4 @@
 script = ExtResource("1_d42bq")
 
 [node name="ComicCutscene" parent="CutsceneController" unique_id=1577575772 instance=ExtResource("2_1stju")]
-sequence = Array[Texture2D]([ExtResource("3_1wlgg"), ExtResource("4_j5oy6"), ExtResource("4_j5oy6"), ExtResource("3_1wlgg")])
+sequence = Array[Texture2D]([ExtResource("3_1wlgg"), ExtResource("4_j5oy6"), ExtResource("4_j5oy6"), ExtResource("3_1wlgg"), ExtResource("3_1wlgg")])
