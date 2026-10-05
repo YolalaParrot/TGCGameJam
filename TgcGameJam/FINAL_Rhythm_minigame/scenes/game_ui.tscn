@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://dpc13ucm0i8fg"]
+
+[ext_resource type="Script" uid="uid://gqt70fqb6nf2" path="res://scripts/game_ui.gd" id="1_u001w"]
+[ext_resource type="FontFile" uid="uid://fupyjfxmy487" path="res://art/PixelOperator8.ttf" id="2_u2dgd"]
+[ext_resource type="FontFile" uid="uid://ud3all3x1xuy" path="res://art/Atop-R99O3.ttf" id="3_bt76a"]
+
+[node name="GameUI" type="Control" unique_id=253142610]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_u001w")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=615447559]
+
+[node name="ScoreLabel" type="RichTextLabel" parent="CanvasLayer" unique_id=1050403119]
+unique_name_in_owner = true
+offset_left = 18.0
+offset_top = 18.0
+offset_right = 360.0
+offset_bottom = 71.0
+theme_override_colors/default_color = Color(0.58297324, 0.6262456, 1, 1)
+theme_override_constants/outline_size = 14
+theme_override_fonts/normal_font = ExtResource("2_u2dgd")
+theme_override_font_sizes/normal_font_size = 41
+text = " 0 pts"
+scroll_active = false
+
+[node name="ComboLabel" type="RichTextLabel" parent="CanvasLayer" unique_id=848689569]
+unique_name_in_owner = true
+offset_left = 41.0
+offset_top = 75.0
+offset_right = 383.0
+offset_bottom = 128.0
+theme_override_colors/default_color = Color(0.3764706, 0.06666667, 0.12941177, 1)
+theme_override_constants/outline_size = 40
+theme_override_fonts/normal_font = ExtResource("3_bt76a")
+theme_override_font_sizes/normal_font_size = 31
+text = "0x combo"
+scroll_active = false
+
+[node name="CountdownLabel" type="RichTextLabel" parent="CanvasLayer" unique_id=1814837773]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(400, 100)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1

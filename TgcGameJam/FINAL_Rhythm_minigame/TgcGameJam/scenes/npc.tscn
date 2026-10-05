@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://chuvimfq0blnm"]
+
+[ext_resource type="Script" uid="uid://bjamdicy1rmb7" path="res://scripts/npc.gd" id="1_abqhh"]
+[ext_resource type="Script" uid="uid://d2e0mqbpohyah" path="res://scripts/interactable.gd" id="2_7n8xq"]
+[ext_resource type="FontFile" uid="uid://bknfx4r2aon3s" path="res://assets-temp/m5x7.ttf" id="2_abqhh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7n8xq"]
+radius = 16.03122
+
+[sub_resource type="LabelSettings" id="LabelSettings_nh2m4"]
+font = ExtResource("2_abqhh")
+font_size = 7
+outline_size = 1
+outline_color = Color(0.30738604, 0.0709007, 0.055149846, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qhqgy"]
+size = Vector2(14, 20)
+
+[node name="npc" type="AnimatableBody2D" unique_id=987617997 groups=["npc"]]
+script = ExtResource("1_abqhh")
+
+[node name="Interactable" type="Area2D" parent="." unique_id=1725258466 groups=["interactable", "npc"]]
+collision_layer = 2
+script = ExtResource("2_7n8xq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable" unique_id=818352050]
+position = Vector2(0, -1)
+shape = SubResource("CircleShape2D_7n8xq")
+
+[node name="Label" type="Label" parent="Interactable" unique_id=751770322]
+offset_left = -8.0
+offset_top = -22.0
+offset_right = 9.0
+offset_bottom = -13.0
+label_settings = SubResource("LabelSettings_nh2m4")
+horizontal_alignment = 1
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=236355110]
+position = Vector2(0, -4)
+scale = Vector2(1.25, 1.4375001)
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=643911397]
+shape = SubResource("RectangleShape2D_qhqgy")
