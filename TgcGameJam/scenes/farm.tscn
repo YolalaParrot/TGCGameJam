@@ -7018,7 +7018,7 @@ position = Vector2(796, -19)
 limit_left = -1006
 limit_top = -507
 limit_right = 1015
-limit_bottom = 509
+limit_bottom = 499
 
 [node name="collisions" type="StaticBody2D" parent="." unique_id=707520541]
 
