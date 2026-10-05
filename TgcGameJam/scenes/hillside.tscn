@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://j54lupoylhq8" path="res://scenes/player.tscn" id="3_rl0pi"]
 [ext_resource type="PackedScene" uid="uid://bt3lpqrk2xw4e" path="res://scenes/teleporter.tscn" id="4_2dp04"]
 [ext_resource type="PackedScene" uid="uid://chuvimfq0blnm" path="res://scenes/npc.tscn" id="5_jimnpc"]
+[ext_resource type="Script" uid="uid://0dsu1akojwp0" path="res://scripts/cutscene_trigger.gd" id="5_ogo75"]
 [ext_resource type="Texture2D" uid="uid://cvcc2sducawnn" path="res://assets-temp/boy_idle_4x1.png" id="6_jimtex"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fwuwm"]
@@ -18,6 +19,9 @@ texture = ExtResource("2_v1baj")
 [sub_resource type="TileSet" id="TileSet_uvgno"]
 sources/1 = SubResource("TileSetAtlasSource_fwuwm")
 sources/2 = SubResource("TileSetAtlasSource_v1baj")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qv2pw"]
+size = Vector2(40, 33)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t6cyu"]
 size = Vector2(266, 706)
@@ -70,6 +74,76 @@ format = 2
 
 [node name="player" parent="." unique_id=1772785746 instance=ExtResource("3_rl0pi")]
 position = Vector2(186, 225)
+
+[node name="CutsceneTrigger_scene2" type="Area2D" parent="." unique_id=481970147]
+position = Vector2(28, 72)
+script = ExtResource("5_ogo75")
+cutscene_id = "scene_2"
+required_cutscene_id = "town1_intro"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CutsceneTrigger_scene2" unique_id=818185337]
+position = Vector2(82, 46)
+shape = SubResource("RectangleShape2D_qv2pw")
+
+[node name="CutsceneTrigger_scene3" type="Area2D" parent="." unique_id=629054807]
+position = Vector2(28, 72)
+script = ExtResource("5_ogo75")
+cutscene_id = "scene_3"
+required_cutscene_id = "scene_2"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CutsceneTrigger_scene3" unique_id=600355092]
+position = Vector2(82, 46)
+shape = SubResource("RectangleShape2D_qv2pw")
+
+[node name="CutsceneTrigger_scene4" type="Area2D" parent="." unique_id=451277318]
+position = Vector2(28, 72)
+script = ExtResource("5_ogo75")
+cutscene_id = "scene_4"
+required_cutscene_id = "scene_3"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CutsceneTrigger_scene4" unique_id=1326917630]
+position = Vector2(82, 46)
+shape = SubResource("RectangleShape2D_qv2pw")
+
+[node name="CutsceneTrigger_scene5" type="Area2D" parent="." unique_id=650909301]
+position = Vector2(28, 72)
+script = ExtResource("5_ogo75")
+cutscene_id = "scene_5"
+required_cutscene_id = "scene_4"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CutsceneTrigger_scene5" unique_id=965984873]
+position = Vector2(82, 46)
+shape = SubResource("RectangleShape2D_qv2pw")
+
+[node name="CutsceneTrigger_sceneHailey" type="Area2D" parent="." unique_id=933323023]
+position = Vector2(28, 72)
+script = ExtResource("5_ogo75")
+cutscene_id = "scene_5_25"
+required_cutscene_id = "scene_5"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CutsceneTrigger_sceneHailey" unique_id=899637319]
+position = Vector2(82, 46)
+shape = SubResource("RectangleShape2D_qv2pw")
+
+[node name="CutsceneTrigger_scene_postHailey" type="Area2D" parent="." unique_id=158022297]
+position = Vector2(28, 72)
+script = ExtResource("5_ogo75")
+cutscene_id = "scene_5_5"
+required_cutscene_id = "scene_25"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CutsceneTrigger_scene_postHailey" unique_id=1479749009]
+position = Vector2(82, 46)
+shape = SubResource("RectangleShape2D_qv2pw")
+
+[node name="CutsceneTrigger_scene_final" type="Area2D" parent="." unique_id=1048575937]
+position = Vector2(28, 72)
+script = ExtResource("5_ogo75")
+cutscene_id = "scene_6"
+required_cutscene_id = "scene_5_5"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CutsceneTrigger_scene_final" unique_id=850916587]
+position = Vector2(82, 46)
+shape = SubResource("RectangleShape2D_qv2pw")
 
 [node name="collisions" type="StaticBody2D" parent="." unique_id=113546697]
 position = Vector2(-1034.858, -517.7665)

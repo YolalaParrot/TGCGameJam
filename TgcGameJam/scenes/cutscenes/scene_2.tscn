@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://dlct2oiabyrtp"]
+
+[ext_resource type="Script" uid="uid://jx7jn4qrkc6f" path="res://scripts/cutscenes/cutscene_controller.gd" id="1_i3v3c"]
+[ext_resource type="PackedScene" uid="uid://cyg7jppqcnuq8" path="res://scenes/cutscenes/comic_cutscene.tscn" id="2_fi4fx"]
+[ext_resource type="Texture2D" uid="uid://ctvhdps8nqklp" path="res://final-assets/cutscenes/scene2/9.png" id="3_4b5ps"]
+[ext_resource type="Texture2D" uid="uid://dvkql01q5u75o" path="res://final-assets/cutscenes/scene2/10.png" id="4_ojtuy"]
+[ext_resource type="Texture2D" uid="uid://mw42lmx7l04y" path="res://final-assets/cutscenes/scene2/11.png" id="5_m274v"]
+[ext_resource type="Texture2D" uid="uid://bb1nttap1nbeg" path="res://final-assets/cutscenes/scene2/12.png" id="6_rm55w"]
+[ext_resource type="Texture2D" uid="uid://bvhgm1amru43u" path="res://final-assets/cutscenes/scene2/13.png" id="7_v01l2"]
+[ext_resource type="Texture2D" uid="uid://c37dw4xbgwgdd" path="res://final-assets/cutscenes/scene2/14.png" id="8_wxush"]
+[ext_resource type="Texture2D" uid="uid://dfif5s61ry5r4" path="res://final-assets/cutscenes/scene2/15.png" id="9_d6lcx"]
+[ext_resource type="Texture2D" uid="uid://b78p1blwmlk8k" path="res://final-assets/cutscenes/scene2/16.png" id="10_pgxgt"]
+[ext_resource type="Texture2D" uid="uid://dp3n2t2i6hqet" path="res://final-assets/cutscenes/scene2/17.png" id="11_mjds5"]
+[ext_resource type="Texture2D" uid="uid://cyoxy2to5h3h2" path="res://final-assets/cutscenes/scene2/18.png" id="12_qxf7d"]
+[ext_resource type="Texture2D" uid="uid://dgsbj6tjis0k2" path="res://final-assets/cutscenes/scene2/19.png" id="13_rr3on"]
+[ext_resource type="Texture2D" uid="uid://daouvn4mcqru7" path="res://final-assets/cutscenes/scene2/20.png" id="14_8i2hk"]
+[ext_resource type="Texture2D" uid="uid://cnuy7csja31tf" path="res://final-assets/cutscenes/scene2/21.png" id="15_6hh8g"]
+[ext_resource type="Texture2D" uid="uid://bovnkhyxyyoub" path="res://final-assets/cutscenes/scene2/22.png" id="16_p1d2k"]
+[ext_resource type="Texture2D" uid="uid://bwuo3n238qm6m" path="res://final-assets/cutscenes/scene2/23.png" id="17_xji68"]
+[ext_resource type="Texture2D" uid="uid://npku6hsc44ts" path="res://final-assets/cutscenes/scene2/24.png" id="18_8nwwj"]
+[ext_resource type="Texture2D" uid="uid://cnahge8hawfqi" path="res://final-assets/cutscenes/scene2/25.png" id="19_nhm1d"]
+[ext_resource type="Texture2D" uid="uid://crowdabuiaps1" path="res://final-assets/cutscenes/scene2/26.png" id="20_n0eiq"]
+[ext_resource type="Texture2D" uid="uid://0fmint3gm18r" path="res://final-assets/cutscenes/scene2/27.png" id="21_4faoq"]
+[ext_resource type="Texture2D" uid="uid://c74xsmut0cbih" path="res://final-assets/cutscenes/scene2/28.png" id="22_ics3r"]
+[ext_resource type="Texture2D" uid="uid://csd46dv2uftoy" path="res://final-assets/cutscenes/scene2/29.png" id="23_qlkh0"]
+
+[node name="Scene2" type="Node2D" unique_id=166160214]
+
+[node name="CutsceneController" type="Node2D" parent="." unique_id=617231232]
+script = ExtResource("1_i3v3c")
+
+[node name="ComicCutscene" parent="CutsceneController" unique_id=1577575772 instance=ExtResource("2_fi4fx")]
+sequence = Array[Texture2D]([ExtResource("3_4b5ps"), ExtResource("4_ojtuy"), ExtResource("5_m274v"), ExtResource("6_rm55w"), ExtResource("7_v01l2"), ExtResource("8_wxush"), ExtResource("9_d6lcx"), ExtResource("10_pgxgt"), ExtResource("11_mjds5"), ExtResource("12_qxf7d"), ExtResource("13_rr3on"), ExtResource("14_8i2hk"), ExtResource("15_6hh8g"), ExtResource("16_p1d2k"), ExtResource("17_xji68"), ExtResource("18_8nwwj"), ExtResource("19_nhm1d"), ExtResource("20_n0eiq"), ExtResource("21_4faoq"), ExtResource("22_ics3r"), ExtResource("23_qlkh0")])
