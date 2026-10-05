@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://dbnrnp3qa0i8a"]
+
+[ext_resource type="Texture2D" uid="uid://qr7gupi2l83i" path="res://final-assets/Environment/Structures/Stations/Furnace/Stone_01-Sheet.png" id="1_enfo0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y1rqp"]
+atlas = ExtResource("1_enfo0")
+region = Rect2(0, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x1jud"]
+atlas = ExtResource("1_enfo0")
+region = Rect2(32, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_insgo"]
+atlas = ExtResource("1_enfo0")
+region = Rect2(0, 48, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qb41x"]
+atlas = ExtResource("1_enfo0")
+region = Rect2(32, 48, 32, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_enfo0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y1rqp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x1jud")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_insgo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qb41x")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Dfb" type="AnimatedSprite2D" unique_id=1934067065]
+sprite_frames = SubResource("SpriteFrames_enfo0")
+autoplay = "default"
+frame_progress = 0.28581056

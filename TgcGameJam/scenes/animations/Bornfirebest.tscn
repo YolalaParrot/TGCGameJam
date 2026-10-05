@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://dwoqnutdo4nek"]
+
+[ext_resource type="Texture2D" uid="uid://bo6fapo18wodp" path="res://final-assets/Environment/Structures/Stations/Bonfire/Fire_01-Sheet.png" id="1_npt4e"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_maicw"]
+atlas = ExtResource("1_npt4e")
+region = Rect2(0, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ryk37"]
+atlas = ExtResource("1_npt4e")
+region = Rect2(32, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y8k78"]
+atlas = ExtResource("1_npt4e")
+region = Rect2(64, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g86mj"]
+atlas = ExtResource("1_npt4e")
+region = Rect2(96, 0, 32, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gv0hh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_maicw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ryk37")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y8k78")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g86mj")
+}],
+"loop": 1,
+"name": &"bornfire2",
+"speed": 6.0
+}]
+
+[node name="Bornfire2" type="AnimatedSprite2D" unique_id=241147653]
+sprite_frames = SubResource("SpriteFrames_gv0hh")
+animation = &"bornfire2"
+autoplay = "bornfire2"
+frame_progress = 0.43375427
