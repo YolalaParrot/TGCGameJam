@@ -235,7 +235,10 @@ func check_match_verdict() -> void:
 	if match_over:
 		victory_overlay.visible = true
 		set_move_buttons_enabled(false)
-		reset_button.visible = true
+		# Run on its own (F6) it can be replayed. In the story MinigameManager closes it and
+		# stores the result in GameState (rps_game).
+		reset_button.visible = get_tree().current_scene == self
+		Signals.GameOver.emit(player_wins >= WINS_NEEDED)
 	else:
 		set_move_buttons_enabled(true)
 		

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3fgmk8xyi4r3"
-path="res://.godot/imported/rock.png-287df246b05da9994798407cdfe616b7.ctex"
+uid="uid://c067648tjkkq2"
+path="res://.godot/imported/fuel.png-89385df2d6d276ef3c3fa893fdc9c803.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/rock.png"
-dest_files=["res://.godot/imported/rock.png-287df246b05da9994798407cdfe616b7.ctex"]
+source_file="res://assets-temp/fuel.png"
+dest_files=["res://.godot/imported/fuel.png-89385df2d6d276ef3c3fa893fdc9c803.ctex"]
 
 [params]
 

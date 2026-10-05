@@ -33,7 +33,7 @@ const TASK_FADE_OUT := 0.5
 const ITEM_SHOW_TIME := 1.25
 var task_tween: Tween
 
-var trial_stage := "light_minigame"
+var trial_stage := "bob"
 const TRIAL_STAGES := {
 	"got_wood": {
 		"flags": {"met_jim":true, "seen_town1_intro":true, "met_ken":true, "met_willy":true,
@@ -43,7 +43,11 @@ const TRIAL_STAGES := {
 	"light_minigame": {
 		"flags": {"met_jim":true, "seen_town1_intro":true, "met_ken":true, "met_willy":true,
 			"dance_battle":"won", "got_wood":true,"wood_delivered":true,"met_mrs_smith":true},
-		"items": [WOOD],
+	},
+	"bob": {
+		"flags": {"met_jim":true, "seen_town1_intro":true, "met_ken":true, "met_willy":true,
+			"dance_battle":"won", "got_wood":true, "wood_delivered":true, "met_mrs_smith":true,
+			"parts_game":"won", "parts_delivered":true},
 	},
 }
 
@@ -76,6 +80,14 @@ func remove_item(item_name: String) -> void:
 # Items given by on_finish "give" sections (and the minigames' on_won).
 const WOOD := {"name":"Wood","image":"res://assets-temp/wood_planks.jpg"}
 const ENGINE_PARTS := {"name":"Engine Parts","image":"res://assets-temp/engine_parts.png"}
+const FUEL := {"name":"Fuel","image":"res://assets-temp/fuel.png"}
+
+# Bob's rock paper scissors match, started by an on_finish "minigame" section. Winning gives the fuel.
+const RPS_GAME := {
+	"scene": "res://scenes/rock_paper_scissors.tscn",
+	"result_flag": "rps_game",
+	"on_won": {"give": [FUEL]},
+}
 
 const Map := {
 	"farm": [
@@ -128,6 +140,7 @@ const MEET_JIM := {
 #   "set" {flag: value}, "move" [{"npc", "location", "position"}]
 #   "give" [{"name", "image"}] items added to the inventory (shown, then the inventory opens)
 #   "take" ["name"] items removed from the inventory
+#   "minigame" {"scene", "result_flag", "on_won", "on_lost"} starts a minigame (see MinigameManager.play)
 #   "flag" (optional) the main flag, defaults to the first flag in "set"
 #   "not_equal" (optional) run unless the main flag equals this, instead of unless it already equals the set value
 # (Jim's walk to the hill is handled separately)
@@ -272,11 +285,33 @@ var dialogues := {
 		]
 	},
 	"bob":{"dialogues":[
+			# WIN: Bob handed over the fuel
+			{
+				"requires":{"rps_game":"won"},
+				"forbids":{},
+				"on_finish":{},
+				"lines":[
+					[
+						{"Bob":"Beaten by a kid.. Go on, take the fuel and get out of here."}
+					]
+				]
+			},
+			# Rematch, after a loss (or if the first match never started)
+			{
+				"requires":{"met_bob":true},
+				"forbids":{"rps_game":"won"},
+				"on_finish":{"flag":"rps_game","not_equal":"won","minigame":RPS_GAME},
+				"lines":[
+					[
+						{"Bob":"Back for more? Alright, one more round!"}
+					]
+				]
+			},
 			# Rock paper scissors challenge
 			{
 				"requires":{"parts_delivered":true},
 				"forbids":{},
-				"on_finish":{"set":{"met_bob":true}},
+				"on_finish":{"set":{"met_bob":true},"minigame":RPS_GAME},
 				"lines":[
 					[
 						{"Player":"Mr Bob!"},
@@ -321,7 +356,7 @@ var dialogues := {
 			{
 				"requires":{"rps_game":"won"},
 				"forbids":{},
-				"on_finish":{"set":{"engine_failed":true}},
+				"on_finish":{"set":{"engine_failed":true},"take":["Fuel"]},
 				"lines":[
 					[
 						{"Ken":"Is the engine in shape? This doesn't look anything like one.."},
@@ -411,7 +446,6 @@ const Tasks := {
 			"forbids":{"wood_delivered":true},
 			"task":{"name":"Take the wood to Finn","location":"hillside","target":"finn"}
 		},
-		# TODO: Bob's location below is a guess, set it to where his scene is
 		{
 			"requires":{"wood_delivered":true},
 			"forbids":{"met_mrs_smith":true},
@@ -430,12 +464,12 @@ const Tasks := {
 		{
 			"requires":{"parts_delivered":true},
 			"forbids":{"met_bob":true},
-			"task":{"name":"Get fuel from Mr Bob","location":"farm","target":"bob"}
+			"task":{"name":"Get fuel from Mr Bob","location":"town_one","target":"bob"}
 		},
 		{
 			"requires":{"met_bob":true},
 			"forbids":{"rps_game":"won"},
-			"task":{"name":"Beat Mr Bob at rock paper scissors","location":"farm","target":"bob"}
+			"task":{"name":"Beat Mr Bob at rock paper scissors","location":"town_one","target":"bob"}
 		},
 		{
 			"requires":{"rps_game":"won"},
@@ -495,6 +529,11 @@ func execute(on_finish: Dictionary) -> void:
 			"take":
 				for item_name in on_finish["take"]:
 					remove_item(item_name)
+			"minigame":
+				# Deferred: the dialogue box is still closing and MinigameManager waits for that.
+				var game: Dictionary = on_finish["minigame"]
+				MinigameManager.play.call_deferred(game.scene, game.result_flag,
+					game.get("on_won", {}), game.get("on_lost", {}))
 			"flag", "not_equal":
 				pass  # read by should_run
 			_:

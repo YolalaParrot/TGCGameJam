@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://mcdg22mdmlo7"
-path="res://.godot/imported/scissors.png-9715baf1c9711b5d235b262f4089af69.ctex"
+uid="uid://d3fgmk8xyi4r3"
+path="res://.godot/imported/rock.png-6a11397b832f60ab4ff0ab8d7b9d9245.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/scissors.png"
-dest_files=["res://.godot/imported/scissors.png-9715baf1c9711b5d235b262f4089af69.ctex"]
+source_file="res://assets-temp/rps/rock.png"
+dest_files=["res://.godot/imported/rock.png-6a11397b832f60ab4ff0ab8d7b9d9245.ctex"]
 
 [params]
 

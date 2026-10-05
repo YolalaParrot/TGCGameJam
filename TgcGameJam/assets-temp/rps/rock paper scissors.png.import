@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cufffhceoee63"
-path="res://.godot/imported/rock paper scissors.png-6dda45868bafd5925dbf0d7020637462.ctex"
+path="res://.godot/imported/rock paper scissors.png-ee8a059c103f70402f53a209b2c8aee6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/rock paper scissors.png"
-dest_files=["res://.godot/imported/rock paper scissors.png-6dda45868bafd5925dbf0d7020637462.ctex"]
+source_file="res://assets-temp/rps/rock paper scissors.png"
+dest_files=["res://.godot/imported/rock paper scissors.png-ee8a059c103f70402f53a209b2c8aee6.ctex"]
 
 [params]
 

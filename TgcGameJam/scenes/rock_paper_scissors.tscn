@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://df3hmtn8l1uav"]
 
-[ext_resource type="Theme" uid="uid://e358fns7nl2" path="res://assets/GameTheme.tres" id="1_h3byi"]
-[ext_resource type="Script" uid="uid://byd470be7pjtv" path="res://rock_paper_scissors.gd" id="1_meytn"]
-[ext_resource type="Texture2D" uid="uid://cufffhceoee63" path="res://assets/rock paper scissors.png" id="2_pusql"]
+[ext_resource type="Theme" uid="uid://e358fns7nl2" path="res://assets-temp/rps/GameTheme.tres" id="1_h3byi"]
+[ext_resource type="Script" uid="uid://byd470be7pjtv" path="res://scripts/rock_paper_scissors.gd" id="1_meytn"]
+[ext_resource type="Texture2D" uid="uid://cufffhceoee63" path="res://assets-temp/rps/rock paper scissors.png" id="2_pusql"]
 
 [node name="RockPaperScissors" type="Control" unique_id=2109228588]
 layout_mode = 3

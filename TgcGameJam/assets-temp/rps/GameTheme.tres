@@ -1,6 +1,6 @@
 [gd_resource type="Theme" format=3 uid="uid://e358fns7nl2"]
 
-[ext_resource type="FontFile" uid="uid://coukv8l4w0n52" path="res://assets/PixelOperator8.ttf" id="1_yorvx"]
+[ext_resource type="FontFile" uid="uid://coukv8l4w0n52" path="res://assets-temp/rps/PixelOperator8.ttf" id="1_yorvx"]
 
 [resource]
 default_font = ExtResource("1_yorvx")
