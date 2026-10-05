@@ -1,0 +1,124 @@
+[gd_scene format=3 uid="uid://df3hmtn8l1uav"]
+
+[ext_resource type="Theme" uid="uid://e358fns7nl2" path="res://assets/GameTheme.tres" id="1_h3byi"]
+[ext_resource type="Script" uid="uid://byd470be7pjtv" path="res://rock_paper_scissors.gd" id="1_meytn"]
+[ext_resource type="Texture2D" uid="uid://cufffhceoee63" path="res://assets/rock paper scissors.png" id="2_pusql"]
+
+[node name="RockPaperScissors" type="Control" unique_id=2109228588]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_h3byi")
+script = ExtResource("1_meytn")
+hands_spritesheet = ExtResource("2_pusql")
+
+[node name="MainContainer" type="VBoxContainer" parent="." unique_id=841379675]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleLabel" type="Label" parent="MainContainer" unique_id=639101098]
+layout_mode = 2
+
+[node name="ScoreLabel" type="Label" parent="MainContainer" unique_id=1060954006]
+layout_mode = 2
+
+[node name="DisplayPanel" type="VBoxContainer" parent="MainContainer" unique_id=1079889004]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="ComputerSide" type="VBoxContainer" parent="MainContainer/DisplayPanel" unique_id=543445481]
+layout_mode = 2
+
+[node name="ComputerTitle" type="Label" parent="MainContainer/DisplayPanel/ComputerSide" unique_id=674948793]
+layout_mode = 2
+
+[node name="ComputerChoiceLabel" type="Label" parent="MainContainer/DisplayPanel/ComputerSide" unique_id=434532020]
+layout_mode = 2
+horizontal_alignment = 2
+
+[node name="ComputerHandHolder" type="Control" parent="MainContainer/DisplayPanel" unique_id=393667124]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+
+[node name="ComputerHandTexture" type="TextureRect" parent="MainContainer/DisplayPanel/ComputerHandHolder" unique_id=1657372296]
+texture_filter = 1
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VSLabel" type="Label" parent="MainContainer/DisplayPanel" unique_id=1672713107]
+layout_mode = 2
+
+[node name="PlayerSide" type="VBoxContainer" parent="MainContainer/DisplayPanel" unique_id=1025215391]
+layout_mode = 2
+
+[node name="PlayerTitle" type="Label" parent="MainContainer/DisplayPanel/PlayerSide" unique_id=2121687007]
+layout_mode = 2
+
+[node name="PlayerChoiceLabel" type="Label" parent="MainContainer/DisplayPanel/PlayerSide" unique_id=161335884]
+layout_mode = 2
+vertical_alignment = 2
+
+[node name="PlayerHandHolder" type="Control" parent="MainContainer/DisplayPanel" unique_id=542359726]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="PlayerHandTexture" type="TextureRect" parent="MainContainer/DisplayPanel/PlayerHandHolder" unique_id=1472365067]
+texture_filter = 1
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 0
+offset_top = -160.0
+offset_right = 398.0
+offset_bottom = -10.0
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ResultLabel" type="Label" parent="MainContainer" unique_id=168064691]
+layout_mode = 2
+
+[node name="VerdictLabel" type="Label" parent="MainContainer" unique_id=1986456505]
+layout_mode = 2
+
+[node name="ChoiceButtons" type="HBoxContainer" parent="MainContainer" unique_id=468118839]
+layout_mode = 2
+
+[node name="RockButton" type="Button" parent="MainContainer/ChoiceButtons" unique_id=735769216]
+custom_minimum_size = Vector2(130, 60)
+layout_mode = 2
+offset_transform_enabled = true
+
+[node name="PaperButton" type="Button" parent="MainContainer/ChoiceButtons" unique_id=1452107142]
+custom_minimum_size = Vector2(130, 60)
+layout_mode = 2
+
+[node name="ScissorsButton" type="Button" parent="MainContainer/ChoiceButtons" unique_id=1104331854]
+custom_minimum_size = Vector2(130, 60)
+layout_mode = 2
+
+[node name="ResetButton" type="Button" parent="MainContainer" unique_id=42073309]
+visible = false
+layout_mode = 2
+text = "Play Again"
+
+[node name="RevealTimer" type="Timer" parent="." unique_id=1989456468]
+one_shot = true
