@@ -12,7 +12,7 @@ var cutscenes: Dictionary = {
 		"scene": "res://scenes/cutscenes/town1_intro.tscn",
 		"requires": {"start": true},
 		"forbids": {},
-		"on_finish": {}
+		"on_finish": GameState.MEET_JIM  # same effects as Jim's first dialogue
 	},
 
 	"world_end_warning": {

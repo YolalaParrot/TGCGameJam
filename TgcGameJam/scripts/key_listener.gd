@@ -36,14 +36,15 @@ func _process(delta):
 			
 			# PRINT MISS
 			var st_inst = score_text.instantiate()
-			get_tree().get_root().call_deferred("add_child", st_inst)
+			get_parent().call_deferred("add_child", st_inst)
 			st_inst.SetTextInfo("MISS")
 			st_inst.global_position = global_position + Vector2(0, -20)
 			Signals.ResetCombo.emit()
 			Signals.NoteHit.emit("MISS") # <--- ADDED LINE 1
 			
 		# If key is pressed, pop from the queue and calculate distance from critical point
-		if Input.is_action_just_pressed(key_name):
+		# (the queue can be empty here: the miss above may have just removed the last key)
+		if Input.is_action_just_pressed(key_name) and falling_key_queue.size() > 0:
 			var key_to_pop = falling_key_queue.pop_front()
 			
 			var distance_from_pass = abs(key_to_pop.pass_threshold - key_to_pop.global_position.y)
@@ -77,7 +78,7 @@ func _process(delta):
 			key_to_pop.queue_free()
 			
 			var st_inst = score_text.instantiate()
-			get_tree().get_root().call_deferred("add_child", st_inst)
+			get_parent().call_deferred("add_child", st_inst)
 			st_inst.SetTextInfo(press_score_text)
 			st_inst.global_position = global_position + Vector2(0, -20)
 	
@@ -86,7 +87,7 @@ func _process(delta):
 func CreateFallingKey(button_name: String):
 	if button_name == key_name:
 		var fk_inst = falling_key.instantiate()
-		get_tree().get_root().call_deferred("add_child", fk_inst)
+		get_parent().call_deferred("add_child", fk_inst)
 		fk_inst.Setup(position.x, frame + 4)
 		
 		falling_key_queue.push_back(fk_inst)

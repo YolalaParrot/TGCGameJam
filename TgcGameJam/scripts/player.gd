@@ -28,7 +28,7 @@ func _ready() -> void:
 func apply_text_sizes() -> void:
 	DialogueBox.set_font_size(dialogue_font_size)
 	for node in get_tree().get_nodes_in_group("interactable"):
-		if "label" in node and node.label.label_settings:
+		if "label" in node and node.label and node.label.label_settings:
 			node.label.label_settings.font_size = talk_font_size
 
 func show_arrow() -> void:
@@ -95,7 +95,7 @@ func _process(delta: float) -> void:
 	guidance_arrow.rotation = dir.angle() 
 	
 func _physics_process(delta: float) -> void:
-	if GameState.gameState.in_dialogue or GameState.gameState.inventory_open:
+	if GameState.gameState.in_dialogue or GameState.gameState.inventory_open or GameState.gameState.in_minigame:
 		velocity = Vector2.ZERO
 		play_animation(0)
 		return
@@ -170,7 +170,7 @@ func find_best_interactable():
 	var best:Area2D = null
 	for area in interactable_areas:
 		if area.is_in_group("interactable"):
-			if not (area.is_in_group("npc") and not area.npc.can_interact()):
+			if not (area.is_in_group("npc") and not area.parent.can_interact()):
 				var d := global_position.distance_to(area.global_position)
 				if d<best_dist:
 					best_dist = d
@@ -184,7 +184,7 @@ func find_best_interactable():
 		current_interactable.focus()
 
 func _unhandled_input(event: InputEvent) -> void:
-	if GameState.gameState.in_dialogue or CutsceneManager.playing:
+	if GameState.gameState.in_dialogue or CutsceneManager.playing or GameState.gameState.in_minigame:
 		return
 	if event.is_action_pressed("inventory"):
 		Inventory.toggle()

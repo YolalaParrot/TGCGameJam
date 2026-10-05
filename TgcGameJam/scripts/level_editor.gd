@@ -69,7 +69,7 @@ func SpawnFallingKey(button_name: String, delay: float) -> void:
 	await get_tree().create_timer(delay).timeout
 	Signals.CreateFallingKey.emit(button_name)
 
-func KeyListenerPress(button_name: String, array_num: int) -> void:
+func KeyListenerPress(_button_name: String, array_num: int) -> void:
 	if music_player:
 		var current_playback_time: float = music_player.get_playback_position()
 		var relative_timestamp: float = current_playback_time - fk_fall_time

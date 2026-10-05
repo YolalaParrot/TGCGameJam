@@ -128,3 +128,4 @@ position = Vector2(8, -81)
 position = Vector2(80, 50)
 NPC_Name = "jim"
 frames = SubResource("SpriteFrames_wu7dk")
+leave_flag = "met_jim"

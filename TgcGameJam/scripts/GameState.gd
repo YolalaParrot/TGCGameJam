@@ -23,11 +23,14 @@ var flags := {
 
 var gameState := {
 	"in_dialogue":false,
-	"inventory_open":false
+	"inventory_open":false,
+	"in_minigame":false
 }
 
 # Emitted when the main task changes (NPCs use it to show or hide their "!").
 signal task_changed
+# Emitted when a flag gets a new value (an NPC can react, e.g. Jim leaving once met_jim is true).
+signal flag_changed(flag: String, value)
 
 const TASK_FADE_IN := 0.5
 const TASK_SHOW_TIME := 2.0
@@ -79,6 +82,12 @@ func npc_pos(npc_name: String):
 		return null
 	return npc_state[npc_name].pos
 
+# Meeting Jim. Used by both the intro cutscene and Jim's first dialogue, so whichever happens
+# leaves the game in the same state.
+const MEET_JIM := {
+	"set": {"met_jim": true},
+}
+
 # NPC dialogues. Keys match each NPC's NPC_Name. Every entry holds conversations in "lines"
 # and a "counter" (added at runtime) that cycles through them each time one is finished.
 # Entries are checked in order and the first whose requires/forbids pass is used, so list the
@@ -95,7 +104,7 @@ var dialogues := {
 			{
 				"requires":{"start":true},
 				"forbids":{},
-				"on_finish":{"set":{"met_jim":true}},
+				"on_finish":MEET_JIM,
 				"lines":[
 					[
 						{"Player":"Woahh."},
@@ -428,7 +437,11 @@ func execute(on_finish: Dictionary) -> void:
 		match section:
 			"set":
 				for flag in on_finish["set"]:
-					flags[flag] = on_finish["set"][flag]
+					var value = on_finish["set"][flag]
+					var changed: bool = flags.get(flag) != value
+					flags[flag] = value
+					if changed:
+						flag_changed.emit(flag, value)
 			"move":
 				for move in on_finish["move"]:
 					move_npc(move.npc, move.location, move.position)

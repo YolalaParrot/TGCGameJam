@@ -3,6 +3,14 @@ extends AnimatableBody2D
 @export var NPC_Name:String = "NPC"
 
 @export var frames: SpriteFrames
+
+@export_group("Leaving")
+## When this flag becomes true the NPC slowly walks off to the right and is gone for good.
+@export var leave_flag := ""
+## Local x position where the NPC disappears.
+@export var leave_x := 150.0
+@export var leave_speed := 20.0
+var leaving := false
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 
 func _ready() -> void:
@@ -13,6 +21,11 @@ func _ready() -> void:
 		return
 	if map != "":
 		position = GameState.npc_pos(NPC_Name)
+	if leave_flag != "":
+		if GameState.flags.get(leave_flag, false):
+			queue_free()  # already left
+			return
+		GameState.flag_changed.connect(_on_flag_changed)
 	interactable.interacted.connect(_on_interacted)
 	GameState.task_changed.connect(interactable.refresh_label)
 	interactable.refresh_label()
@@ -33,10 +46,27 @@ func has_dialogue() -> bool:
 	return GameState.dialogues.has(NPC_Name) and not GameState.get_dialogue(NPC_Name).is_empty()
 
 func can_interact() -> bool:
+	if leaving:
+		return false
 	var map := GameState.npc_map(NPC_Name)
 	if map != "" and map != current_map():
 		return false  # e.g. Jim while he is running off to the hill
 	return pending_cutscene() != "" or has_dialogue()
+
+func _on_flag_changed(flag: String, value) -> void:
+	if flag == leave_flag and value == true:
+		leaving = true
+		interactable.refresh_label()
+
+
+# Walks to the right at a steady speed, no tween, and is removed at leave_x.
+func _process(delta: float) -> void:
+	if not leaving:
+		return
+	position.x += leave_speed * delta
+	if position.x > leave_x:
+		queue_free()
+
 
 func current_map() -> String:
 	return owner.scene_file_path.get_file().get_basename() if owner else ""

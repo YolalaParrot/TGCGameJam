@@ -10,6 +10,8 @@ var on_finish: Dictionary = {}  # run through GameState.execute when the last li
 var entry: Dictionary = {}  # the GameState dialogue entry being shown (holds its counter)
 var active = false
 
+const MOVE_ACTIONS := ["move_left", "move_right", "move_up", "move_down"]
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	panel.visible = false
@@ -30,6 +32,12 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event.is_action_pressed("ui_close_dialog"):
 		get_viewport().set_input_as_handled()
 		close_box()
+	else:
+		# Walking away closes the dialogue (it only finishes, and runs on_finish, when read to the end).
+		for action in MOVE_ACTIONS:
+			if event.is_action_pressed(action):
+				close_box()
+				break
 	
 
 # Name and dialogue share one LabelSettings, so this resizes both.
@@ -48,8 +56,6 @@ func close_box():
 	if index>=dialogues.size():
 		entry["counter"] = entry.get("counter", 0) + 1
 		GameState.execute(on_finish)
-		if speaker == "jim":
-			move_jim_to_hill()
 	on_finish = {}
 	entry = {}
 		
@@ -73,21 +79,3 @@ func show_dialogues(new_speaker: String,new_dialogues: Array,new_on_finish: Dict
 		dialogue.text = "..."
 	else:
 		show_current_dialogue()
-
-
-func move_jim_to_hill() -> void:
-	if not GameState.flags.get("met_jim", false):
-		return
-	if GameState.npc_map("jim") != "town_one":
-		return
-	GameState.npc_state["jim"] = {"loc": "hillside", "pos": Vector2(160, 120)}
-	var scene := get_tree().current_scene
-	var jim := scene.find_child("jim", true, false) as Node2D
-	var exit := scene.find_child("town_two_transition", true, false)
-	if jim == null or exit == null:
-		return
-	var target: Vector2 = (exit.get_child(0) as Node2D).global_position
-	var duration := jim.global_position.distance_to(target) / 80.0 
-	var tween := jim.create_tween()
-	tween.tween_property(jim, "global_position", target, duration)
-	tween.tween_callback(jim.queue_free)
