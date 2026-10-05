@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://b8f1ign6hpicr"]
+
+[ext_resource type="PackedScene" uid="uid://dfdglmltorqae" path="res://scenes/key_listener.tscn" id="1_h3xak"]
+[ext_resource type="PackedScene" uid="uid://dpc13ucm0i8fg" path="res://scenes/game_ui.tscn" id="2_l1p8s"]
+[ext_resource type="PackedScene" uid="uid://coqj034dvvbeu" path="res://scenes/level_editor.tscn" id="4_1wrej"]
+
+[sub_resource type="Environment" id="Environment_i5mjo"]
+background_mode = 3
+glow_enabled = true
+
+[node name="GameLevel" type="Node2D" unique_id=1472733185]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1606356445]
+
+[node name="KeyListener" parent="." unique_id=960400289 instance=ExtResource("1_h3xak")]
+position = Vector2(-120, 280)
+key_name = "button_left"
+
+[node name="KeyListener2" parent="." unique_id=1114100647 instance=ExtResource("1_h3xak")]
+position = Vector2(-40, 280)
+frame = 1
+key_name = "button_down"
+
+[node name="KeyListener3" parent="." unique_id=1216545394 instance=ExtResource("1_h3xak")]
+position = Vector2(40, 280)
+frame = 2
+key_name = "button_up"
+
+[node name="KeyListener4" parent="." unique_id=566284692 instance=ExtResource("1_h3xak")]
+position = Vector2(120, 280)
+frame = 3
+key_name = "button_right"
+
+[node name="GameUI" parent="." unique_id=1900547845 instance=ExtResource("2_l1p8s")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1326743372]
+environment = SubResource("Environment_i5mjo")
+
+[node name="LevelEditor" parent="." unique_id=1105880718 instance=ExtResource("4_1wrej")]

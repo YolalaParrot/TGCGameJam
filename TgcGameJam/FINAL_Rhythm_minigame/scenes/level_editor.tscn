@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://coqj034dvvbeu"]
+
+[ext_resource type="Script" uid="uid://dudtjhslpl3xx" path="res://scripts/level_editor.gd" id="1_agvgh"]
+
+[node name="LevelEditor" type="Node2D" unique_id=2121299522]
+script = ExtResource("1_agvgh")
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=1075751334]
+
+[node name="CountdownSFX" type="AudioStreamPlayer" parent="." unique_id=542057663]
+
+[connection signal="finished" from="MusicPlayer" to="." method="_on_music_player_finished"]
