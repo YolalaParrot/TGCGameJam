@@ -4,6 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://drjmjyodgguar" path="res://assets-temp/tilesets/grass.png" id="2_7byxm"]
 [ext_resource type="PackedScene" uid="uid://j54lupoylhq8" path="res://scenes/player.tscn" id="3_5q3ck"]
 [ext_resource type="PackedScene" uid="uid://bt3lpqrk2xw4e" path="res://scenes/teleporter.tscn" id="4_6buwl"]
+[ext_resource type="PackedScene" uid="uid://chuvimfq0blnm" path="res://scenes/npc.tscn" id="5_5q3ck"]
+[ext_resource type="Texture2D" uid="uid://cvcc2sducawnn" path="res://assets-temp/boy_idle_4x1.png" id="6_6buwl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fq2vd"]
 texture = ExtResource("1_k3ns2")
@@ -18,6 +20,45 @@ sources/2 = SubResource("TileSetAtlasSource_t855c")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1038h"]
 size = Vector2(22, 79)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kfime"]
+atlas = ExtResource("6_6buwl")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wu7dk"]
+atlas = ExtResource("6_6buwl")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_55ilf"]
+atlas = ExtResource("6_6buwl")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d5g2i"]
+atlas = ExtResource("6_6buwl")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fq2vd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kfime")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wu7dk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_55ilf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d5g2i")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5q3ck"]
+size = Vector2(47, 24)
 
 [node name="farm" type="Node2D" unique_id=2766861]
 position = Vector2(-160, -144)
@@ -48,3 +89,15 @@ shape = SubResource("RectangleShape2D_1038h")
 
 [node name="Spawn_From_Town1_To_Farm" type="Marker2D" parent="." unique_id=968893700]
 position = Vector2(260, 152)
+
+[node name="mrs_smith" parent="." unique_id=987617997 instance=ExtResource("5_5q3ck")]
+position = Vector2(80, 50)
+NPC_Name = "mrs_smith"
+frames = SubResource("SpriteFrames_fq2vd")
+
+[node name="maze" type="Area2D" parent="." unique_id=613634841]
+position = Vector2(147, 251)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="maze" unique_id=194032475]
+position = Vector2(13.5, 2)
+shape = SubResource("RectangleShape2D_5q3ck")

@@ -24,6 +24,10 @@ func _on_body_entered(body: Node2D) -> void:
 		if not GameState.cutscene_seen(required_cutscene_id):
 			return
 
+	# The registry's requires/forbids, like a dialogue entry.
+	if not CutsceneRegistry.conditions_ok(cutscene_id):
+		return
+
 	# Prevent replay if this cutscene is one-time.
 	if play_once and GameState.cutscene_seen(cutscene_id):
 		return

@@ -28,4 +28,6 @@ label_settings = SubResource("LabelSettings_r2og1")
 
 [node name="Dialogue" type="Label" parent="PanelContainer/VBoxContainer" unique_id=570708492]
 layout_mode = 2
+size_flags_horizontal = 3
+autowrap_mode = 3
 label_settings = SubResource("LabelSettings_r2og1")

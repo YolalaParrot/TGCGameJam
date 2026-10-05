@@ -114,3 +114,11 @@ stretch_mode = 5
 layout_mode = 2
 label_settings = SubResource("LabelSettings_text")
 horizontal_alignment = 1
+
+[node name="Separator" type="HSeparator" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="Task" type="Label" parent="Panel/VBox"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_text")
+horizontal_alignment = 1

@@ -25,6 +25,7 @@ CutsceneManager="*uid://bx1lcbcdmfdbx"
 CutsceneRegistry="*uid://12rlg8q3ntla"
 HelpOverlay="*res://scenes/help_overlay.tscn"
 Inventory="*res://scenes/inventory.tscn"
+TaskOverlay="*res://scenes/task_overlay.tscn"
 
 [display]
 

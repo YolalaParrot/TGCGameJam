@@ -4,6 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://c13j1knb38xse" path="res://assets-temp/tilesets/decor_8x8.png" id="2_m6nlh"]
 [ext_resource type="Texture2D" uid="uid://drjmjyodgguar" path="res://assets-temp/tilesets/grass.png" id="3_dg0mw"]
 [ext_resource type="PackedScene" uid="uid://bt3lpqrk2xw4e" path="res://scenes/teleporter.tscn" id="4_m6nlh"]
+[ext_resource type="PackedScene" uid="uid://chuvimfq0blnm" path="res://scenes/npc.tscn" id="5_3fmpw"]
+[ext_resource type="Texture2D" uid="uid://cvcc2sducawnn" path="res://assets-temp/boy_idle_4x1.png" id="6_onjpk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m6nlh"]
 texture = ExtResource("2_m6nlh")
@@ -18,6 +20,45 @@ sources/2 = SubResource("TileSetAtlasSource_dg0mw")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bde3n"]
 size = Vector2(26, 71)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kfime"]
+atlas = ExtResource("6_onjpk")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wu7dk"]
+atlas = ExtResource("6_onjpk")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_55ilf"]
+atlas = ExtResource("6_onjpk")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d5g2i"]
+atlas = ExtResource("6_onjpk")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dq7sv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kfime")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wu7dk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_55ilf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d5g2i")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vj8al"]
+size = Vector2(47, 24)
 
 [node name="town_two" type="Node2D" unique_id=1135322753]
 position = Vector2(-160, -144)
@@ -58,3 +99,15 @@ position = Vector2(182, 33)
 
 [node name="Spawn_From_Town1" type="Marker2D" parent="." unique_id=1379482118]
 position = Vector2(49, 143)
+
+[node name="willy" parent="." unique_id=987617997 instance=ExtResource("5_3fmpw")]
+position = Vector2(213, 221)
+NPC_Name = "willy"
+frames = SubResource("SpriteFrames_dq7sv")
+
+[node name="shop" type="Area2D" parent="." unique_id=662949551]
+position = Vector2(147, 251)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="shop" unique_id=1141575156]
+position = Vector2(13.5, 2)
+shape = SubResource("RectangleShape2D_vj8al")

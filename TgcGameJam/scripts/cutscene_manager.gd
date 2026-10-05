@@ -3,7 +3,8 @@ extends Node
 var playing := false
 
 
-func play_cutscene(cutscene_id: String) -> void:
+# extra_on_finish is run after the cutscene's own on_finish (npc.gd uses it for met_<npc>).
+func play_cutscene(cutscene_id: String, extra_on_finish: Dictionary = {}) -> void:
 	if playing or GameState.gameState.inventory_open:
 		return
 
@@ -55,6 +56,7 @@ func play_cutscene(cutscene_id: String) -> void:
 	# Only a finished cutscene counts as seen and changes the game state.
 	GameState.mark_cutscene_seen(cutscene_id)
 	GameState.execute(cutscene_data.get("on_finish", {}))
+	GameState.execute(extra_on_finish)
 
 	# Fade from black back into gameplay.
 	await Transition.fade_in(0.8)

@@ -2,133 +2,52 @@ extends CanvasLayer
 
 signal finished
 
-@export_category("Comic Panels")
-
+@export_category("Comic Pages")
+## Each page has one or two panels with their own position, size and entry side.
+## Used when it is not empty.
+@export var pages: Array[ComicPage] = []
+## Shortcut when no pages are set: the images are shown two per page, stacked.
 @export var sequence: Array[Texture2D] = []
 
 @export_category("Animation")
-
 @export_range(0.05, 2.0, 0.05)
 var panel_animation_time: float = 0.35
 
 @export_range(0.0, 1.0, 0.01)
 var panel_gap: float = 0.08
 
-@export_category("Page Layout")
-
-@export_range(0.0, 50.0, 1.0)
-var horizontal_margin: float = 10.0
-
-@export_range(0.0, 50.0, 1.0)
-var vertical_margin: float = 10.0
-
-@export_range(0.0, 50.0, 1.0)
-var middle_gap: float = 10.0
-
 @onready var background: ColorRect = $Background
+@onready var page_root: Control = $Page
 
-@onready var page_content: Control = $Page/PageContent
+var page_list: Array[ComicPage] = []
+var page_index := 0
+var panel_index := 0
+var animating := false
 
-@onready var top_holder: Control = $Page/PageContent/TopHolder
-@onready var bottom_holder: Control = $Page/PageContent/BottomHolder
-
-@onready var top_panel: TextureRect = $Page/PageContent/TopHolder/TopPanel
-@onready var bottom_panel: TextureRect = $Page/PageContent/BottomHolder/BottomPanel
-
-
-var current_index: int = 0
-var animating: bool = false
-
-var top_rest_position: Vector2 = Vector2.ZERO
-var bottom_rest_position: Vector2 = Vector2.ZERO
+# The panels on screen for the current page, and the side each one came in from.
+var shown: Array[TextureRect] = []
+var shown_sides: Array[ComicPanel.Side] = []
 
 
 func _ready() -> void:
-	await get_tree().process_frame
-	await get_tree().process_frame
-
-	_setup_holders()
-
-	top_rest_position = top_holder.position
-	bottom_rest_position = bottom_holder.position
-
 	background.color = Color.BLACK
-	background.modulate.a = 1.0
-
-	print("SEQUENCE SIZE: ", sequence.size())
-	print("TOP HOLDER REST: ", top_rest_position)
-	print("BOTTOM HOLDER REST: ", bottom_rest_position)
-	print("PAGE CONTENT SIZE: ", page_content.get_size())
-
-
-func _setup_holders() -> void:
-	var page_width_value: float = page_content.get_size().x
-	var page_height_value: float = page_content.get_size().y
-
-	var panel_width: float = (
-		page_width_value - (horizontal_margin * 2.0)
-	)
-
-	var half_height: float = page_height_value / 2.0
-
-	var panel_height: float = (
-		half_height
-		- vertical_margin
-		- (middle_gap / 2.0)
-	)
-
-	top_holder.position = Vector2(
-		horizontal_margin,
-		vertical_margin
-	)
-
-	top_holder.size = Vector2(
-		panel_width,
-		panel_height
-	)
-
-	bottom_holder.position = Vector2(
-		horizontal_margin,
-		half_height + (middle_gap / 2.0)
-	)
-
-	bottom_holder.size = Vector2(
-		panel_width,
-		panel_height
-	)
 
 
 func play() -> void:
-	visible = true
+	page_list = _build_pages()
 
-	animating = true
-	current_index = 0
-
-	background.color = Color.BLACK
-	background.modulate.a = 1.0
-
-	if sequence.is_empty():
+	if page_list.is_empty():
 		push_error("COMIC CUTSCENE HAS NO PANELS")
-
-		finished.emit()
-
 		visible = false
-		animating = false
-
 		return
 
-	# Recalculate the holders every time the cutscene starts.
-	_setup_holders()
+	visible = true
+	background.color = Color.BLACK
+	page_index = 0
+	panel_index = 0
 
-	top_rest_position = top_holder.position
-	bottom_rest_position = bottom_holder.position
-
-	_reset_visuals()
-
-	await get_tree().process_frame
-
-	await _enter_top_panel()
-
+	animating = true
+	await _enter_panel()
 	animating = false
 
 	await finished
@@ -149,192 +68,139 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _advance() -> void:
-	if animating:
-		return
-
 	animating = true
 
-	# Last panel.
-	if current_index >= sequence.size() - 1:
-		await _finish_cutscene()
-		return
+	# Another panel on this page.
+	if panel_index < page_list[page_index].panels.size() - 1:
+		panel_index += 1
+		await _enter_panel()
 
-	current_index += 1
+	# Next page.
+	elif page_index < page_list.size() - 1:
+		await _leave_page()
+		await get_tree().create_timer(panel_gap).timeout
+		page_index += 1
+		panel_index = 0
+		await _enter_panel()
 
-	# Odd index = bottom panel.
-	if current_index % 2 == 1:
-		await _enter_bottom_panel()
-
-	# Even index = new page.
+	# Last page: everything leaves and the cutscene ends.
 	else:
-		await _change_page()
+		await _leave_page()
+		finished.emit()
+		return
 
 	animating = false
 
 
-func _enter_top_panel() -> void:
-	if current_index >= sequence.size():
-		return
+func _enter_panel() -> void:
+	var data: ComicPanel = page_list[page_index].panels[panel_index]
+	var area := _screen_size()
 
-	top_panel.texture = sequence[current_index]
-	bottom_panel.texture = null
+	var panel := TextureRect.new()
+	panel.texture = data.texture
+	panel.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	panel.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	panel.size = data.rect.size * area
 
-	# Start above-left of the page.
-	top_holder.position = top_rest_position + Vector2(
-		-page_width(),
-		-page_height()
-	)
+	var rest_position := data.rect.position * area
+	panel.position = rest_position + _offscreen_offset(data.enter_from, rest_position, panel.size, area)
 
-	await _move_panel(
-		top_holder,
-		top_rest_position,
-		panel_animation_time
-	)
+	page_root.add_child(panel)
+	shown.append(panel)
+	shown_sides.append(data.enter_from)
 
-
-func _enter_bottom_panel() -> void:
-	if current_index >= sequence.size():
-		return
-
-	bottom_panel.texture = sequence[current_index]
-
-	# Start below-right of the page.
-	bottom_holder.position = bottom_rest_position + Vector2(
-		page_width(),
-		page_height()
-	)
-
-	await _move_panel(
-		bottom_holder,
-		bottom_rest_position,
-		panel_animation_time
-	)
+	await _move_panel(panel, rest_position, panel_animation_time).finished
 
 
-func _change_page() -> void:
-	# --------------------------------
-	# OLD PAGE LEAVES
-	# --------------------------------
+# Every panel on the page slides out through the side opposite to the one it came from.
+func _leave_page() -> void:
+	var area := _screen_size()
+	var last_tween: Tween = null
 
-	var top_tween: Tween = _move_panel(
-		top_holder,
-		top_rest_position + Vector2(
-			page_width(),
-			-page_height()
-		),
-		panel_animation_time
-	)
+	for i in shown.size():
+		var panel := shown[i]
+		var exit_side := _opposite(shown_sides[i])
+		var target := panel.position + _offscreen_offset(exit_side, panel.position, panel.size, area)
+		last_tween = _move_panel(panel, target, panel_animation_time)
 
-	var bottom_tween: Tween = _move_panel(
-		bottom_holder,
-		bottom_rest_position + Vector2(
-			-page_width(),
-			page_height()
-		),
-		panel_animation_time
-	)
+	if last_tween:
+		await last_tween.finished
 
-	await top_tween.finished
-	await bottom_tween.finished
-
-	# Tiny pause between pages.
-	await get_tree().create_timer(panel_gap).timeout
-
-	# --------------------------------
-	# CLEAR OLD PAGE
-	# --------------------------------
-
-	top_panel.texture = null
-	bottom_panel.texture = null
-
-	# --------------------------------
-	# LOAD NEW TOP PANEL
-	# --------------------------------
-
-	top_panel.texture = sequence[current_index]
-
-	# Start new top panel from top-right.
-	top_holder.position = top_rest_position + Vector2(
-		page_width(),
-		-page_height()
-	)
-
-	await get_tree().process_frame
-
-	# Move new top panel into place.
-	await _move_panel(
-		top_holder,
-		top_rest_position,
-		panel_animation_time
-	)
+	for panel in shown:
+		panel.queue_free()
+	shown.clear()
+	shown_sides.clear()
 
 
-func _finish_cutscene() -> void:
-	# --------------------------------
-	# BOTH PANELS LEAVE
-	# --------------------------------
-
-	var top_tween: Tween = _move_panel(
-		top_holder,
-		top_rest_position + Vector2(
-			page_width(),
-			-page_height()
-		),
-		panel_animation_time
-	)
-
-	var bottom_tween: Tween = _move_panel(
-		bottom_holder,
-		bottom_rest_position + Vector2(
-			-page_width(),
-			page_height()
-		),
-		panel_animation_time
-	)
-
-	await top_tween.finished
-	await bottom_tween.finished
-
-	# Keep the screen black until
-	# CutsceneManager fades back to gameplay.
-	background.color = Color.BLACK
-	background.modulate.a = 1.0
-
-	finished.emit()
+# How far to move a panel resting at rest_position so it is just outside the given screen edge.
+func _offscreen_offset(side: ComicPanel.Side, rest_position: Vector2, panel_size: Vector2, area: Vector2) -> Vector2:
+	match side:
+		ComicPanel.Side.LEFT:
+			return Vector2(-(rest_position.x + panel_size.x), 0.0)
+		ComicPanel.Side.RIGHT:
+			return Vector2(area.x - rest_position.x, 0.0)
+		ComicPanel.Side.TOP:
+			return Vector2(0.0, -(rest_position.y + panel_size.y))
+		_:
+			return Vector2(0.0, area.y - rest_position.y)
 
 
-func _move_panel(
-	panel: Control,
-	target_position: Vector2,
-	duration: float
-) -> Tween:
+func _opposite(side: ComicPanel.Side) -> ComicPanel.Side:
+	match side:
+		ComicPanel.Side.LEFT:
+			return ComicPanel.Side.RIGHT
+		ComicPanel.Side.RIGHT:
+			return ComicPanel.Side.LEFT
+		ComicPanel.Side.TOP:
+			return ComicPanel.Side.BOTTOM
+		_:
+			return ComicPanel.Side.TOP
 
+
+func _move_panel(panel: Control, target_position: Vector2, duration: float) -> Tween:
 	var tween: Tween = create_tween()
 
 	tween.set_trans(Tween.TRANS_QUAD)
 	tween.set_ease(Tween.EASE_OUT)
 
-	tween.tween_property(
-		panel,
-		"position",
-		target_position,
-		duration
-	)
+	tween.tween_property(panel, "position", target_position, duration)
 
 	return tween
 
 
-func _reset_visuals() -> void:
-	top_panel.texture = null
-	bottom_panel.texture = null
-
-	top_holder.position = top_rest_position
-	bottom_holder.position = bottom_rest_position
+func _screen_size() -> Vector2:
+	return get_viewport().get_visible_rect().size
 
 
-func page_width() -> float:
-	return page_content.get_size().x
+# The pages to play: the ones set in the inspector, otherwise `sequence` two images per page.
+func _build_pages() -> Array[ComicPage]:
+	var built: Array[ComicPage] = []
 
+	for page in pages:
+		if page and not page.panels.is_empty():
+			built.append(page)
 
-func page_height() -> float:
-	return page_content.get_size().y
+	if not built.is_empty():
+		return built
+
+	for i in range(0, sequence.size(), 2):
+		var page := ComicPage.new()
+		var has_pair := i + 1 < sequence.size()
+
+		var first := ComicPanel.new()
+		first.texture = sequence[i]
+		first.rect = Rect2(0.05, 0.04, 0.9, 0.44) if has_pair else Rect2(0.05, 0.05, 0.9, 0.9)
+		first.enter_from = ComicPanel.Side.LEFT
+		page.panels.append(first)
+
+		if has_pair:
+			var second := ComicPanel.new()
+			second.texture = sequence[i + 1]
+			second.rect = Rect2(0.05, 0.52, 0.9, 0.44)
+			second.enter_from = ComicPanel.Side.RIGHT
+			page.panels.append(second)
+
+		built.append(page)
+
+	return built

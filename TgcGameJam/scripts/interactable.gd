@@ -5,11 +5,23 @@ extends Area2D
 
 signal interacted
 
+var focused := false
+
 func focus():
-	label.text = "Talk" if npc.can_interact() else ""
-	
+	focused = true
+	refresh_label()
+
 func unfocus():
-	label.text = ""
+	focused = false
+	refresh_label()
+
+# "Talk" while the player is next to an NPC they can talk to, otherwise "!" if this NPC is
+# the main task's target, otherwise empty.
+func refresh_label():
+	if focused and npc.can_interact():
+		label.text = "Talk"
+	else:
+		label.text = npc.marker_text()
 
 func interact():
 	interacted.emit()

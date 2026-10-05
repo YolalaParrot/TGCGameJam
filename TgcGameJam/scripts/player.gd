@@ -1,6 +1,12 @@
 extends CharacterBody2D
 
-const SPEED = 5000.0
+# Editable per map on the player instance in each scene's inspector.
+# (The camera is the player's Camera2D: use "Editable Children" on the instance, as minigame_light does.)
+@export_group("Map settings")
+@export var speed := 5000.0
+@export var dialogue_font_size := 14
+@export var talk_font_size := 7
+@export_group("")
 var current_dir = "none"
 
 @onready var interact_sensor: Area2D = $InteractSensor
@@ -16,6 +22,14 @@ func _ready() -> void:
 	$AnimatedSprite2D.play("front_idle")
 	arrow_radius = guidance_arrow.position.length()
 	guidance_arrow.visible = false
+	apply_text_sizes.call_deferred()  # deferred so every NPC label in the scene is ready
+
+# Dialogue box and the "Talk" / "!" labels above NPCs use this map's text sizes.
+func apply_text_sizes() -> void:
+	DialogueBox.set_font_size(dialogue_font_size)
+	for node in get_tree().get_nodes_in_group("interactable"):
+		if "label" in node and node.label.label_settings:
+			node.label.label_settings.font_size = talk_font_size
 
 func show_arrow() -> void:
 	var task = GameState.get_current_tasks()
@@ -30,7 +44,7 @@ func show_arrow() -> void:
 		var exit_name := bfs(here, task.location)
 		var teleporter := owner.find_child(exit_name, true, false) if exit_name != "" else null
 		if teleporter:
-			target_item = teleporter.get_child(0) as Node2D  # the door's collision shape
+			target_item = teleporter.get_child(0) as Node2D
 
 	guidance_arrow.visible = target_item != null
 	if target_item:
@@ -98,25 +112,25 @@ func player_movement(delta: float) -> void:
 			velocity.y = 0
 			current_dir = "right"
 		play_animation(1)
-		velocity.x = SPEED*delta
+		velocity.x = speed*delta
 	if is_left:
 		if not (is_up or is_down):
 			velocity.y = 0
 			current_dir = "left"
 		play_animation(1)
-		velocity.x = -SPEED*delta
+		velocity.x = -speed*delta
 	if is_down:
 		if not (is_left or is_right):
 			velocity.x = 0
 			current_dir = "down"
 		play_animation(1)
-		velocity.y = SPEED*delta
+		velocity.y = speed*delta
 	if Input.is_action_pressed("move_up"):
 		if not (is_left or is_right):
 			velocity.x = 0
 			current_dir = "up"
 		play_animation(1)
-		velocity.y = -SPEED*delta
+		velocity.y = -speed*delta
 	if not (is_left or is_up or is_down or is_right):
 		play_animation(0)
 		velocity = Vector2.ZERO

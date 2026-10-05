@@ -7,6 +7,7 @@ var index:=0
 var speaker:String = ""
 var dialogues: Array = []
 var on_finish: Dictionary = {}  # run through GameState.execute when the last line is reached
+var entry: Dictionary = {}  # the GameState dialogue entry being shown (holds its counter)
 var active = false
 
 # Called when the node enters the scene tree for the first time.
@@ -31,6 +32,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		close_box()
 	
 
+# Name and dialogue share one LabelSettings, so this resizes both.
+func set_font_size(size: int) -> void:
+	dialogue.label_settings.font_size = size
+
 func show_current_dialogue():
 	if index>=dialogues.size():
 		close_box()
@@ -40,18 +45,19 @@ func show_current_dialogue():
 	dialogue.text = line.values()[0]
 
 func close_box():
-	if speaker and speaker in GameState.dialogues and index>=dialogues.size():
-		GameState.dialogues[speaker].counter+=1
 	if index>=dialogues.size():
+		entry["counter"] = entry.get("counter", 0) + 1
 		GameState.execute(on_finish)
-		move_jim_to_hill()
+		if speaker == "jim":
+			move_jim_to_hill()
 	on_finish = {}
+	entry = {}
 		
 	GameState.gameState.in_dialogue = false
 	panel.visible = false
 	active = false
 	
-func show_dialogues(new_speaker: String,new_dialogues: Array,new_on_finish: Dictionary = {}):
+func show_dialogues(new_speaker: String,new_dialogues: Array,new_on_finish: Dictionary = {}, new_entry: Dictionary = {}):
 	if GameState.gameState.inventory_open:
 		return
 	GameState.gameState.in_dialogue = true
@@ -60,6 +66,7 @@ func show_dialogues(new_speaker: String,new_dialogues: Array,new_on_finish: Dict
 	speaker = new_speaker
 	dialogues = new_dialogues
 	on_finish = new_on_finish
+	entry = new_entry
 	index = 0
 	if dialogues.is_empty():
 		name_label.text = ""
