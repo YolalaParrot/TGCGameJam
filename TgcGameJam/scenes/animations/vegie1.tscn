@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://c2a3tpyh1fxyy"]
+
+[ext_resource type="Texture2D" uid="uid://2g2skpvsvp3n" path="res://final-assets/Environment/Props/Static/Farm.png" id="1_14csl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xl3fk"]
+atlas = ExtResource("1_14csl")
+region = Rect2(32, 112, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v7263"]
+atlas = ExtResource("1_14csl")
+region = Rect2(48, 112, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nw7hv"]
+atlas = ExtResource("1_14csl")
+region = Rect2(64, 112, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4om7j"]
+atlas = ExtResource("1_14csl")
+region = Rect2(80, 112, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vohai"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xl3fk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v7263")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nw7hv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4om7j")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 0.5
+}]
+
+[node name="Df" type="AnimatedSprite2D" unique_id=332945697]
+sprite_frames = SubResource("SpriteFrames_vohai")
+autoplay = "default"

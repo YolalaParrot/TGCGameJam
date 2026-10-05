@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://kfuva7reanxm"]
+
+[ext_resource type="Script" uid="uid://b8auqu36vjor" path="res://scripts/credits.gd" id="1_spvsy"]
+[ext_resource type="FontFile" uid="uid://bimslda18c7rn" path="res://final-assets/fonts/ThaleahFat.ttf" id="2_gw1d4"]
+
+[node name="Credits" type="Control" unique_id=670197097]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_spvsy")
+
+[node name="Background" type="ColorRect" parent="." unique_id=45764472]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="CreditsText" type="RichTextLabel" parent="." unique_id=1371833752]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 352.0
+grow_horizontal = 2
+theme_override_fonts/normal_font = ExtResource("2_gw1d4")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "CREDITS
+
+
+GAME BY:
+MCINDIEDEVS
+
+ROHAN BHASKARAN
+SHOURIN DAS
+ARNAV NAINWAR
+AROHAN ARORA
+VEDANANDA PATHI
+
+
+ASSETS USED FROM PIXEL CRAWLER ASSET PACK
+
+THANK YOU FOR PLAYING!"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1

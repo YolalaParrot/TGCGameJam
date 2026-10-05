@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://bq10dethcg7dl"]
+
+[ext_resource type="Texture2D" uid="uid://6pj1ddavu86f" path="res://final-assets/Environment/Props/Static/Vegetation.png" id="1_rijfa"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j64m1"]
+atlas = ExtResource("1_rijfa")
+region = Rect2(16, 384, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cipsp"]
+atlas = ExtResource("1_rijfa")
+region = Rect2(0, 384, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3thys"]
+atlas = ExtResource("1_rijfa")
+region = Rect2(64, 384, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wkwqk"]
+atlas = ExtResource("1_rijfa")
+region = Rect2(48, 384, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_j64m1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j64m1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cipsp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3thys")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wkwqk")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Jh" type="AnimatedSprite2D" unique_id=397714257]
+sprite_frames = SubResource("SpriteFrames_j64m1")
+frame_progress = 0.52074695
