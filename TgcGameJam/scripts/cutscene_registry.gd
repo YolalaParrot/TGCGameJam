@@ -2,7 +2,8 @@ extends Node
 
 # Every cutscene has the same shape as a dialogue entry:
 #   "scene"      the scene to play
-#   "npc"        optional NPC name: talking to that NPC plays it (before their dialogues)
+#   "npc"        optional NPC name: talking to that NPC plays it first, their dialogues only
+#                play once it is seen or its requires/forbids no longer pass
 #   "requires" / "forbids"   flag conditions, checked like dialogues (see GameState.conditions_met)
 #   "on_finish"  run through GameState.execute when it finishes (same sections and guard as dialogues)
 # A cutscene is marked seen (flag seen_<id>) when it finishes, and an NPC only plays it once.
@@ -10,8 +11,9 @@ extends Node
 var cutscenes: Dictionary = {
 	"town1_intro": {
 		"scene": "res://scenes/cutscenes/town1_intro.tscn",
+		"npc": "jim",
 		"requires": {"start": true},
-		"forbids": {},
+		"forbids": {"met_jim": true},
 		"on_finish": GameState.MEET_JIM  # same effects as Jim's first dialogue
 	},
 

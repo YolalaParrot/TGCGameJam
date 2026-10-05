@@ -5,10 +5,11 @@ extends AnimatableBody2D
 @export var frames: SpriteFrames
 
 @export_group("Leaving")
-## When this flag becomes true the NPC slowly walks off to the right and is gone for good.
+## When this flag becomes true the NPC walks off sideways and is gone for good.
 @export var leave_flag := ""
-## Local x position where the NPC disappears.
+## Local x position where the NPC disappears. Left of the NPC walks left, right of it walks right.
 @export var leave_x := 150.0
+## Pixels per second.
 @export var leave_speed := 20.0
 var leaving := false
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
@@ -59,12 +60,13 @@ func _on_flag_changed(flag: String, value) -> void:
 		interactable.refresh_label()
 
 
-# Walks to the right at a steady speed, no tween, and is removed at leave_x.
+# Walks towards leave_x at a steady speed, no tween, and is removed when it gets there.
 func _process(delta: float) -> void:
 	if not leaving:
 		return
-	position.x += leave_speed * delta
-	if position.x > leave_x:
+	anim.flip_h = leave_x < position.x
+	position.x = move_toward(position.x, leave_x, leave_speed * delta)
+	if position.x == leave_x:
 		queue_free()
 
 

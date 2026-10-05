@@ -35,6 +35,8 @@ signal flag_changed(flag: String, value)
 const TASK_FADE_IN := 0.5
 const TASK_SHOW_TIME := 2.0
 const TASK_FADE_OUT := 0.5
+# How long a received item stays on screen (ItemPopup) before the inventory opens.
+const ITEM_SHOW_TIME := 1.25
 var task_tween: Tween
 
 func _ready() -> void:
@@ -95,6 +97,7 @@ const MEET_JIM := {
 # main flag is not already done (see should_run).
 # on_finish sections run through execute():
 #   "set" {flag: value}, "move" [{"npc", "location", "position"}]
+#   "give" [{"name", "image"}] items added to the inventory (shown, then the inventory opens)
 #   "flag" (optional) the main flag, defaults to the first flag in "set"
 #   "not_equal" (optional) run unless the main flag equals this, instead of unless it already equals the set value
 # (Jim's walk to the hill is handled separately)
@@ -124,7 +127,7 @@ var dialogues := {
 			{
 				"requires":{"dance_battle":"won"},
 				"forbids":{},
-				"on_finish":{"set":{"got_wood":true}},
+				"on_finish":{"set":{"got_wood":true},"give":[{"name":"Wood","image":"res://assets-temp/wood_planks.jpg"}]},
 				"lines":[
 					[
 						{"Willy":"Alright you beat me kid fair and square! Take what you need i dont care about it anyways..."},
@@ -433,6 +436,7 @@ func execute(on_finish: Dictionary) -> void:
 	if not should_run(on_finish):
 		return
 	var task_before: String = get_current_tasks().get("name", "")
+	var received: Array = []
 	for section in on_finish:
 		match section:
 			"set":
@@ -445,11 +449,29 @@ func execute(on_finish: Dictionary) -> void:
 			"move":
 				for move in on_finish["move"]:
 					move_npc(move.npc, move.location, move.position)
+			"give":
+				received.append_array(on_finish["give"])
 			"flag", "not_equal":
 				pass  # read by should_run
 			_:
 				push_warning("Unknown on_finish section: " + str(section))
-	if get_current_tasks().get("name", "") != task_before:
+	var task_moved: bool = get_current_tasks().get("name", "") != task_before
+	if not received.is_empty():
+		receive_items(received, task_moved)
+	elif task_moved:
+		announce_task()
+
+
+# Adds each item, shows it (ItemPopup) with "Collected <name>" in the top left, then opens the
+# inventory. A new task is announced after that, so it does not cover the "Collected" text.
+func receive_items(new_items: Array, announce_after: bool) -> void:
+	for item in new_items:
+		add_item(item.name, item.image)
+		display_task("Collected " + item.name, ITEM_SHOW_TIME)
+		await ItemPopup.show_item(load(item.image), ITEM_SHOW_TIME)
+	if not gameState.inventory_open:
+		Inventory.toggle()
+	if announce_after:
 		announce_task()
 
 
@@ -481,7 +503,7 @@ func announce_task() -> void:
 
 
 # Shows text in the top left overlay: fades in, stays, fades out, then the text is cleared.
-func display_task(text: String) -> void:
+func display_task(text: String, show_time := TASK_SHOW_TIME) -> void:
 	var panel: Control = TaskOverlay.get_node("Panel")
 	var label: Label = panel.get_node("Label")
 	label.text = text
@@ -491,7 +513,7 @@ func display_task(text: String) -> void:
 	panel.modulate.a = 0.0
 	task_tween = create_tween()
 	task_tween.tween_property(panel, "modulate:a", 1.0, TASK_FADE_IN)
-	task_tween.tween_interval(TASK_SHOW_TIME)
+	task_tween.tween_interval(show_time)
 	task_tween.tween_property(panel, "modulate:a", 0.0, TASK_FADE_OUT)
 	task_tween.tween_callback(clear_task_display)
 

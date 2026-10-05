@@ -1620,6 +1620,11 @@ tile_set = SubResource("TileSet_euywh")
 [node name="player" parent="." unique_id=1772785746 instance=ExtResource("3_t32w7")]
 position = Vector2(217, 150)
 rotation = -1.5360757
+scale = Vector2(1, 1)
+speed = 5000.0
+
+[node name="Camera2D" parent="player" index="2" unique_id=1036130193]
+zoom = Vector2(5, 5)
 
 [node name="collisions" type="StaticBody2D" parent="." unique_id=1116281962]
 
@@ -1639,3 +1644,5 @@ shape = SubResource("RectangleShape2D_640lt")
 
 [node name="Spawn_From_Town1_To_Player_House" type="Marker2D" parent="." unique_id=1791811874]
 position = Vector2(257.725, 143.49509)
+
+[editable path="player"]

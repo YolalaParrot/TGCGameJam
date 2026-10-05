@@ -5,7 +5,7 @@ var playing := false
 
 # extra_on_finish is run after the cutscene's own on_finish (npc.gd uses it for met_<npc>).
 func play_cutscene(cutscene_id: String, extra_on_finish: Dictionary = {}) -> void:
-	if playing or GameState.gameState.inventory_open:
+	if playing or GameState.gameState.inventory_open or GameState.gameState.in_dialogue:
 		return
 
 	if not CutsceneRegistry.has_cutscene(cutscene_id):
