@@ -2,8 +2,14 @@
 
 [ext_resource type="Script" uid="uid://jx7jn4qrkc6f" path="res://scripts/cutscenes/cutscene_controller.gd" id="1_d42bq"]
 [ext_resource type="PackedScene" uid="uid://cyg7jppqcnuq8" path="res://scenes/cutscenes/comic_cutscene.tscn" id="2_1stju"]
-[ext_resource type="Texture2D" uid="uid://g4jtgl3r0aub" path="res://assets-temp/hitler_gamejam.jpeg" id="3_1wlgg"]
-[ext_resource type="Texture2D" uid="uid://cu6ewcbg2vxdq" path="res://icon.svg" id="4_j5oy6"]
+[ext_resource type="Texture2D" uid="uid://blakoejs8rlne" path="res://final-assets/cutscenes/scene1/1.png" id="3_by0g8"]
+[ext_resource type="Texture2D" uid="uid://c278s0qt86la1" path="res://final-assets/cutscenes/scene1/2.png" id="4_xovn3"]
+[ext_resource type="Texture2D" uid="uid://cequdf514u18l" path="res://final-assets/cutscenes/scene1/3.png" id="5_o4yfg"]
+[ext_resource type="Texture2D" uid="uid://01r643u04wb1" path="res://final-assets/cutscenes/scene1/4.png" id="6_bajx5"]
+[ext_resource type="Texture2D" uid="uid://cd31fhd02qrcv" path="res://final-assets/cutscenes/scene1/5.png" id="7_ai2sn"]
+[ext_resource type="Texture2D" uid="uid://gu0ywy8n4dsw" path="res://final-assets/cutscenes/scene1/6.png" id="8_o3boh"]
+[ext_resource type="Texture2D" uid="uid://do5frqo4b6dg7" path="res://final-assets/cutscenes/scene1/7.png" id="9_2pe8w"]
+[ext_resource type="Texture2D" uid="uid://dugw2qomhqyf1" path="res://final-assets/cutscenes/scene1/8.png" id="10_axggw"]
 
 [node name="Town1Intro" type="Node2D" unique_id=166160214]
 
@@ -11,4 +17,4 @@
 script = ExtResource("1_d42bq")
 
 [node name="ComicCutscene" parent="CutsceneController" unique_id=1577575772 instance=ExtResource("2_1stju")]
-sequence = Array[Texture2D]([ExtResource("3_1wlgg"), ExtResource("4_j5oy6"), ExtResource("4_j5oy6"), ExtResource("3_1wlgg"), ExtResource("3_1wlgg")])
+sequence = Array[Texture2D]([ExtResource("3_by0g8"), ExtResource("4_xovn3"), ExtResource("5_o4yfg"), ExtResource("6_bajx5"), ExtResource("7_ai2sn"), ExtResource("8_o3boh"), ExtResource("9_2pe8w"), ExtResource("10_axggw")])

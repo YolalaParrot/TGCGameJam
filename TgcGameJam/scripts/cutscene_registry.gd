@@ -6,6 +6,7 @@ extends Node
 #                play once it is seen or its requires/forbids no longer pass
 #   "requires" / "forbids"   flag conditions, checked like dialogues (see GameState.conditions_met)
 #   "on_finish"  run through GameState.execute when it finishes (same sections and guard as dialogues)
+#                plus "next": the id of a cutscene to play straight after, still faded to black
 # A cutscene is marked seen (flag seen_<id>) when it finishes, and an NPC only plays it once.
 # Triggers (cutscene_trigger.gd) check requires/forbids too, so a cutscene can replace a dialogue.
 var cutscenes: Dictionary = {
@@ -17,18 +18,62 @@ var cutscenes: Dictionary = {
 		"on_finish": GameState.MEET_JIM  # same effects as Jim's first dialogue
 	},
 
-	"world_end_warning": {
-		"scene": "res://scenes/cutscenes/town1_intro.tscn",
-		"requires": {},
-		"forbids": {},
-		"on_finish": {}
+	# Hill: Ken's rocket plan (replaces his first dialogue)
+	"scene_2": {
+		"scene": "res://scenes/cutscenes/scene_2.tscn",
+		"npc": "ken",
+		"requires": {"met_jim": true},
+		"forbids": {"met_ken": true},
+		"on_finish": {"set": {"met_ken": true}}
 	},
 
-	"all_friends_meeting": {
-		"scene": "res://scenes/cutscenes/town1_intro.tscn",
-		"requires": {},
+	# Hill: Finn gets the wood
+	"scene_3": {
+		"scene": "res://scenes/cutscenes/scene_3.tscn",
+		"npc": "finn",
+		"requires": {"got_wood": true},
+		"forbids": {"wood_delivered": true},
+		"on_finish": {"set": {"wood_delivered": true}, "take": ["Wood"]}
+	},
+
+	# Hill: Finn gets the engine parts
+	"scene_4": {
+		"scene": "res://scenes/cutscenes/scene_4.tscn",
+		"npc": "finn",
+		"requires": {"wood_delivered": true, "parts_game": "won"},
+		"forbids": {"parts_delivered": true},
+		"on_finish": {"set": {"parts_delivered": true}, "take": ["Engine Parts"]}
+	},
+
+	# The ending, played back to back from Ken once Bob's fuel is in: the engine fails,
+	# Hailey's comet, "it didn't kill us", the last painting, then the credits.
+	"scene_5": {
+		"scene": "res://scenes/cutscenes/scene_5.tscn",
+		"npc": "ken",
+		"requires": {"rps_game": "won"},
+		"forbids": {"engine_failed": true},
+		"on_finish": {"set": {"engine_failed": true}, "take": ["Fuel"], "next": "scene_hailey"}
+	},
+
+	"scene_hailey": {
+		"scene": "res://scenes/cutscenes/scene_Hailey.tscn",
+		"requires": {"engine_failed": true},
 		"forbids": {},
-		"on_finish": {}
+		"on_finish": {"set": {"comet_seen": true}, "next": "scene_5_5"}
+	},
+
+	"scene_5_5": {
+		"scene": "res://scenes/cutscenes/scene_5_5.tscn",
+		"requires": {"comet_seen": true},
+		"forbids": {},
+		"on_finish": {"next": "scene_6"}
+	},
+
+	"scene_6": {
+		"scene": "res://scenes/cutscenes/scene_6.tscn",
+		"requires": {"comet_seen": true},
+		"forbids": {},
+		"on_finish": {"set": {"game_complete": true}, "credits": true}
 	}
 }
 
