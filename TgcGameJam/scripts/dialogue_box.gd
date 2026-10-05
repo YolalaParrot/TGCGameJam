@@ -6,6 +6,7 @@ extends CanvasLayer
 var index:=0
 var speaker:String = ""
 var dialogues: Array = []
+var on_finish: Dictionary = {}  # run through GameState.execute when the last line is reached
 var active = false
 
 # Called when the node enters the scene tree for the first time.
@@ -41,22 +42,45 @@ func show_current_dialogue():
 func close_box():
 	if speaker and speaker in GameState.dialogues and index>=dialogues.size():
 		GameState.dialogues[speaker].counter+=1
+	if index>=dialogues.size():
+		GameState.execute(on_finish)
+		move_jim_to_hill()
+	on_finish = {}
+		
 	GameState.gameState.in_dialogue = false
 	panel.visible = false
 	active = false
 	
-func show_dialogues(new_speaker: String,new_dialogues: Array):
+func show_dialogues(new_speaker: String,new_dialogues: Array,new_on_finish: Dictionary = {}):
+	if GameState.gameState.inventory_open:
+		return
 	GameState.gameState.in_dialogue = true
 	active = true
 	panel.visible = true
 	speaker = new_speaker
 	dialogues = new_dialogues
+	on_finish = new_on_finish
 	index = 0
 	if dialogues.is_empty():
 		name_label.text = ""
 		dialogue.text = "..."
 	else:
 		show_current_dialogue()
-	
-	
-	
+
+
+func move_jim_to_hill() -> void:
+	if not GameState.flags.get("met_jim", false):
+		return
+	if GameState.npc_map("jim") != "town_one":
+		return
+	GameState.npc_state["jim"] = {"loc": "hillside", "pos": Vector2(160, 120)}
+	var scene := get_tree().current_scene
+	var jim := scene.find_child("jim", true, false) as Node2D
+	var exit := scene.find_child("town_two_transition", true, false)
+	if jim == null or exit == null:
+		return
+	var target: Vector2 = (exit.get_child(0) as Node2D).global_position
+	var duration := jim.global_position.distance_to(target) / 80.0 
+	var tween := jim.create_tween()
+	tween.tween_property(jim, "global_position", target, duration)
+	tween.tween_callback(jim.queue_free)

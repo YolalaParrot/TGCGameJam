@@ -4,7 +4,7 @@ var playing := false
 
 
 func play_cutscene(cutscene_id: String) -> void:
-	if playing:
+	if playing or GameState.gameState.inventory_open:
 		return
 
 	if not CutsceneRegistry.has_cutscene(cutscene_id):
@@ -51,6 +51,10 @@ func play_cutscene(cutscene_id: String) -> void:
 	await cutscene_instance.get_node("CutsceneController").play()
 
 	cutscene_instance.queue_free()
+
+	# Only a finished cutscene counts as seen and changes the game state.
+	GameState.mark_cutscene_seen(cutscene_id)
+	GameState.execute(cutscene_data.get("on_finish", {}))
 
 	# Fade from black back into gameplay.
 	await Transition.fade_in(0.8)

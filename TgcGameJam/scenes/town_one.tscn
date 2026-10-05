@@ -85,7 +85,7 @@ script = ExtResource("4_187fi")
 cutscene_id = "town1_intro"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CutsceneTrigger" unique_id=1965274357]
-position = Vector2(4, 80)
+position = Vector2(80, 50)
 shape = SubResource("RectangleShape2D_euywh")
 
 [node name="town_two_transition" parent="." unique_id=707145697 groups=["teleporter"] instance=ExtResource("4_wu7dk")]
@@ -110,7 +110,7 @@ position = Vector2(111, 0)
 [node name="Spawn_From_Farm" type="Marker2D" parent="." unique_id=1141174396]
 position = Vector2(-97, 0)
 
-[node name="npc1" parent="." unique_id=987617997 instance=ExtResource("1_kfime")]
+[node name="jim" parent="." unique_id=987617997 instance=ExtResource("1_kfime")]
 position = Vector2(80, 50)
-NPC_Name = "npc1"
+NPC_Name = "jim"
 frames = SubResource("SpriteFrames_wu7dk")

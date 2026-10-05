@@ -3,7 +3,8 @@ extends Node
 
 var cutscenes: Dictionary = {
 	"town1_intro": {
-		"scene": "res://scenes/cutscenes/town1_intro.tscn"
+		"scene": "res://scenes/cutscenes/town1_intro.tscn",
+		"on_finish": {"set": {"met_jim": true}}
 	},
 
 	"world_end_warning": {

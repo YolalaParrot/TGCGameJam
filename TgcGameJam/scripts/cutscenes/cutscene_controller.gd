@@ -2,7 +2,6 @@ extends Node2D
 
 @onready var comic_cutscene = $ComicCutscene
 
-
 func play() -> void:
 	print("Cutscene started: ", get_parent().name)
 

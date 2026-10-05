@@ -1,0 +1,147 @@
+[gd_scene format=3 uid="uid://dh3lpov4rl2y8"]
+
+[ext_resource type="Script" path="res://scripts/help_overlay.gd" id="1_help"]
+[ext_resource type="FontFile" uid="uid://bknfx4r2aon3s" path="res://assets-temp/m5x7.ttf" id="2_font"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+content_margin_left = 8.0
+content_margin_top = 5.0
+content_margin_right = 8.0
+content_margin_bottom = 5.0
+bg_color = Color(0.168627, 0.113725, 0.0784314, 0.92)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.823529, 0.247059, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="LabelSettings" id="LabelSettings_title"]
+font = ExtResource("2_font")
+font_size = 16
+font_color = Color(1, 0.823529, 0.247059, 1)
+outline_size = 2
+outline_color = Color(0.168627, 0.113725, 0.0784314, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_key"]
+font = ExtResource("2_font")
+font_size = 14
+font_color = Color(1, 0.823529, 0.247059, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_text"]
+font = ExtResource("2_font")
+font_size = 14
+font_color = Color(1, 0.956863, 0.854902, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_hint"]
+font = ExtResource("2_font")
+font_size = 14
+font_color = Color(0.75, 0.68, 0.55, 1)
+
+[node name="HelpOverlay" type="CanvasLayer"]
+layer = 20
+script = ExtResource("1_help")
+
+[node name="Panel" type="PanelContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBox" type="VBoxContainer" parent="Panel"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Title" type="Label" parent="Panel/VBox"]
+layout_mode = 2
+text = "Controls"
+label_settings = SubResource("LabelSettings_title")
+horizontal_alignment = 1
+
+[node name="Separator" type="HSeparator" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="Grid" type="GridContainer" parent="Panel/VBox"]
+layout_mode = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 0
+columns = 2
+
+[node name="Key1" type="Label" parent="Panel/VBox/Grid"]
+layout_mode = 2
+text = "WASD / Arrows"
+label_settings = SubResource("LabelSettings_key")
+horizontal_alignment = 2
+
+[node name="Action1" type="Label" parent="Panel/VBox/Grid"]
+layout_mode = 2
+text = "Move"
+label_settings = SubResource("LabelSettings_text")
+
+[node name="Key2" type="Label" parent="Panel/VBox/Grid"]
+layout_mode = 2
+text = "E"
+label_settings = SubResource("LabelSettings_key")
+horizontal_alignment = 2
+
+[node name="Action2" type="Label" parent="Panel/VBox/Grid"]
+layout_mode = 2
+text = "Talk / next line"
+label_settings = SubResource("LabelSettings_text")
+
+[node name="Key3" type="Label" parent="Panel/VBox/Grid"]
+layout_mode = 2
+text = "Esc"
+label_settings = SubResource("LabelSettings_key")
+horizontal_alignment = 2
+
+[node name="Action3" type="Label" parent="Panel/VBox/Grid"]
+layout_mode = 2
+text = "Close dialogue"
+label_settings = SubResource("LabelSettings_text")
+
+[node name="Key4" type="Label" parent="Panel/VBox/Grid"]
+layout_mode = 2
+text = "G"
+label_settings = SubResource("LabelSettings_key")
+horizontal_alignment = 2
+
+[node name="Action4" type="Label" parent="Panel/VBox/Grid"]
+layout_mode = 2
+text = "Show guide arrow"
+label_settings = SubResource("LabelSettings_text")
+
+[node name="Key5" type="Label" parent="Panel/VBox/Grid"]
+layout_mode = 2
+text = "E / Enter"
+label_settings = SubResource("LabelSettings_key")
+horizontal_alignment = 2
+
+[node name="Action5" type="Label" parent="Panel/VBox/Grid"]
+layout_mode = 2
+text = "Next comic panel"
+label_settings = SubResource("LabelSettings_text")
+
+[node name="Key6" type="Label" parent="Panel/VBox/Grid"]
+layout_mode = 2
+text = "H"
+label_settings = SubResource("LabelSettings_key")
+horizontal_alignment = 2
+
+[node name="Action6" type="Label" parent="Panel/VBox/Grid"]
+layout_mode = 2
+text = "Show / hide help"
+label_settings = SubResource("LabelSettings_text")
+
+[node name="Hint" type="Label" parent="Panel/VBox"]
+layout_mode = 2
+text = "Press H to close"
+label_settings = SubResource("LabelSettings_hint")
+horizontal_alignment = 1

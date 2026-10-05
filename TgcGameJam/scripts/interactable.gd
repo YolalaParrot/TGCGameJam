@@ -1,15 +1,12 @@
 extends Area2D
 @onready var label: Label = $Label
-@onready var npc: AnimatableBody2D = $".."
+@onready var npc = $".."  # the NPC (npc.gd); untyped so its custom functions can be called
 
 
 signal interacted
 
 func focus():
-	if owner.NPC_Name in GameState.dialogues and not GameState.get_dialogue(owner.NPC_Name).is_empty():
-		label.text = "Talk"
-	else:
-		label.text = ""
+	label.text = "Talk" if npc.can_interact() else ""
 	
 func unfocus():
 	label.text = ""

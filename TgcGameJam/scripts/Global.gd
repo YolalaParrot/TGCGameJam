@@ -51,8 +51,6 @@
 	#
 extends Node
 
-var completed_cutscenes: Dictionary = {}
-
 func teleport_player(scene_path: String, spawn_marker_name: String) -> void:
 	print("================================")
 	print("TELEPORT REQUEST")
@@ -133,11 +131,3 @@ func _do_teleport(scene_path: String, spawn_marker_name: String) -> void:
 
 	print("Fade in complete.")
 	print("================================")
-
-
-func has_seen_cutscene(cutscene_id: String) -> bool:
-	return completed_cutscenes.has(cutscene_id)
-
-
-func mark_cutscene_seen(cutscene_id: String) -> void:
-	completed_cutscenes[cutscene_id] = true

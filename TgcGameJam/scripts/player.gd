@@ -18,7 +18,9 @@ func _ready() -> void:
 	guidance_arrow.visible = false
 
 func show_arrow() -> void:
-	var task = GameState.currentTasks.main
+	var task = GameState.get_current_tasks()
+	if task.is_empty():
+		return
 	var here := current_location()
 	var target_item: Node2D = null
 
@@ -79,16 +81,18 @@ func _process(delta: float) -> void:
 	guidance_arrow.rotation = dir.angle() 
 	
 func _physics_process(delta: float) -> void:
-	if GameState.gameState.in_dialogue:
+	if GameState.gameState.in_dialogue or GameState.gameState.inventory_open:
+		velocity = Vector2.ZERO
+		play_animation(0)
 		return
 	player_movement(delta)
 	find_best_interactable()
 
 func player_movement(delta: float) -> void:
-	var is_right = Input.is_action_pressed("ui_right")
-	var is_left = Input.is_action_pressed("ui_left")
-	var is_down = Input.is_action_pressed("ui_down")
-	var is_up = Input.is_action_pressed("ui_up")
+	var is_right = Input.is_action_pressed("move_right")
+	var is_left = Input.is_action_pressed("move_left")
+	var is_down = Input.is_action_pressed("move_down")
+	var is_up = Input.is_action_pressed("move_up")
 	if is_right:
 		if not (is_up or is_down):
 			velocity.y = 0
@@ -107,7 +111,7 @@ func player_movement(delta: float) -> void:
 			current_dir = "down"
 		play_animation(1)
 		velocity.y = SPEED*delta
-	if Input.is_action_pressed("ui_up"):
+	if Input.is_action_pressed("move_up"):
 		if not (is_left or is_right):
 			velocity.x = 0
 			current_dir = "up"
@@ -152,7 +156,7 @@ func find_best_interactable():
 	var best:Area2D = null
 	for area in interactable_areas:
 		if area.is_in_group("interactable"):
-			if not (area.is_in_group("npc") and area.npc.NPC_Name not in GameState.dialogues):
+			if not (area.is_in_group("npc") and not area.npc.can_interact()):
 				var d := global_position.distance_to(area.global_position)
 				if d<best_dist:
 					best_dist = d
@@ -166,7 +170,13 @@ func find_best_interactable():
 		current_interactable.focus()
 
 func _unhandled_input(event: InputEvent) -> void:
-	if GameState.gameState.in_dialogue:
+	if GameState.gameState.in_dialogue or CutsceneManager.playing:
+		return
+	if event.is_action_pressed("inventory"):
+		Inventory.toggle()
+		get_viewport().set_input_as_handled()
+		return
+	if GameState.gameState.inventory_open:
 		return
 	if event.is_action_pressed("interact") and current_interactable:
 		current_interactable.interact()

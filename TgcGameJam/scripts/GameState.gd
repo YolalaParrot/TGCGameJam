@@ -2,12 +2,19 @@ extends Node
 
 var flags := {
 	"start":true,
-	"met_friend":false
+	"met_jim":false
 }
 
 var gameState := {
-	"in_dialogue":false
+	"in_dialogue":false,
+	"inventory_open":false
 }
+
+var items: Array = [{"name":"Icon","image":"res://icon.svg"}]
+
+func add_item(item_name: String, image: String) -> void:
+	items.append({"name": item_name, "image": image})
+	Inventory.refresh()
 
 const Map := {
 	"farm": [
@@ -26,51 +33,119 @@ const Map := {
 	],
 }
 
-var positions := {
-	"jim":{"start":{"loc":"town_one","pos":Vector2(80,50)}}
+# Where each NPC currently is: loc is the map name, pos the position inside that map (like in the editor)
+var npc_state := {
+	"jim": {"loc": "town_one", "pos": Vector2(80, 50)},
 }
+
+func npc_map(npc_name: String) -> String:
+	if not npc_state.has(npc_name):
+		return ""
+	return npc_state[npc_name].loc
+
+func npc_pos(npc_name: String):
+	if not npc_state.has(npc_name):
+		return null
+	return npc_state[npc_name].pos
 
 #Initial Dialogues(We will be changing these)
 var dialogues := {
-	"npc1":{"counter":0,"dialogues":[
+	"jim":{"counter":0,"dialogues":[
 			{
-				"requires":["start"],
-				"forbids":[],
-				"lines":[[
-					{"Jim":"Bro , Did you hear the news, the world is about to end!!!!!!!!"},
-					{"Jim":"In 16hrsss!!!!"},
-					{"Player":"Whaaaaat"}
-				],
-				[{"Jim":"Quickly , Come out , We have to go to the hill"}]]
+				"requires":{"start":true},
+				"forbids":{},
+				# sections run by execute(): "set" {flag: value}, "move" [{"npc", "location", "position"}]
+				# (Jim's walk to the hill is handled separately)
+				"on_finish":{"set":{"met_jim":true}},
+				"lines":[
+					[
+						{"Jim":"Bro , Did you hear the news, the world is about to end!!!!!!!!"},
+						{"Jim":"In 16hrsss!!!!"},
+						{"Player":"Whaaaaat"}
+					],
+					[
+						{"Jim":"Quickly , Come out , We have to go to the hill"}
+					]
+				]
 			},
 			{
-				"requires":[],
-				"forbids":[],
+				"requires":{"met_jim":true},
+				"forbids":{},
+				"on_finish":{},
 				"lines":[[{"Jim":"Hello"}]],
 			},
 		]
 	}
 }
 
-var currentTasks := {
-	"main":{"name":"Talk to Jim","location":"hillside","target":"npc1"}
+const Tasks := {
+	"main":[
+		{
+			"requires":{"start":true},
+			"forbids":{"met_jim":true},
+			"task":{"name":"Talk to Jim","location":"hillside","target":"jim"}
+		}
+	]
 }
 
-
+# requires: every flag must equal its value. forbids: blocked if a flag equals its value.
 func conditions_met(entry: Dictionary):
-	for cond in entry.requires:
-		if not flags.has(cond) or not flags[cond]:
+	for flag in entry.requires:
+		if flags.get(flag) != entry.requires[flag]:
 			return false
-	for cond in entry.forbids:
-		if flags.get(cond, false):
+	for flag in entry.forbids:
+		if flags.has(flag) and flags[flag] == entry.forbids[flag]:
 			return false
-	print("Conditions Met")
 	return true
 
 
-func get_dialogue(npc: String)->Array:
+# Runs the named sections of an on_finish dictionary. Dialogue and cutscenes both call this.
+func execute(on_finish: Dictionary) -> void:
+	for section in on_finish:
+		match section:
+			"set":
+				for flag in on_finish["set"]:
+					flags[flag] = on_finish["set"][flag]
+			"move":
+				for move in on_finish["move"]:
+					move_npc(move.npc, move.location, move.position)
+			_:
+				push_warning("Unknown on_finish section: " + str(section))
+
+
+func move_npc(npc_name: String, location: String, position: Vector2) -> void:
+	var old_map := npc_map(npc_name)
+	npc_state[npc_name] = {"loc": location, "pos": position}
+	var npc := get_tree().current_scene.find_child(npc_name, true, false) as Node2D
+	if npc == null:
+		return
+	if location == old_map:
+		npc.position = position
+	else:
+		npc.queue_free()
+
+
+func cutscene_seen(cutscene_id: String) -> bool:
+	return flags.get("seen_" + cutscene_id, false)
+
+
+func mark_cutscene_seen(cutscene_id: String) -> void:
+	flags["seen_" + cutscene_id] = true
+
+func get_current_tasks()->Dictionary:
+	var mainTasks = Tasks.main
+	for task in mainTasks:
+		if conditions_met(task):
+			return task.task
+	return {}
+
+
+func get_dialogue_set(npc: String)->Dictionary:
 	var dialogue_sets = dialogues[npc].dialogues
 	for dialogue_set in dialogue_sets:
 		if conditions_met(dialogue_set):
-			return dialogue_set.lines
-	return []
+			return dialogue_set
+	return {}
+
+func get_dialogue(npc: String)->Array:
+	return get_dialogue_set(npc).get("lines", [])

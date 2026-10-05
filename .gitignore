@@ -1,0 +1,12 @@
+# AI tooling (never commit)
+.vibe-wise/
+.sensible-vibes/
+.claude/
+CLAUDE.md
+CLAUDE.local.md
+.mcp.json
+.cursor/
+.cursorrules
+.aider*
+.github/copilot-instructions.md
+AGENTS.md
