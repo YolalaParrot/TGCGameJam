@@ -33,8 +33,29 @@ const TASK_FADE_OUT := 0.5
 const ITEM_SHOW_TIME := 1.25
 var task_tween: Tween
 
+# Trial runs: start the game at a later story stage to test it. "" plays from the beginning.
+var trial_stage := "got_wood"
+const TRIAL_STAGES := {
+	# Right after Uncle Willy hands over the wood: next task is taking it to Finn
+	"got_wood": {
+		"flags": {"met_jim":true, "seen_town1_intro":true, "met_ken":true, "met_willy":true,
+			"dance_battle":"won", "got_wood":true},
+		"items": [WOOD],
+	},
+}
+
 func _ready() -> void:
+	if trial_stage != "":
+		start_trial(trial_stage)
 	announce_task.call_deferred()
+
+
+func start_trial(stage: String) -> void:
+	var trial: Dictionary = TRIAL_STAGES[stage]
+	flags.merge(trial.get("flags", {}), true)
+	# Straight into the list: the Inventory autoload is not ready yet and refreshes itself.
+	items.append_array(trial.get("items", []))
+	print("TRIAL RUN from stage: ", stage)
 
 var items: Array = []
 
