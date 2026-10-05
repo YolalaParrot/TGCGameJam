@@ -4197,7 +4197,7 @@ position = Vector2(80, 50)
 NPC_Name = "jim"
 frames = SubResource("SpriteFrames_wu7dk")
 leave_flag = "met_jim"
-leave_x = -1000.0
+leave_x = 1050.0
 leave_speed = 150.0
 
 [node name="bob" parent="." unique_id=1402557311 instance=ExtResource("1_kfime")]

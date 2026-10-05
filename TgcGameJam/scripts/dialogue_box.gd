@@ -6,19 +6,17 @@ extends CanvasLayer
 var index:=0
 var speaker:String = ""
 var dialogues: Array = []
-var on_finish: Dictionary = {}  # run through GameState.execute when the last line is reached
-var entry: Dictionary = {}  # the GameState dialogue entry being shown (holds its counter)
+var on_finish: Dictionary = {}
+var entry: Dictionary = {}
 var active = false
 
-const MOVE_ACTIONS := ["move_left", "move_right", "move_up", "move_down"]
+const move_actions := ["move_left", "move_right", "move_up", "move_down"]
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	panel.visible = false
-	pass # Replace with function body.
+	pass
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
@@ -33,14 +31,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		close_box()
 	else:
-		# Walking away closes the dialogue (it only finishes, and runs on_finish, when read to the end).
-		for action in MOVE_ACTIONS:
+		for action in move_actions:
 			if event.is_action_pressed(action):
 				close_box()
 				break
 	
 
-# Name and dialogue share one LabelSettings, so this resizes both.
 func set_font_size(size: int) -> void:
 	dialogue.label_settings.font_size = size
 

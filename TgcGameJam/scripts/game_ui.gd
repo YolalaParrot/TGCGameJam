@@ -3,12 +3,10 @@ extends Control
 var score: int = 0
 var combo_count: int = 0
 
-# Track total notes hit and the accumulated rating points
 var total_notes: int = 0
 var total_rating_points: float = 0.0
 
-# Numerical weight for each rating judgment
-const RATING_WEIGHTS = {
+const rating_weights = {
 	"PERFECT": 4.0,
 	"GREAT":   3.0,
 	"GOOD":    2.0,
@@ -16,7 +14,6 @@ const RATING_WEIGHTS = {
 	"MISS":    0.0
 }
 
-# Average threshold needed to pass (GOOD average = 2.0)
 @export var target_average_score: float = 2.0
 
 var custom_font = preload("res://art/PixelOperator8.ttf") 
@@ -38,7 +35,6 @@ func _ready():
 	score_node = get_node_or_null("%ScoreLabel") if get_node_or_null("%ScoreLabel") else get_node_or_null("ScoreLabel")
 	combo_node = get_node_or_null("%ComboLabel") if get_node_or_null("%ComboLabel") else get_node_or_null("ComboLabel")
 
-	# Updated to look for CountdownLabel
 	result_node = get_node_or_null("%CountdownLabel")
 	if result_node == null:
 		result_node = get_node_or_null("CountdownLabel")
@@ -53,13 +49,13 @@ func _ready():
 	ResetCombo()
 	
 func _on_update_countdown(text: String) -> void:
-	if result_node: # result_node references CountdownLabel
+	if result_node:
 		if text == "":
 			result_node.visible = false
 		else:
 			result_node.visible = true
 			result_node.text = text
-			result_node.modulate = Color.WHITE # Ensure normal text color during countdown
+			result_node.modulate = Color.WHITE
 
 func _apply_font(node: Control, font: Font, size: int):
 	if node == null:
@@ -87,12 +83,11 @@ func ResetCombo():
 	if combo_node:
 		combo_node.text = ""
 
-# --- Average Rating Calculation & UI Display ---
 
 func _on_note_hit(rating: String):
-	if RATING_WEIGHTS.has(rating):
+	if rating_weights.has(rating):
 		total_notes += 1
-		total_rating_points += RATING_WEIGHTS[rating]
+		total_rating_points += rating_weights[rating]
 
 func _on_level_finished():
 	print("--- LEVEL FINISHED SIGNAL RECEIVED ---")
@@ -108,10 +103,10 @@ func _on_level_finished():
 		result_node.visible = true
 		if passed:
 			result_node.text = "STAGE CLEAR!"
-			result_node.modulate = Color("25e24b") # Green
+			result_node.modulate = Color("25e24b")
 		else:
 			result_node.text = "STAGE FAILED!"
-			result_node.modulate = Color("e22525") # Red
+			result_node.modulate = Color("e22525")
 	else:
 		print("ERROR: Could not find CountdownLabel node!")
 

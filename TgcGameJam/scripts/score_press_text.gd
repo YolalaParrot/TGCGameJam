@@ -1,10 +1,8 @@
 extends Control
 
-# Preload your TrueType Font file
 var custom_font = preload("res://art/PixelOperator8.ttf") 
 
 func _ready():
-	# RichTextLabel uses "normal_font" instead of "font"
 	$ScoreLevelText.add_theme_font_override("normal_font", custom_font)
 	$ScoreLevelText.add_theme_font_size_override("normal_font_size", 28)
 

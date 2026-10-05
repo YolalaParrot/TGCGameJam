@@ -4,7 +4,7 @@ extends Sprite2D
 
 var init_y_pos: float = -360.0
 var target_y_pos: float = 280.0 
-var pass_threshold: float = 280.0 # Re-added for key_listener.gd
+var pass_threshold: float = 280.0
 var miss_threshold: float = 360.0
 
 var has_passed: bool = false

@@ -27,18 +27,18 @@ var gameState := {
 
 signal task_changed
 signal flag_changed(flag: String, value)
-const TASK_FADE_IN := 0.5
-const TASK_SHOW_TIME := 2.0
-const TASK_FADE_OUT := 0.5
-const ITEM_SHOW_TIME := 1.25
+const task_fade_in := 0.5
+const task_show_time := 2.0
+const task_fade_out := 0.5
+const item_show_time := 1.25
 var task_tween: Tween
 
-var trial_stage := "bob"
-const TRIAL_STAGES := {
+var trial_stage := "final"
+const trial_stages := {
 	"got_wood": {
 		"flags": {"met_jim":true, "seen_town1_intro":true, "met_ken":true, "met_willy":true,
 			"dance_battle":"won", "got_wood":true},
-		"items": [WOOD],
+		"items": [wood],
 	},
 	"light_minigame": {
 		"flags": {"met_jim":true, "seen_town1_intro":true, "met_ken":true, "met_willy":true,
@@ -49,6 +49,14 @@ const TRIAL_STAGES := {
 			"dance_battle":"won", "got_wood":true, "wood_delivered":true, "met_mrs_smith":true,
 			"parts_game":"won", "parts_delivered":true},
 	},
+	"final": {
+		"flags": {"met_jim":true, "seen_town1_intro":true, "met_ken":true, "met_willy":true,
+			"dance_battle":"won", "got_wood":true, "wood_delivered":true, "met_mrs_smith":true,
+			"parts_game":"won", "parts_delivered":true,"met_bob":true,"rps_game":"won",
+	"engine_failed":true,
+	"comet_seen":true,
+	"game_complete":true},
+	},
 }
 
 func _ready() -> void:
@@ -58,9 +66,8 @@ func _ready() -> void:
 
 
 func start_trial(stage: String) -> void:
-	var trial: Dictionary = TRIAL_STAGES[stage]
+	var trial: Dictionary = trial_stages[stage]
 	flags.merge(trial.get("flags", {}), true)
-	# Straight into the list: the Inventory autoload is not ready yet and refreshes itself.
 	items.append_array(trial.get("items", []))
 	print("TRIAL RUN from stage: ", stage)
 
@@ -77,16 +84,14 @@ func remove_item(item_name: String) -> void:
 			break
 	Inventory.refresh()
 
-# Items given by on_finish "give" sections (and the minigames' on_won).
-const WOOD := {"name":"Wood","image":"res://assets-temp/wood_planks.jpg"}
-const ENGINE_PARTS := {"name":"Engine Parts","image":"res://assets-temp/engine_parts.png"}
-const FUEL := {"name":"Fuel","image":"res://assets-temp/fuel.png"}
+const wood := {"name":"Wood","image":"res://assets-temp/wood_planks.jpg"}
+const engine_parts := {"name":"Engine Parts","image":"res://assets-temp/engine_parts.png"}
+const fuel := {"name":"Fuel","image":"res://assets-temp/fuel.png"}
 
-# Bob's rock paper scissors match, started by an on_finish "minigame" section. Winning gives the fuel.
-const RPS_GAME := {
+const rps_game := {
 	"scene": "res://scenes/rock_paper_scissors.tscn",
 	"result_flag": "rps_game",
-	"on_won": {"give": [FUEL]},
+	"on_won": {"give": [fuel]},
 }
 
 const Map := {
@@ -110,7 +115,6 @@ const Map := {
 	],
 }
 
-# Where each NPC currently is: loc is the map name, pos the position inside that map (like in the editor)
 var npc_state := {
 	"jim": {"loc": "town_one", "pos": Vector2(80, 50)},
 }
@@ -125,32 +129,17 @@ func npc_pos(npc_name: String):
 		return null
 	return npc_state[npc_name].pos
 
-# Meeting Jim. Used by both the intro cutscene and Jim's first dialogue, so whichever happens
-# leaves the game in the same state.
-const MEET_JIM := {
+const meet_jim := {
 	"set": {"met_jim": true},
 }
 
-# NPC dialogues. Keys match each NPC's NPC_Name. Every entry holds conversations in "lines"
-# and a "counter" (added at runtime) that cycles through them each time one is finished.
-# Entries are checked in order and the first whose requires/forbids pass is used, so list the
-# latest story stage first. Dialogues can be talked through again: on_finish only runs while its
-# main flag is not already done (see should_run).
-# on_finish sections run through execute():
-#   "set" {flag: value}, "move" [{"npc", "location", "position"}]
-#   "give" [{"name", "image"}] items added to the inventory (shown, then the inventory opens)
-#   "take" ["name"] items removed from the inventory
-#   "minigame" {"scene", "result_flag", "on_won", "on_lost"} starts a minigame (see MinigameManager.play)
-#   "flag" (optional) the main flag, defaults to the first flag in "set"
-#   "not_equal" (optional) run unless the main flag equals this, instead of unless it already equals the set value
-# (Jim's walk to the hill is handled separately)
 var dialogues := {
 	"jim":{"dialogues":[
 			# Town one: Jim meets the player (after the intro cutscene)
 			{
 				"requires":{"start":true},
 				"forbids":{},
-				"on_finish":MEET_JIM,
+				"on_finish":meet_jim,
 				"lines":[
 					[
 						{"Player":"Woahh."},
@@ -170,7 +159,7 @@ var dialogues := {
 			{
 				"requires":{"dance_battle":"won"},
 				"forbids":{},
-				"on_finish":{"set":{"got_wood":true},"give":[WOOD]},
+				"on_finish":{"set":{"got_wood":true},"give":[wood]},
 				"lines":[
 					[
 						{"Willy":"Alright you beat me kid fair and square! Take what you need i dont care about it anyways..."},
@@ -300,7 +289,7 @@ var dialogues := {
 			{
 				"requires":{"met_bob":true},
 				"forbids":{"rps_game":"won"},
-				"on_finish":{"flag":"rps_game","not_equal":"won","minigame":RPS_GAME},
+				"on_finish":{"flag":"rps_game","not_equal":"won","minigame":rps_game},
 				"lines":[
 					[
 						{"Bob":"Back for more? Alright, one more round!"}
@@ -311,7 +300,7 @@ var dialogues := {
 			{
 				"requires":{"parts_delivered":true},
 				"forbids":{},
-				"on_finish":{"set":{"met_bob":true},"minigame":RPS_GAME},
+				"on_finish":{"set":{"met_bob":true},"minigame":rps_game},
 				"lines":[
 					[
 						{"Player":"Mr Bob!"},
@@ -412,8 +401,6 @@ var dialogues := {
 	}
 }
 
-# The task shown by the guide arrow is the first one whose requires/forbids pass.
-# target is a node name in the location's scene (an NPC's node name, "shop" or "maze").
 const Tasks := {
 	"main":[
 		{
@@ -479,7 +466,6 @@ const Tasks := {
 	]
 }
 
-# requires: every flag must equal its value. forbids: blocked if a flag equals its value.
 func conditions_met(entry: Dictionary):
 	var requires: Dictionary = entry.get("requires", {})
 	for flag in requires:
@@ -492,10 +478,6 @@ func conditions_met(entry: Dictionary):
 	return true
 
 
-# on_finish only runs while its main flag is not already done, so talking to someone again does
-# not repeat it. The main flag is on_finish["flag"], or else the first flag in "set". It counts as
-# done when it equals the value "set" gives it. "not_equal" replaces that value: the on_finish
-# runs unless the main flag equals "not_equal". Without a main flag it always runs.
 func should_run(on_finish: Dictionary) -> bool:
 	var main: String = on_finish.get("flag", "")
 	if main == "" and not on_finish.get("set", {}).is_empty():
@@ -506,7 +488,6 @@ func should_run(on_finish: Dictionary) -> bool:
 	return flags.get(main) != done_value
 
 
-# Runs the named sections of an on_finish dictionary. Dialogue and cutscenes both call this.
 func execute(on_finish: Dictionary) -> void:
 	if not should_run(on_finish):
 		return
@@ -530,12 +511,13 @@ func execute(on_finish: Dictionary) -> void:
 				for item_name in on_finish["take"]:
 					remove_item(item_name)
 			"minigame":
-				# Deferred: the dialogue box is still closing and MinigameManager waits for that.
 				var game: Dictionary = on_finish["minigame"]
 				MinigameManager.play.call_deferred(game.scene, game.result_flag,
 					game.get("on_won", {}), game.get("on_lost", {}))
-			"flag", "not_equal":
-				pass  # read by should_run
+			"credits":
+				get_tree().change_scene_to_file.call_deferred("res://scenes/Credits.tscn")
+			"flag", "not_equal", "next":
+				pass
 			_:
 				push_warning("Unknown on_finish section: " + str(section))
 	var task_moved: bool = get_current_tasks().get("name", "") != task_before
@@ -545,13 +527,11 @@ func execute(on_finish: Dictionary) -> void:
 		announce_task()
 
 
-# Adds each item, shows it (ItemPopup) with "Collected <name>" in the top left, then opens the
-# inventory. A new task is announced after that, so it does not cover the "Collected" text.
 func receive_items(new_items: Array, announce_after: bool) -> void:
 	for item in new_items:
 		add_item(item.name, item.image)
-		display_task("Collected " + item.name, ITEM_SHOW_TIME)
-		await ItemPopup.show_item(load(item.image), ITEM_SHOW_TIME)
+		display_task("Collected " + item.name, item_show_time)
+		await ItemPopup.show_item(load(item.image), item_show_time)
 	if not gameState.inventory_open:
 		Inventory.toggle()
 	if announce_after:
@@ -577,7 +557,6 @@ func cutscene_seen(cutscene_id: String) -> bool:
 func mark_cutscene_seen(cutscene_id: String) -> void:
 	flags["seen_" + cutscene_id] = true
 
-# Tells everyone the main task changed and flashes its name in the top left.
 func announce_task() -> void:
 	task_changed.emit()
 	var task := get_current_tasks()
@@ -585,8 +564,7 @@ func announce_task() -> void:
 		display_task(task.name)
 
 
-# Shows text in the top left overlay: fades in, stays, fades out, then the text is cleared.
-func display_task(text: String, show_time := TASK_SHOW_TIME) -> void:
+func display_task(text: String, show_time := task_show_time) -> void:
 	var panel: Control = TaskOverlay.get_node("Panel")
 	var label: Label = panel.get_node("Label")
 	label.text = text
@@ -595,9 +573,9 @@ func display_task(text: String, show_time := TASK_SHOW_TIME) -> void:
 	panel.visible = true
 	panel.modulate.a = 0.0
 	task_tween = create_tween()
-	task_tween.tween_property(panel, "modulate:a", 1.0, TASK_FADE_IN)
+	task_tween.tween_property(panel, "modulate:a", 1.0, task_fade_in)
 	task_tween.tween_interval(show_time)
-	task_tween.tween_property(panel, "modulate:a", 0.0, TASK_FADE_OUT)
+	task_tween.tween_property(panel, "modulate:a", 0.0, task_fade_out)
 	task_tween.tween_callback(clear_task_display)
 
 

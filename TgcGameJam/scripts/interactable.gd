@@ -4,10 +4,10 @@ extends Area2D
 @onready var parent = $".."
 @onready var is_npc: bool = parent.is_in_group("npc")
 
-const GLOW_COLOR := Color(1.0, 0.85, 0.25)
-const GLOW_MIN := 0.2
-const GLOW_MAX := 0.7
-const GLOW_PERIOD := 0.9
+const glow_color := Color(1.0, 0.85, 0.25)
+const glow_min := 0.2
+const glow_max := 0.7
+const glow_period := 0.9
 
 signal interacted
 
@@ -53,10 +53,10 @@ func set_glow(on: bool) -> void:
 	if not on:
 		modulate.a = 0.0
 		return
-	modulate.a = GLOW_MIN
+	modulate.a = glow_min
 	glow_tween = create_tween().set_loops()
-	glow_tween.tween_property(self, "modulate:a", GLOW_MAX, GLOW_PERIOD / 2.0)
-	glow_tween.tween_property(self, "modulate:a", GLOW_MIN, GLOW_PERIOD / 2.0)
+	glow_tween.tween_property(self, "modulate:a", glow_max, glow_period / 2.0)
+	glow_tween.tween_property(self, "modulate:a", glow_min, glow_period / 2.0)
 
 
 func _draw() -> void:
@@ -66,6 +66,6 @@ func _draw() -> void:
 		if child is CollisionShape2D:
 			var shape: Shape2D = child.shape
 			if shape is RectangleShape2D:
-				draw_rect(Rect2(child.position - shape.size / 2.0, shape.size), GLOW_COLOR)
+				draw_rect(Rect2(child.position - shape.size / 2.0, shape.size), glow_color)
 			elif shape is CircleShape2D:
-				draw_circle(child.position, shape.radius, GLOW_COLOR)
+				draw_circle(child.position, shape.radius, glow_color)

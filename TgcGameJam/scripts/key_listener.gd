@@ -6,12 +6,10 @@ extends Sprite2D
 
 var falling_key_queue = []
 
-# If distance_from_pass is less than threshold, give that score
 var perfect_press_threshold: float = 30
 var great_press_threshold: float = 50
 var good_press_threshold: float = 60
 var ok_press_threshold: float = 80
-# otherwise, miss
 
 var perfect_press_score: float = 250
 var great_press_score: float = 100
@@ -22,28 +20,22 @@ func _ready():
 	$GlowOverlay.frame = frame + 4
 	Signals.CreateFallingKey.connect(CreateFallingKey)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_just_pressed(key_name):
 		Signals.KeyListenerPress.emit(key_name, frame)
 	
-	# Make sure there is a falling key to check for this given key
 	if falling_key_queue.size() > 0:
 		
-		# If that falling key has passed, remove it from the queue
 		if falling_key_queue.front().has_passed:
 			falling_key_queue.pop_front()
 			
-			# PRINT MISS
 			var st_inst = score_text.instantiate()
 			get_parent().call_deferred("add_child", st_inst)
 			st_inst.SetTextInfo("MISS")
 			st_inst.global_position = global_position + Vector2(0, -20)
 			Signals.ResetCombo.emit()
-			Signals.NoteHit.emit("MISS") # <--- ADDED LINE 1
+			Signals.NoteHit.emit("MISS")
 			
-		# If key is pressed, pop from the queue and calculate distance from critical point
-		# (the queue can be empty here: the miss above may have just removed the last key)
 		if Input.is_action_just_pressed(key_name) and falling_key_queue.size() > 0:
 			var key_to_pop = falling_key_queue.pop_front()
 			
@@ -73,7 +65,7 @@ func _process(delta):
 				press_score_text = "MISS"
 				Signals.ResetCombo.emit()
 			
-			Signals.NoteHit.emit(press_score_text) # <--- ADDED LINE 2
+			Signals.NoteHit.emit(press_score_text)
 			
 			key_to_pop.queue_free()
 			
@@ -94,6 +86,5 @@ func CreateFallingKey(button_name: String):
 
 
 func _on_random_spawn_timer_timeout():
-	#CreateFallingKey()
 	$RandomSpawnTimer.wait_time = randf_range(0.4, 3)
 	$RandomSpawnTimer.start()

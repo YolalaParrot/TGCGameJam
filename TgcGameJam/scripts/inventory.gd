@@ -32,7 +32,6 @@ func refresh() -> void:
 			icon.texture = null
 			label.text = ""
 
-	# The current main task is shown under the items, if there is one.
 	var task := GameState.get_current_tasks()
 	task_label.visible = not task.is_empty()
 	task_separator.visible = task_label.visible

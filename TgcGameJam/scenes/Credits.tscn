@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://kfuva7reanxm"]
 
 [ext_resource type="Script" uid="uid://b8auqu36vjor" path="res://scripts/credits.gd" id="1_spvsy"]
-[ext_resource type="FontFile" uid="uid://bimslda18c7rn" path="res://final-assets/fonts/ThaleahFat.ttf" id="2_gw1d4"]
+[ext_resource type="FontFile" uid="uid://vyu311wfu6mh" path="res://final-assets/fonts/PixelOperator8-Bold.ttf" id="2_gw1d4"]
 
 [node name="Credits" type="Control" unique_id=670197097]
 layout_mode = 3

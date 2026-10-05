@@ -109,6 +109,5 @@ func start_countdown() -> void:
 	if music_player:
 		music_player.play()
 		
-	# Hide after 0.5 seconds
 	await get_tree().create_timer(0.5).timeout
 	Signals.UpdateCountdown.emit("")

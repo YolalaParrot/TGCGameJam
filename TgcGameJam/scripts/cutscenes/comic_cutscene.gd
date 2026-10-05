@@ -3,10 +3,7 @@ extends CanvasLayer
 signal finished
 
 @export_category("Comic Pages")
-## Each page has one or two panels with their own position, size and entry side.
-## Used when it is not empty.
 @export var pages: Array[ComicPage] = []
-## Shortcut when no pages are set: the images are shown two per page, stacked.
 @export var sequence: Array[Texture2D] = []
 
 @export_category("Animation")
@@ -24,7 +21,6 @@ var page_index := 0
 var panel_index := 0
 var animating := false
 
-# The panels on screen for the current page, and the side each one came in from.
 var shown: Array[TextureRect] = []
 var shown_sides: Array[ComicPanel.Side] = []
 
@@ -60,7 +56,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 
 	if event.is_action_pressed("advance_cutscene"):
-		# Stop the key press reaching the player/NPCs while the comic is open.
 		get_viewport().set_input_as_handled()
 		if animating:
 			return
@@ -70,12 +65,10 @@ func _unhandled_input(event: InputEvent) -> void:
 func _advance() -> void:
 	animating = true
 
-	# Another panel on this page.
 	if panel_index < page_list[page_index].panels.size() - 1:
 		panel_index += 1
 		await _enter_panel()
 
-	# Next page.
 	elif page_index < page_list.size() - 1:
 		await _leave_page()
 		await get_tree().create_timer(panel_gap).timeout
@@ -83,7 +76,6 @@ func _advance() -> void:
 		panel_index = 0
 		await _enter_panel()
 
-	# Last page: everything leaves and the cutscene ends.
 	else:
 		await _leave_page()
 		finished.emit()
@@ -113,7 +105,6 @@ func _enter_panel() -> void:
 	await _move_panel(panel, rest_position, panel_animation_time).finished
 
 
-# Every panel on the page slides out through the side opposite to the one it came from.
 func _leave_page() -> void:
 	var area := _screen_size()
 	var last_tween: Tween = null
@@ -133,7 +124,6 @@ func _leave_page() -> void:
 	shown_sides.clear()
 
 
-# How far to move a panel resting at rest_position so it is just outside the given screen edge.
 func _offscreen_offset(side: ComicPanel.Side, rest_position: Vector2, panel_size: Vector2, area: Vector2) -> Vector2:
 	match side:
 		ComicPanel.Side.LEFT:
@@ -173,7 +163,6 @@ func _screen_size() -> Vector2:
 	return get_viewport().get_visible_rect().size
 
 
-# The pages to play: the ones set in the inspector, otherwise `sequence` two images per page.
 func _build_pages() -> Array[ComicPage]:
 	var built: Array[ComicPage] = []
 

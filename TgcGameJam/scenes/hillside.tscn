@@ -4,10 +4,11 @@
 [ext_resource type="Texture2D" uid="uid://iva0vnecw6o3" path="res://final-assets/Environment/Tilesets/Wall_Tiles.png" id="3_ogo75"]
 [ext_resource type="PackedScene" uid="uid://j54lupoylhq8" path="res://scenes/player.tscn" id="3_rl0pi"]
 [ext_resource type="PackedScene" uid="uid://bt3lpqrk2xw4e" path="res://scenes/teleporter.tscn" id="4_2dp04"]
-[ext_resource type="PackedScene" uid="uid://chuvimfq0blnm" path="res://scenes/npc.tscn" id="5_jimnpc"]
-[ext_resource type="Texture2D" uid="uid://cvcc2sducawnn" path="res://assets-temp/boy_idle_4x1.png" id="6_jimtex"]
 [ext_resource type="Texture2D" uid="uid://cgjxe8sakyxat" path="res://final-assets/Environment/Tilesets/Wall_Variations.png" id="4_qv2pw"]
+[ext_resource type="PackedScene" uid="uid://chuvimfq0blnm" path="res://scenes/npc.tscn" id="5_jimnpc"]
+[ext_resource type="Script" uid="uid://0dsu1akojwp0" path="res://scripts/cutscene_trigger.gd" id="5_ogo75"]
 [ext_resource type="Texture2D" uid="uid://buyr6va8k7305" path="res://final-assets/Environment/Tilesets/Water_tiles.png" id="5_uvgno"]
+[ext_resource type="Texture2D" uid="uid://cvcc2sducawnn" path="res://assets-temp/boy_idle_4x1.png" id="6_jimtex"]
 [ext_resource type="Texture2D" uid="uid://ud5668jvt607" path="res://final-assets/Environment/Props/Static/Trees/Model_02/Size_05.png" id="6_t6cyu"]
 [ext_resource type="Texture2D" uid="uid://6pj1ddavu86f" path="res://final-assets/Environment/Props/Static/Vegetation.png" id="7_ogo75"]
 
@@ -2028,6 +2029,9 @@ texture = ExtResource("7_ogo75")
 [sub_resource type="TileSet" id="TileSet_efked"]
 sources/0 = SubResource("TileSetAtlasSource_uvgno")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qv2pw"]
+size = Vector2(40, 33)
+
 [node name="hillside" type="Node2D" unique_id=854784106]
 position = Vector2(-160, -144)
 
@@ -2077,3 +2081,41 @@ tile_set = SubResource("TileSet_sccup")
 [node name="TileMapLayer3" type="TileMapLayer" parent="." unique_id=1185944856]
 tile_map_data = PackedByteArray("AADG/+7/AAAEAAsAAADG//D/AAAEAAsAAADE//v/AAAEAAsAAADD//3/AAAEAAsAAADD//7/AAAEAA4AAADE//7/AAAEAAsAAADJ//b/AAAEAAsAAADO//n/AAAEAAsAAADU//r/AAAEAA4AAADU//7/AAAEAA4AAADe/wcAAAAEAA4AAADi/wYAAAAEAA4AAADX/wIAAAAEAAsAAADO//3/AAAEAA4AAADL//v/AAAEAA4AAADT//H/AAAEAAsAAADS/+3/AAAEAA4AAADR/+v/AAAEAA4AAADP/+b/AAAEAAsAAADQ/+T/AAAEAA4AAADS/+j/AAAEAAsAAADb//n/AAAEAA4AAADa//j/AAAEAA4AAADW//X/AAAEAAsAAADT/+n/AAAEAAsAAADW/+P/AAAEAA4AAADW/+n/AAAEAA4AAADY/+//AAAEAAsAAADg/wMAAAAEAA4AAADY/wUAAAAEAA4AAADX/wMAAAAEAA4AAADW/wMAAAAEAA4AAADV/wIAAAAEAA4AAADU/wEAAAAEAAsAAADL/+//AAAEAA4AAADJ/+7/AAAEAA4AAADK//L/AAAEAAsAAADL/+z/AAAEAA4AAADM/+v/AAAEAAsAAADM/+r/AAAEAAsAAADR//D/AAAEAAsAAADd/wsAAAAEAAsAAADe/w0AAAAEAAsAAADg/xAAAAAEAAsAAADg/xgAAAAEAA4AAADe/xcAAAAEAAsAAADe/xYAAAAEAAsAAADn/w8AAAAEAA4AAADp/xkAAAAEAAsAAADq/xkAAAAEAAsAAADu/xcAAAAEAAsAAADt/xMAAAAEAA4AAADs/xEAAAAEAAsAAADr/w8AAAAEAA4AAADl/xMAAAAEAAsAAADl/xcAAAAEAAsAAADl/xgAAAAEAA4AAADs/xQAAAAEAA4AAADz/xgAAAAEAAsAAAD6/xgAAAAEAAsAAAD8/xYAAAAEAA4AAAD9/xgAAAAEAA4AAAACABcAAAAEAAsAAAALABgAAAAEAA4AAAALABcAAAAEAA4AAAD//xkAAAAEAA4AAAD+/xkAAAAEAAsAAAD9/xkAAAAEAA4AAAD5/xgAAAAEAA4AAADt/xkAAAAEAA4AAADv/xkAAAAEAAsAAADy/xoAAAAEAAsAAAD6/xsAAAAEAAsAAAAFAB0AAAAEAAsAAAALABsAAAAEAAsAAAANABoAAAAEAA4AAAAOABoAAAAEAA4AAAD6/xkAAAAEAA4AAADk/xgAAAAEAA4AAADf/xkAAAAEAAsAAADe/xkAAAAEAA4AAADT/xoAAAAEAAsAAADP/xoAAAAEAAsAAADK/xkAAAAEAA4AAADG/w4AAAAEAAsAAADG/w0AAAAEAAsAAADH/wkAAAAEAA4AAADH/wcAAAAEAA4AAADI/wcAAAAEAA4AAADJ/wYAAAAEAA4AAADL/wUAAAAEAA4AAADS/wYAAAAEAA4AAADV/woAAAAEAA4AAADX/w4AAAAEAA4AAADL/xgAAAAEAAsAAADH/xQAAAAEAA4AAADH/xMAAAAEAA4AAADD/woAAAAEAAsAAADD/wkAAAAEAA4AAADD/wcAAAAEAA4AAADD/wYAAAAEAA4AAADD/xcAAAAEAAsAAADD/xgAAAAEAAsAAADG/xoAAAAEAA4AAADF/xgAAAAEAAsAAADF/xMAAAAEAAsAAADH/xYAAAAEAA4AAADK/x0AAAAEAA4AAADN/x0AAAAEAA4AAADV/x0AAAAEAA4AAADd/xoAAAAEAA4AAADe/xoAAAAEAA4AAADk/xwAAAAEAAsAAADp/xsAAAAEAAsAAAD7/xsAAAAEAAsAAADb/wAAAAACAAwAAADc/wEAAAACAA0AAADd/wMAAAADABAAAADd/wQAAAACAA8AAADe/wQAAAADAA8AAADm/wsAAAACAA8AAADn/wwAAAACAAwAAADo/w0AAAADABAAAAD4/xEAAAADAA8AAAD5/xEAAAADABAAAAD5/xIAAAACAAwAAAD6/xIAAAACAA0AAAD7/xIAAAADABAAAAD8/xIAAAADAA4AAAD9/xIAAAACAA0AAAATABcAAAADAA8AAAAUABcAAAADAA8AAAAWABcAAAADAA4AAAAXABcAAAACAAwAAAAYABcAAAADABAAAAAaABcAAAADAAwAAAAbABcAAAACAA8AAAAdABcAAAACAA4AAAAeABcAAAADAA8AAAAZABkAAAACAAwAAAAaABkAAAADAA8AAAAbABkAAAADAA4AAAAeABkAAAADAA4AAAAfABoAAAADAAwAAAAgABoAAAACAA8AAAAhABsAAAADAA4AAADR//f/AAACAA0AAADS//f/AAADAAwAAADU//f/AAADAA0AAADV//f/AAADAA8AAAABABMAAAACAA8AAAADABMAAAACAA4AAAAGABMAAAADABAAAAAIABMAAAACAA8AAAAJABMAAAADAA4AAAAKABMAAAADAAwAAAANABQAAAADAA0AAAAOABQAAAADABAAAAAPABQAAAACAAwAAAAQABQAAAACAA8AAAARABUAAAACAAwAAAAUABUAAAADAAwAAAAVABUAAAACABAAAAAWABUAAAACAAwAAAAYABUAAAADAA8AAAAZABUAAAADAA8AAAAaABUAAAACABAAAAAbABUAAAACAA4AAAAcABUAAAACAAwAAAAeABUAAAADAA0AAAA=")
 tile_set = SubResource("TileSet_efked")
+
+[node name="CutsceneTrigger_scene2" type="Area2D" parent="." unique_id=481970147]
+position = Vector2(28, 72)
+script = ExtResource("5_ogo75")
+cutscene_id = "scene_2"
+play_once = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CutsceneTrigger_scene2" unique_id=818185337]
+position = Vector2(82, 46)
+shape = SubResource("RectangleShape2D_qv2pw")
+
+[node name="CutsceneTrigger_scene3" type="Area2D" parent="." unique_id=629054807]
+position = Vector2(28, 72)
+script = ExtResource("5_ogo75")
+cutscene_id = "scene_3"
+play_once = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CutsceneTrigger_scene3" unique_id=600355092]
+position = Vector2(82, 46)
+shape = SubResource("RectangleShape2D_qv2pw")
+
+[node name="CutsceneTrigger_scene4" type="Area2D" parent="." unique_id=451277318]
+position = Vector2(28, 72)
+script = ExtResource("5_ogo75")
+cutscene_id = "scene_4"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CutsceneTrigger_scene4" unique_id=1326917630]
+position = Vector2(82, 46)
+shape = SubResource("RectangleShape2D_qv2pw")
+
+[node name="CutsceneTrigger_scene5" type="Area2D" parent="." unique_id=650909301]
+position = Vector2(28, 72)
+script = ExtResource("5_ogo75")
+cutscene_id = "scene_5"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CutsceneTrigger_scene5" unique_id=965984873]
+position = Vector2(82, 46)
+shape = SubResource("RectangleShape2D_qv2pw")

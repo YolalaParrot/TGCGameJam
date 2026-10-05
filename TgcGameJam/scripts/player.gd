@@ -1,13 +1,9 @@
 extends CharacterBody2D
 
-# Editable per map on the player instance in each scene's inspector.
-# (The camera is the player's Camera2D: use "Editable Children" on the instance, as minigame_light does.)
 @export_group("Map settings")
 @export var speed := 15000.0
 @export var dialogue_font_size := 42
 @export var talk_font_size := 24
-## The player inside a minigame scene: moves while in_minigame is on, and has no inventory,
-## talking or guide arrow.
 @export var minigame_player := false
 @export_group("")
 var current_dir = "none"
@@ -27,9 +23,8 @@ func _ready() -> void:
 	guidance_arrow.visible = false
 	if minigame_player:
 		return
-	apply_text_sizes.call_deferred()  # deferred so every NPC label in the scene is ready
+	apply_text_sizes.call_deferred()
 
-# Dialogue box and the "Talk" / "!" labels above NPCs use this map's text sizes.
 func apply_text_sizes() -> void:
 	DialogueBox.set_font_size(dialogue_font_size)
 	for node in get_tree().get_nodes_in_group("interactable"):
@@ -55,7 +50,6 @@ func show_arrow() -> void:
 	if target_item:
 		next_task_target = target_item
 		
-		# Small Fading Animation for Arrow
 		if arrow_tween:
 			arrow_tween.kill()
 		guidance_arrow.visible = true
@@ -77,7 +71,7 @@ func bfs(from: String, to: String) -> String:
 		if exit.to == to:
 			return exit.exit
 		visited[exit.to] = true
-		queue.append([exit.to, exit.exit])  # [region, first exit taken to get there]
+		queue.append([exit.to, exit.exit])
 	while not queue.is_empty():
 		var curr = queue.pop_front()
 		for exit in GameState.Map.get(curr[0], []):
@@ -96,7 +90,7 @@ func _process(delta: float) -> void:
 	if not guidance_arrow.visible or not is_instance_valid(next_task_target):
 		return
 	var dir := (next_task_target.global_position - global_position).normalized()
-	guidance_arrow.position = dir * arrow_radius   # move onto the circle around the player
+	guidance_arrow.position = dir * arrow_radius
 	guidance_arrow.rotation = dir.angle() 
 	
 func _physics_process(delta: float) -> void:

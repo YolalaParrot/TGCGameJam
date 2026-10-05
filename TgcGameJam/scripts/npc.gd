@@ -5,17 +5,13 @@ extends AnimatableBody2D
 @export var frames: SpriteFrames
 
 @export_group("Leaving")
-## When this flag becomes true the NPC walks off sideways and is gone for good.
 @export var leave_flag := ""
-## Local x position where the NPC disappears. Left of the NPC walks left, right of it walks right.
 @export var leave_x := 150.0
-## Pixels per second.
 @export var leave_speed := 20.0
 var leaving := false
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 
 func _ready() -> void:
-	# A moving NPC only exists in the map of its current spot (GameState.npc_state)
 	var map := GameState.npc_map(NPC_Name)
 	if map != "" and map != current_map():
 		queue_free()
@@ -24,7 +20,7 @@ func _ready() -> void:
 		position = GameState.npc_pos(NPC_Name)
 	if leave_flag != "":
 		if GameState.flags.get(leave_flag, false):
-			queue_free()  # already left
+			queue_free()
 			return
 		GameState.flag_changed.connect(_on_flag_changed)
 	interactable.interacted.connect(_on_interacted)
@@ -35,11 +31,9 @@ func _ready() -> void:
 		anim.play("idle")
 
 
-# "!" above the NPC while they are the main task's target.
 func marker_text() -> String:
 	return "!" if GameState.get_current_tasks().get("target", "") == NPC_Name else ""
 
-# A cutscene (CutsceneRegistry, "npc": this name) is played instead of the dialogues while it applies.
 func pending_cutscene() -> String:
 	return CutsceneRegistry.find_for_npc(NPC_Name)
 
@@ -51,7 +45,7 @@ func can_interact() -> bool:
 		return false
 	var map := GameState.npc_map(NPC_Name)
 	if map != "" and map != current_map():
-		return false  # e.g. Jim while he is running off to the hill
+		return false
 	return pending_cutscene() != "" or has_dialogue()
 
 func _on_flag_changed(flag: String, value) -> void:
@@ -60,7 +54,6 @@ func _on_flag_changed(flag: String, value) -> void:
 		interactable.refresh_label()
 
 
-# Walks towards leave_x at a steady speed, no tween, and is removed when it gets there.
 func _process(delta: float) -> void:
 	if not leaving:
 		return
@@ -97,8 +90,6 @@ func _on_interacted():
 		print("")
 
 
-# If this NPC is the current task's target, finishing the dialogue marks met_<name> as true.
-# Checked now, before the dialogue runs, because its on_finish can move the task on.
 func with_met_flag(on_finish: Dictionary) -> Dictionary:
 	if GameState.get_current_tasks().get("target", "") != NPC_Name:
 		return on_finish

@@ -1,9 +1,6 @@
 extends Node
 
-# Light maze minigame: collect every part (the children of Parts) before the time runs out.
-# Ends with Signals.GameOver(passed), which MinigameManager waits for.
 
-## Seconds the player has to find all the parts.
 @export var time_limit := 60.0
 
 var parts_collected := 0
