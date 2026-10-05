@@ -4,15 +4,15 @@
 [ext_resource type="FontFile" uid="uid://bknfx4r2aon3s" path="res://assets-temp/m5x7.ttf" id="2_font"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
-content_margin_left = 8.0
-content_margin_top = 5.0
-content_margin_right = 8.0
-content_margin_bottom = 5.0
+content_margin_left = 24.0
+content_margin_top = 15.0
+content_margin_right = 24.0
+content_margin_bottom = 15.0
 bg_color = Color(0.168627, 0.113725, 0.0784314, 0.92)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
 border_color = Color(1, 0.823529, 0.247059, 1)
 corner_radius_top_left = 2
 corner_radius_top_right = 2
@@ -21,8 +21,9 @@ corner_radius_bottom_left = 2
 
 [sub_resource type="LabelSettings" id="LabelSettings_title"]
 font = ExtResource("2_font")
+font_size = 48
 font_color = Color(1, 0.823529, 0.247059, 1)
-outline_size = 2
+outline_size = 4
 outline_color = Color(0.168627, 0.113725, 0.0784314, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_slot"]
@@ -30,7 +31,7 @@ bg_color = Color(0, 0, 0, 0.35)
 
 [sub_resource type="LabelSettings" id="LabelSettings_text"]
 font = ExtResource("2_font")
-font_size = 14
+font_size = 42
 font_color = Color(1, 0.956863, 0.854902, 1)
 
 [node name="Inventory" type="CanvasLayer" unique_id=1033314266]
@@ -49,7 +50,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
 [node name="VBox" type="VBoxContainer" parent="Panel" unique_id=104375616]
 layout_mode = 2
-theme_override_constants/separation = 4
+theme_override_constants/separation = 12
 
 [node name="Title" type="Label" parent="Panel/VBox" unique_id=393766964]
 layout_mode = 2
@@ -59,13 +60,13 @@ horizontal_alignment = 1
 
 [node name="Slots" type="HBoxContainer" parent="Panel/VBox" unique_id=1531922753]
 layout_mode = 2
-theme_override_constants/separation = 6
+theme_override_constants/separation = 18
 
 [node name="Slot1" type="VBoxContainer" parent="Panel/VBox/Slots" unique_id=1007331690]
 layout_mode = 2
 
 [node name="Frame" type="PanelContainer" parent="Panel/VBox/Slots/Slot1" unique_id=1960400336]
-custom_minimum_size = Vector2(32, 32)
+custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_slot")
 
@@ -83,7 +84,7 @@ horizontal_alignment = 1
 layout_mode = 2
 
 [node name="Frame" type="PanelContainer" parent="Panel/VBox/Slots/Slot2" unique_id=545516538]
-custom_minimum_size = Vector2(32, 32)
+custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_slot")
 
@@ -101,7 +102,7 @@ horizontal_alignment = 1
 layout_mode = 2
 
 [node name="Frame" type="PanelContainer" parent="Panel/VBox/Slots/Slot3" unique_id=436806969]
-custom_minimum_size = Vector2(32, 32)
+custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_slot")
 

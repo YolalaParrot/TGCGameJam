@@ -33,7 +33,6 @@ MinigameManager="*res://scripts/minigame_manager.gd"
 
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
-window/stretch/scale=4.0
 
 [dotnet]
 

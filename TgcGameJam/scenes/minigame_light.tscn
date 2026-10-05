@@ -5,11 +5,20 @@
 [ext_resource type="Texture2D" uid="uid://xtf53i0pc614" path="res://assets-temp/tilesets/walls/walls.png" id="2_qj0hh"]
 [ext_resource type="FontFile" uid="uid://vyu311wfu6mh" path="res://final-assets/fonts/PixelOperator8-Bold.ttf" id="2_x7mjr"]
 [ext_resource type="Texture2D" uid="uid://b63o6p1047kl1" path="res://final-assets/Environment/Structures/Buildings/Interior/Interior_Walls_01.png" id="3_vycj5"]
+[ext_resource type="FontFile" uid="uid://bknfx4r2aon3s" path="res://assets-temp/m5x7.ttf" id="4_28ae0"]
 [ext_resource type="Texture2D" uid="uid://b2tgnnv4gioki" path="res://final-assets/Environment/Tilesets/Dungeon_Tiles.png" id="4_buhsa"]
 [ext_resource type="Texture2D" uid="uid://ssknvwfwaqcp" path="res://final-assets/Environment/Props/Static/Rocks.png" id="4_w12is"]
 [ext_resource type="Texture2D" uid="uid://clpn38u5xloj1" path="res://final-assets/Environment/Props/Static/Trees/Model_01/Size_02.png" id="5_tdjst"]
 [ext_resource type="Texture2D" uid="uid://i6vuxevq5i4k" path="res://final-assets/Environment/Props/Static/Trees/Model_01/Size_03.png" id="6_774kp"]
 [ext_resource type="PackedScene" uid="uid://crykne6f6i830" path="res://scenes/parts.tscn" id="8_774kp"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_c1gba"]
+font = ExtResource("4_28ae0")
+font_size = 26
+
+[sub_resource type="LabelSettings" id="LabelSettings_28ae0"]
+font = ExtResource("4_28ae0")
+font_size = 28
 
 [sub_resource type="Gradient" id="Gradient_qj0hh"]
 offsets = PackedFloat32Array(0.016826924, 0.81490386)
@@ -2439,25 +2448,42 @@ script = ExtResource("1_c1gba")
 
 [node name="player" parent="." unique_id=1772785746 instance=ExtResource("1_egsj3")]
 z_index = 2
-position = Vector2(46, -253)
+position = Vector2(56, -264)
+scale = Vector2(1, 1)
+speed = 6000.0
+
+[node name="Camera2D" parent="player" index="2" unique_id=1036130193]
+position = Vector2(1, 8)
+zoom = Vector2(3, 3)
+limit_left = 31
+limit_top = -378
+limit_right = 898
+limit_bottom = 185
+position_smoothing_enabled = true
+drag_horizontal_enabled = false
+drag_vertical_enabled = false
 
 [node name="Label" type="Label" parent="player" unique_id=1827848896]
-offset_left = -36.0
-offset_top = -25.0
-offset_right = 33.0
-offset_bottom = -17.0
+offset_left = -33.0
+offset_top = -26.0
+offset_right = 174.0
+offset_bottom = -2.0
+scale = Vector2(0.33333334, 0.33333334)
 theme_override_fonts/font = ExtResource("2_x7mjr")
-theme_override_font_sizes/font_size = 4
 text = "Number of parts: 6"
+label_settings = SubResource("LabelSettings_c1gba")
+horizontal_alignment = 1
 
 [node name="part_label" type="Label" parent="player" unique_id=655718506]
-offset_left = -45.0
-offset_top = -18.0
-offset_right = 67.0
-offset_bottom = -13.0
+offset_left = -55.0
+offset_top = -19.0
+offset_right = 281.0
+offset_bottom = 7.0
+scale = Vector2(0.33333334, 0.33333334)
 theme_override_fonts/font = ExtResource("2_x7mjr")
-theme_override_font_sizes/font_size = 4
-text = "Number of parts collected: 0"
+text = "Number of Parts Collected : 0"
+label_settings = SubResource("LabelSettings_28ae0")
+horizontal_alignment = 1
 
 [node name="PointLight2D" type="PointLight2D" parent="player" unique_id=1960651194]
 position = Vector2(-4, 2.999999)
@@ -2467,16 +2493,6 @@ energy = 2.7
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_ky188")
 texture_scale = 1.75
-
-[node name="Camera2D" parent="player"]
-position = Vector2(1, 8)
-limit_left = -10000000
-limit_top = -10000000
-limit_right = 10000000
-limit_bottom = 10000000
-drag_horizontal_enabled = false
-drag_vertical_enabled = false
-position_smoothing_enabled = true
 
 [node name="Labels" type="Node" parent="player" unique_id=574027798]
 

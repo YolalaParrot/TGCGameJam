@@ -3,9 +3,9 @@ extends CharacterBody2D
 # Editable per map on the player instance in each scene's inspector.
 # (The camera is the player's Camera2D: use "Editable Children" on the instance, as minigame_light does.)
 @export_group("Map settings")
-@export var speed := 5000.0
-@export var dialogue_font_size := 14
-@export var talk_font_size := 7
+@export var speed := 15000.0
+@export var dialogue_font_size := 42
+@export var talk_font_size := 24
 @export_group("")
 var current_dir = "none"
 

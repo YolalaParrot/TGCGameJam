@@ -5,7 +5,7 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_r2og1"]
 font = ExtResource("2_giuoe")
-font_size = 14
+font_size = 42
 
 [node name="CanvasLayer" type="CanvasLayer" unique_id=784457619]
 script = ExtResource("1_r2og1")
@@ -15,7 +15,7 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -40.0
+offset_top = -120.0
 grow_horizontal = 2
 grow_vertical = 0
 
