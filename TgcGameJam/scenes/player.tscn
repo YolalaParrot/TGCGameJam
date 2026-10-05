@@ -290,7 +290,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fwuwm"]
-size = Vector2(10, 18)
+size = Vector2(10, 4.5)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vj8al"]
 radius = 18.0
@@ -305,7 +305,7 @@ sprite_frames = SubResource("SpriteFrames_bde3n")
 animation = &"side_walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1165888745]
-position = Vector2(0, 8)
+position = Vector2(0, 14.25)
 shape = SubResource("RectangleShape2D_fwuwm")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1036130193]

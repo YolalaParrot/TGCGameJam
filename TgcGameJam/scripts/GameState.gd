@@ -33,13 +33,16 @@ const TASK_FADE_OUT := 0.5
 const ITEM_SHOW_TIME := 1.25
 var task_tween: Tween
 
-# Trial runs: start the game at a later story stage to test it. "" plays from the beginning.
-var trial_stage := "got_wood"
+var trial_stage := "light_minigame"
 const TRIAL_STAGES := {
-	# Right after Uncle Willy hands over the wood: next task is taking it to Finn
 	"got_wood": {
 		"flags": {"met_jim":true, "seen_town1_intro":true, "met_ken":true, "met_willy":true,
 			"dance_battle":"won", "got_wood":true},
+		"items": [WOOD],
+	},
+	"light_minigame": {
+		"flags": {"met_jim":true, "seen_town1_intro":true, "met_ken":true, "met_willy":true,
+			"dance_battle":"won", "got_wood":true,"wood_delivered":true,"met_mrs_smith":true},
 		"items": [WOOD],
 	},
 }
