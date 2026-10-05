@@ -2041,6 +2041,10 @@ speed = 5000.0
 
 [node name="Camera2D" parent="player" index="2" unique_id=1036130193]
 zoom = Vector2(5, 5)
+limit_left = -143
+limit_top = -160
+limit_right = 128
+limit_bottom = 129
 
 [node name="collisions" type="StaticBody2D" parent="." unique_id=1116281962]
 

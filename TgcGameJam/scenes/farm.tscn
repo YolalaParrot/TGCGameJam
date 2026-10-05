@@ -6996,7 +6996,6 @@ animations = [{
 size = Vector2(219, 199)
 
 [node name="farm" type="Node2D" unique_id=2766861]
-position = Vector2(-160, -144)
 
 [node name="TileMap" type="TileMap" parent="." unique_id=1495925443]
 tile_set = SubResource("TileSet_lakm8")
@@ -7014,6 +7013,12 @@ tile_set = SubResource("TileSet_giyli")
 
 [node name="player" parent="." unique_id=1772785746 instance=ExtResource("3_5q3ck")]
 position = Vector2(796, -19)
+
+[node name="Camera2D" parent="player" index="2" unique_id=1036130193]
+limit_left = -1006
+limit_top = -507
+limit_right = 1015
+limit_bottom = 509
 
 [node name="collisions" type="StaticBody2D" parent="." unique_id=707520541]
 
@@ -7064,4 +7069,5 @@ shape = SubResource("RectangleShape2D_4qe0f")
 position = Vector2(35.5, 10.5)
 shape = SubResource("RectangleShape2D_4qe0f")
 
+[editable path="player"]
 [editable path="maze"]

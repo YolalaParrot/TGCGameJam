@@ -75,6 +75,12 @@ format = 2
 [node name="player" parent="." unique_id=1772785746 instance=ExtResource("1_hp5pe")]
 position = Vector2(66, 131)
 
+[node name="Camera2D" parent="player" index="2" unique_id=1036130193]
+limit_left = -1160
+limit_top = -644
+limit_right = 840
+limit_bottom = 356
+
 [node name="collisions" type="StaticBody2D" parent="." unique_id=534276912]
 
 [node name="map_boundary" type="CollisionPolygon2D" parent="collisions" unique_id=156432518]
@@ -111,3 +117,5 @@ frames = SubResource("SpriteFrames_dq7sv")
 
 [node name="shop" parent="." unique_id=479663280 instance=ExtResource("8_dq7sv")]
 position = Vector2(147, 251)
+
+[editable path="player"]

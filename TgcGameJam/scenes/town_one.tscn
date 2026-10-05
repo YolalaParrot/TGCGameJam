@@ -4143,6 +4143,12 @@ layer_0/tile_data = PackedInt32Array(-1900593, 10, 0, -1835057, 10, 1, -1769521,
 [node name="player" parent="." unique_id=1772785746 instance=ExtResource("3_kfime")]
 position = Vector2(272, -72)
 
+[node name="Camera2D" parent="player" index="2" unique_id=1036130193]
+limit_left = -1000
+limit_top = -500
+limit_right = 1000
+limit_bottom = 500
+
 [node name="collisions" type="StaticBody2D" parent="." unique_id=852483241]
 
 [node name="map_boundary" type="CollisionPolygon2D" parent="collisions" unique_id=830799348]
@@ -4204,3 +4210,5 @@ leave_speed = 150.0
 position = Vector2(160, 50)
 NPC_Name = "bob"
 frames = SubResource("SpriteFrames_wu7dk")
+
+[editable path="player"]
