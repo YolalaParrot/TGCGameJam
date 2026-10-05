@@ -53,10 +53,14 @@ const Map := {
 	"town_one": [
 		{"to": "town_two", "exit": "town_two_transition"},
 		{"to": "farm", "exit": "farm_transition"},
+		{"to": "player_house", "exit": "player_house_transition"},
 	],
 	"town_two": [
 		{"to": "town_one", "exit": "town_one_transition"},
 		{"to": "hillside", "exit": "hillside_transition"},
+	],
+	"player_house": [
+		{"to": "town_one", "exit": "town_one_transition"},
 	],
 }
 

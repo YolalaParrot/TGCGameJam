@@ -25,6 +25,9 @@ size = Vector2(40, 33)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_giyli"]
 size = Vector2(20, 49)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nplr6"]
+size = Vector2(13, 14)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bde3n"]
 size = Vector2(24, 56)
 
@@ -96,6 +99,14 @@ destination_spawn = "Spawn_From_Town1"
 position = Vector2(138, -2.5)
 shape = SubResource("RectangleShape2D_giyli")
 
+[node name="player_house_transition" parent="." unique_id=1469502787 groups=["teleporter"] instance=ExtResource("4_wu7dk")]
+destination_scene = "uid://thnfd4qqt5ua"
+destination_spawn = "Spawn_From_Town1_To_Player_House"
+
+[node name="trigger_player_house" type="CollisionShape2D" parent="player_house_transition" unique_id=1627067096]
+position = Vector2(61.5, -82)
+shape = SubResource("RectangleShape2D_nplr6")
+
 [node name="farm_transition" parent="." unique_id=1980557838 groups=["teleporter"] instance=ExtResource("4_wu7dk")]
 destination_scene = "uid://bx7oxrgvxhkk6"
 destination_spawn = "Spawn_From_Town1_To_Farm"
@@ -109,6 +120,9 @@ position = Vector2(111, 0)
 
 [node name="Spawn_From_Farm" type="Marker2D" parent="." unique_id=1141174396]
 position = Vector2(-97, 0)
+
+[node name="Spawn_From_Player_House" type="Marker2D" parent="." unique_id=1742597027]
+position = Vector2(8, -81)
 
 [node name="jim" parent="." unique_id=987617997 instance=ExtResource("1_kfime")]
 position = Vector2(80, 50)
