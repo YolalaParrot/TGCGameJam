@@ -155,6 +155,17 @@ var dialogues := {
 		]
 	},
 	"willy":{"dialogues":[
+			# Wood handed over: a reminder
+			{
+				"requires":{"got_wood":true},
+				"forbids":{},
+				"on_finish":{},
+				"lines":[
+					[
+						{"Willy":"Go on, get that wood to your friends before I change my mind!"}
+					]
+				]
+			},
 			# Dance challenge: WIN
 			{
 				"requires":{"dance_battle":"won"},
@@ -181,6 +192,17 @@ var dialogues := {
 					]
 				]
 			},
+			# Challenge accepted: a reminder
+			{
+				"requires":{"met_willy":true},
+				"forbids":{},
+				"on_finish":{},
+				"lines":[
+					[
+						{"Willy":"Well? The dance floor is in the shop, kid. Show me what you got!"}
+					]
+				]
+			},
 			# Before the dance challenge
 			{
 				"requires":{"met_ken":true},
@@ -198,9 +220,36 @@ var dialogues := {
 					]
 				]
 			},
+			# Small talk before the story reaches Willy
+			{
+				"requires":{"start":true},
+				"forbids":{},
+				"on_finish":{},
+				"lines":[
+					[
+						{"Willy":"Ya hear about that space rock, kid? Whole town is running around like headless chickens."},
+						{"Player":"Space rock? What space rock?"},
+						{"Willy":"Bah! Kids these days never read the news. Go find your friends, they wont shut up about it."}
+					],
+					[
+						{"Willy":"Shop is closed today. Not that it matters much anymore..."}
+					]
+				]
+			},
 		]
 	},
 	"finn":{"dialogues":[
+			# Parts delivered: a reminder
+			{
+				"requires":{"parts_delivered":true},
+				"forbids":{},
+				"on_finish":{},
+				"lines":[
+					[
+						{"Finn":"The engine is gonna take time. Go get the fuel from Mr Bob!"}
+					]
+				]
+			},
 			# Hill: parts delivered, fuel needed
 			{
 				"requires":{"wood_delivered":true,"parts_game":"won"},
@@ -211,6 +260,17 @@ var dialogues := {
 						{"Finn":"Alright good. These parts should be enough."},
 						{"Finn":"This engine is gonna take time. Meanwhile you go and get some fuel."},
 						{"Player":"Alright! Only Mr Bob should have it."}
+					]
+				]
+			},
+			# Wood delivered: a reminder
+			{
+				"requires":{"wood_delivered":true},
+				"forbids":{},
+				"on_finish":{},
+				"lines":[
+					[
+						{"Finn":"Did you get the parts from Mrs Smith yet? I cant build an engine out of wood!"}
 					]
 				]
 			},
@@ -227,6 +287,21 @@ var dialogues := {
 						{"Finn":"I know what im doing! Just get to work Joe. Mrs Smith should have this stuff."},
 						{"Ken":"Just get what he says Joe! Humanity depends on this!"},
 						{"Player":"Alright! Alright!"}
+					]
+				]
+			},
+			# Small talk on the hill before the wood
+			{
+				"requires":{"met_jim":true},
+				"forbids":{},
+				"on_finish":{},
+				"lines":[
+					[
+						{"Finn":"I read everything about rockets in that book from the big city!"},
+						{"Finn":"Wood for the body, an engine, and fuel. How hard can it be?"}
+					],
+					[
+						{"Finn":"Ken says he is the king of the hill now... please just go along with it."}
 					]
 				]
 			},
@@ -256,6 +331,17 @@ var dialogues := {
 					]
 				]
 			},
+			# Sent into the maze: a reminder
+			{
+				"requires":{"met_mrs_smith":true},
+				"forbids":{},
+				"on_finish":{},
+				"lines":[
+					[
+						{"Mrs Smith":"Everything on that list should be inside. Go on in, Joe!"}
+					]
+				]
+			},
 			# Before the parts
 			{
 				"requires":{"wood_delivered":true},
@@ -268,6 +354,23 @@ var dialogues := {
 						{"Player":"Hey Mrs Smith i have this list here."},
 						{"Mrs Smith":"Well uh. Thats a lot of stuff.."},
 						{"Mrs Smith":"Ya know what? I trust ya son. Just go inside and take what you need!"}
+					]
+				]
+			},
+			# Small talk before the story reaches Mrs Smith
+			{
+				"requires":{"start":true},
+				"forbids":{},
+				"on_finish":{},
+				"lines":[
+					[
+						{"Mrs Smith":"Oh Joe! Have you seen how chaotic the town is today?"},
+						{"Mrs Smith":"Mr Smith locked himself in the workshop the minute he heard the news."},
+						{"Player":"What news?"},
+						{"Mrs Smith":"Ask your friends dear, I dont want to think about it."}
+					],
+					[
+						{"Mrs Smith":"The crops wont water themselves, end of the world or not!"}
 					]
 				]
 			},
@@ -312,6 +415,22 @@ var dialogues := {
 					]
 				]
 			},
+			# Small talk before the story reaches Bob
+			{
+				"requires":{"start":true},
+				"forbids":{},
+				"on_finish":{},
+				"lines":[
+					[
+						{"Bob":"What do you want kid? Cant you see im busy?"},
+						{"Player":"Busy doing what?"},
+						{"Bob":"Busy minding my own business. You should try it."}
+					],
+					[
+						{"Bob":"If that rock hits us, at least I wont have to deal with you kids anymore."}
+					]
+				]
+			},
 		]
 	},
 	"ken":{"dialogues":[
@@ -353,6 +472,17 @@ var dialogues := {
 						{"Ken":"FINN..DO YOU REALLY KNOW WHAT YOURE DOING?!"},
 						{"Finn":"It should've worked.."},
 						{"Ken":"Finn you useless little...!!"}
+					]
+				]
+			},
+			# After the rocket plan: a reminder
+			{
+				"requires":{"met_ken":true},
+				"forbids":{},
+				"on_finish":{},
+				"lines":[
+					[
+						{"Ken":"What are you waiting for subject? Go get Finn what he needs!"}
 					]
 				]
 			},
