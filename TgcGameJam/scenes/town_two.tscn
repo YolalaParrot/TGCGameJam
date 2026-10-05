@@ -7,8 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bt3lpqrk2xw4e" path="res://scenes/teleporter.tscn" id="4_m6nlh"]
 [ext_resource type="PackedScene" uid="uid://chuvimfq0blnm" path="res://scenes/npc.tscn" id="5_3fmpw"]
 [ext_resource type="Texture2D" uid="uid://cvcc2sducawnn" path="res://assets-temp/boy_idle_4x1.png" id="6_onjpk"]
-[ext_resource type="Script" path="res://scripts/minigame_trigger.gd" id="7_minigame"]
-[ext_resource type="Script" uid="uid://d2e0mqbpohyah" path="res://scripts/interactable.gd" id="8_interact"]
+[ext_resource type="PackedScene" uid="uid://dmi2ryhd4nvik" path="res://scenes/minigameArea.tscn" id="8_dq7sv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m6nlh"]
 texture = ExtResource("2_m6nlh")
@@ -63,9 +62,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vj8al"]
-size = Vector2(141, 72)
-
 [node name="town_two" type="Node2D" unique_id=1135322753]
 position = Vector2(-160, -144)
 
@@ -113,26 +109,5 @@ position = Vector2(213, 221)
 NPC_Name = "willy"
 frames = SubResource("SpriteFrames_dq7sv")
 
-[node name="shop" type="Area2D" parent="." unique_id=662949551]
+[node name="shop" parent="." unique_id=479663280 instance=ExtResource("8_dq7sv")]
 position = Vector2(147, 251)
-script = ExtResource("7_minigame")
-result_flag = "dance_battle"
-requires = {
-"met_willy": true
-}
-forbids = {
-"dance_battle": "won"
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="shop" unique_id=1141575156]
-position = Vector2(40.5, 6)
-shape = SubResource("RectangleShape2D_vj8al")
-
-[node name="Interactable" type="Area2D" parent="shop" groups=["interactable"]]
-collision_layer = 2
-collision_mask = 0
-script = ExtResource("8_interact")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="shop/Interactable"]
-position = Vector2(40.5, 6)
-shape = SubResource("RectangleShape2D_vj8al")

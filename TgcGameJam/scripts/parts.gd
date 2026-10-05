@@ -11,6 +11,8 @@ func _ready() -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
+	if not body.is_in_group("player"):
+		return
 	mini_game_manager.update_collected()
 	print("haww u touched mehhh, blehhhbbb")
 	queue_free()

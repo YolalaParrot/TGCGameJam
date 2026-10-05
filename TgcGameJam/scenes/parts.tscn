@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://crykne6f6i830"]
 
 [ext_resource type="Script" uid="uid://dq1os8olqeusu" path="res://scripts/parts.gd" id="1_hfrku"]
-[ext_resource type="Texture2D" uid="uid://cu6ewcbg2vxdq" path="res://icon.svg" id="2_xma56"]
+[ext_resource type="Texture2D" path="res://assets-temp/engine_parts.png" id="2_xma56"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ome65"]
 radius = 55.542778
@@ -21,6 +21,7 @@ script = ExtResource("1_hfrku")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1704490766]
 texture = ExtResource("2_xma56")
+scale = Vector2(1.3333334, 1.3333334)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1285622614]
 position = Vector2(0, 1)

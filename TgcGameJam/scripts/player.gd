@@ -6,6 +6,9 @@ extends CharacterBody2D
 @export var speed := 15000.0
 @export var dialogue_font_size := 42
 @export var talk_font_size := 24
+## The player inside a minigame scene: moves while in_minigame is on, and has no inventory,
+## talking or guide arrow.
+@export var minigame_player := false
 @export_group("")
 var current_dir = "none"
 
@@ -22,6 +25,8 @@ func _ready() -> void:
 	$AnimatedSprite2D.play("front_idle")
 	arrow_radius = guidance_arrow.position.length()
 	guidance_arrow.visible = false
+	if minigame_player:
+		return
 	apply_text_sizes.call_deferred()  # deferred so every NPC label in the scene is ready
 
 # Dialogue box and the "Talk" / "!" labels above NPCs use this map's text sizes.
@@ -95,6 +100,9 @@ func _process(delta: float) -> void:
 	guidance_arrow.rotation = dir.angle() 
 	
 func _physics_process(delta: float) -> void:
+	if minigame_player:
+		player_movement(delta)
+		return
 	if GameState.gameState.in_dialogue or GameState.gameState.inventory_open or GameState.gameState.in_minigame:
 		velocity = Vector2.ZERO
 		play_animation(0)
@@ -184,6 +192,8 @@ func find_best_interactable():
 		current_interactable.focus()
 
 func _unhandled_input(event: InputEvent) -> void:
+	if minigame_player:
+		return
 	if GameState.gameState.in_dialogue or CutsceneManager.playing or GameState.gameState.in_minigame:
 		return
 	if event.is_action_pressed("inventory"):

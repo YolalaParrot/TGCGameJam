@@ -2451,6 +2451,7 @@ z_index = 2
 position = Vector2(56, -264)
 scale = Vector2(1, 1)
 speed = 6000.0
+minigame_player = true
 
 [node name="Camera2D" parent="player" index="2" unique_id=1036130193]
 position = Vector2(1, 8)

@@ -5,11 +5,11 @@
 [ext_resource type="Texture2D" uid="uid://b42f1xi1qon1n" path="res://final-assets/Environment/Tilesets/Floors_Tiles.png" id="3_0b8bt"]
 [ext_resource type="PackedScene" uid="uid://j54lupoylhq8" path="res://scenes/player.tscn" id="3_5q3ck"]
 [ext_resource type="PackedScene" uid="uid://bt3lpqrk2xw4e" path="res://scenes/teleporter.tscn" id="4_6buwl"]
-[ext_resource type="PackedScene" uid="uid://chuvimfq0blnm" path="res://scenes/npc.tscn" id="5_5q3ck"]
-[ext_resource type="Texture2D" uid="uid://cvcc2sducawnn" path="res://assets-temp/boy_idle_4x1.png" id="6_6buwl"]
 [ext_resource type="Texture2D" uid="uid://cxd1b5t438lie" path="res://final-assets/Texture/TX Tileset Grass.png" id="4_q12fp"]
 [ext_resource type="Texture2D" uid="uid://2g2skpvsvp3n" path="res://final-assets/Environment/Props/Static/Farm.png" id="4_y5vk0"]
+[ext_resource type="PackedScene" uid="uid://chuvimfq0blnm" path="res://scenes/npc.tscn" id="5_5q3ck"]
 [ext_resource type="Texture2D" uid="uid://c03qpvd4mi1u8" path="res://final-assets/Environment/Props/Static/Furniture.png" id="5_q12fp"]
+[ext_resource type="Texture2D" uid="uid://cvcc2sducawnn" path="res://assets-temp/boy_idle_4x1.png" id="6_6buwl"]
 [ext_resource type="Texture2D" uid="uid://ca4ap2epuxaat" path="res://final-assets/shourin/Town 1/fence.png" id="6_vnlei"]
 [ext_resource type="Texture2D" uid="uid://ga0rac3dlphy" path="res://final-assets/Texture/Extra/TX Props with Shadow.png" id="7_ji0l8"]
 [ext_resource type="Texture2D" uid="uid://b6xnj8fq8xrdi" path="res://final-assets/Environment/Props/Static/Resources.png" id="7_utxq6"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://ds5mody6dqlbh" path="res://final-assets/Environment/Structures/Buildings/Walls.png" id="10_a2a5s"]
 [ext_resource type="Texture2D" uid="uid://cgjxe8sakyxat" path="res://final-assets/Environment/Tilesets/Wall_Variations.png" id="11_ruo0b"]
 [ext_resource type="Texture2D" uid="uid://2m3tey2rk6y5" path="res://final-assets/shourin/Town 1/bigfence.png" id="12_t4c7y"]
+[ext_resource type="PackedScene" uid="uid://dmi2ryhd4nvik" path="res://scenes/minigameArea.tscn" id="20_utxq6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_urit4"]
 texture = ExtResource("1_lgm8x")
@@ -6991,8 +6992,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5q3ck"]
-size = Vector2(141, 72)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4qe0f"]
+size = Vector2(219, 199)
 
 [node name="farm" type="Node2D" unique_id=2766861]
 position = Vector2(-160, -144)
@@ -7013,7 +7014,6 @@ tile_set = SubResource("TileSet_giyli")
 
 [node name="player" parent="." unique_id=1772785746 instance=ExtResource("3_5q3ck")]
 position = Vector2(796, -19)
-scale = Vector2(2, 2)
 
 [node name="collisions" type="StaticBody2D" parent="." unique_id=707520541]
 
@@ -7039,9 +7039,29 @@ position = Vector2(80, 50)
 NPC_Name = "mrs_smith"
 frames = SubResource("SpriteFrames_fq2vd")
 
-[node name="maze" type="Area2D" parent="." unique_id=613634841]
-position = Vector2(147, 251)
+[node name="maze" parent="." unique_id=479663280 instance=ExtResource("20_utxq6")]
+position = Vector2(-926, -409)
+minigame_scene = "res://scenes/minigame_light.tscn"
+result_flag = "parts_game"
+requires = {
+"met_mrs_smith": true
+}
+forbids = {
+"parts_game": "won"
+}
+on_won = {
+"give": [{
+"image": "res://assets-temp/engine_parts.png",
+"name": "Engine Parts"
+}]
+}
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="maze" unique_id=194032475]
-position = Vector2(40.5, 6)
-shape = SubResource("RectangleShape2D_5q3ck")
+[node name="CollisionShape2D" parent="maze" index="0" unique_id=823786623]
+position = Vector2(35.5, 10.5)
+shape = SubResource("RectangleShape2D_4qe0f")
+
+[node name="CollisionShape2D" parent="maze/Interactable" parent_id_path=PackedInt32Array(479663280, 1013346451) index="0" unique_id=1513148442]
+position = Vector2(35.5, 10.5)
+shape = SubResource("RectangleShape2D_4qe0f")
+
+[editable path="maze"]

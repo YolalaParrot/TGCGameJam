@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://dmi2ryhd4nvik"]
+
+[ext_resource type="Script" uid="uid://dikw8cdmjv5cc" path="res://scripts/minigame_trigger.gd" id="1_ke0tu"]
+[ext_resource type="Script" uid="uid://d2e0mqbpohyah" path="res://scripts/interactable.gd" id="2_wrv7q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vj8al"]
+size = Vector2(141, 72)
+
+[node name="shop" type="Area2D" unique_id=479663280]
+script = ExtResource("1_ke0tu")
+requires = {
+"met_willy": true
+}
+forbids = {
+"dance_battle": "won"
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=823786623]
+position = Vector2(40.5, 6)
+shape = SubResource("RectangleShape2D_vj8al")
+
+[node name="Interactable" type="Area2D" parent="." unique_id=1013346451 groups=["interactable"]]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("2_wrv7q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable" unique_id=1513148442]
+position = Vector2(40.5, 6)
+shape = SubResource("RectangleShape2D_vj8al")

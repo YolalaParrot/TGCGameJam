@@ -1,9 +1,7 @@
 extends Node
 
-# Story flags. An unset flag reads as null: requires {"x": true} fails and forbids {"x": true} passes.
-# met_<npc> is set when that NPC is the current task's target and their dialogue finishes (see npc.gd).
-# The *_game flags are "not_started" / "won" / "lost" and are set by their minigame (not built yet).
-var flags := {
+
+@export var flags := {
 	"start":true,
 	"met_jim":false,
 	"met_ken":false,
@@ -27,26 +25,33 @@ var gameState := {
 	"in_minigame":false
 }
 
-# Emitted when the main task changes (NPCs use it to show or hide their "!").
 signal task_changed
-# Emitted when a flag gets a new value (an NPC can react, e.g. Jim leaving once met_jim is true).
 signal flag_changed(flag: String, value)
-
 const TASK_FADE_IN := 0.5
 const TASK_SHOW_TIME := 2.0
 const TASK_FADE_OUT := 0.5
-# How long a received item stays on screen (ItemPopup) before the inventory opens.
 const ITEM_SHOW_TIME := 1.25
 var task_tween: Tween
 
 func _ready() -> void:
 	announce_task.call_deferred()
 
-var items: Array = [{"name":"Icon","image":"res://icon.svg"}]
+var items: Array = []
 
 func add_item(item_name: String, image: String) -> void:
 	items.append({"name": item_name, "image": image})
 	Inventory.refresh()
+
+func remove_item(item_name: String) -> void:
+	for i in items.size():
+		if items[i].name == item_name:
+			items.remove_at(i)
+			break
+	Inventory.refresh()
+
+# Items given by on_finish "give" sections (and the minigames' on_won).
+const WOOD := {"name":"Wood","image":"res://assets-temp/wood_planks.jpg"}
+const ENGINE_PARTS := {"name":"Engine Parts","image":"res://assets-temp/engine_parts.png"}
 
 const Map := {
 	"farm": [
@@ -98,6 +103,7 @@ const MEET_JIM := {
 # on_finish sections run through execute():
 #   "set" {flag: value}, "move" [{"npc", "location", "position"}]
 #   "give" [{"name", "image"}] items added to the inventory (shown, then the inventory opens)
+#   "take" ["name"] items removed from the inventory
 #   "flag" (optional) the main flag, defaults to the first flag in "set"
 #   "not_equal" (optional) run unless the main flag equals this, instead of unless it already equals the set value
 # (Jim's walk to the hill is handled separately)
@@ -127,7 +133,7 @@ var dialogues := {
 			{
 				"requires":{"dance_battle":"won"},
 				"forbids":{},
-				"on_finish":{"set":{"got_wood":true},"give":[{"name":"Wood","image":"res://assets-temp/wood_planks.jpg"}]},
+				"on_finish":{"set":{"got_wood":true},"give":[WOOD]},
 				"lines":[
 					[
 						{"Willy":"Alright you beat me kid fair and square! Take what you need i dont care about it anyways..."},
@@ -157,7 +163,7 @@ var dialogues := {
 				"lines":[
 					[
 						{"Willy":"Well son, ya hear the news huh? Its all over now."},
-						{"Player":"Uncle Ken i have no time to explain but i need wood for a rocket."},
+						{"Player":"Uncle Willy i have no time to explain but i need wood for a rocket."},
 						{"Willy":"Goddamnit you kids always upto something..always doing something....FUN"},
 						{"Willy":"Well guess what?! If im gonna go ill go out in style."},
 						{"Willy":"Youre gonna have to keep up with me in dance to get your stuff."},
@@ -173,7 +179,7 @@ var dialogues := {
 			{
 				"requires":{"wood_delivered":true,"parts_game":"won"},
 				"forbids":{},
-				"on_finish":{"set":{"parts_delivered":true}},
+				"on_finish":{"set":{"parts_delivered":true},"take":["Engine Parts"]},
 				"lines":[
 					[
 						{"Finn":"Alright good. These parts should be enough."},
@@ -186,13 +192,13 @@ var dialogues := {
 			{
 				"requires":{"got_wood":true},
 				"forbids":{},
-				"on_finish":{"set":{"wood_delivered":true}},
+				"on_finish":{"set":{"wood_delivered":true},"take":["Wood"]},
 				"lines":[
 					[
 						{"Finn":"This should do. Lets get to work."},
 						{"Finn":"Were going to need an engine. Youll have to get these parts. Heres a list."},
 						{"Player":"Are you sure this will work? I never thought this is all it took to reach space."},
-						{"Finn":"I know what im doing! Just get to work Joe. Mr Smith should have this stuff."},
+						{"Finn":"I know what im doing! Just get to work Joe. Mrs Smith should have this stuff."},
 						{"Ken":"Just get what he says Joe! Humanity depends on this!"},
 						{"Player":"Alright! Alright!"}
 					]
@@ -201,15 +207,26 @@ var dialogues := {
 		]
 	},
 	"mrs_smith":{"dialogues":[
-			# LOST (the WIN branch has no lines in the script yet)
+			# WIN: the parts were found in the maze
+			{
+				"requires":{"parts_game":"won"},
+				"forbids":{},
+				"on_finish":{},
+				"lines":[
+					[
+						{"Mrs Smith":"Found everything on that list? Good luck with whatever you're building, Joe!"}
+					]
+				]
+			},
+			# LOST: not every part was found in time
 			{
 				"requires":{"met_mrs_smith":true,"parts_game":"lost"},
 				"forbids":{},
 				"on_finish":{},
 				"lines":[
 					[
-						{"Finn":"Were gonna need all the parts to build the engine!"},
-						{"Mr Smith":"Sure go ahead"}
+						{"Player":"Finn said we're gonna need all the parts to build the engine!"},
+						{"Mrs Smith":"Sure go ahead, have another look inside."}
 					]
 				]
 			},
@@ -222,7 +239,7 @@ var dialogues := {
 					[
 						{"Mrs Smith":"Oh he's inside doing god knows what!"},
 						{"Mrs Smith":"Hey Joe what ya need?"},
-						{"Player":"Hey Mr Smith i have this list here."},
+						{"Player":"Hey Mrs Smith i have this list here."},
 						{"Mrs Smith":"Well uh. Thats a lot of stuff.."},
 						{"Mrs Smith":"Ya know what? I trust ya son. Just go inside and take what you need!"}
 					]
@@ -337,7 +354,7 @@ var dialogues := {
 }
 
 # The task shown by the guide arrow is the first one whose requires/forbids pass.
-# target is a node name in the location's scene (an NPC's node name, or "shop").
+# target is a node name in the location's scene (an NPC's node name, "shop" or "maze").
 const Tasks := {
 	"main":[
 		{
@@ -370,16 +387,16 @@ const Tasks := {
 			"forbids":{"wood_delivered":true},
 			"task":{"name":"Take the wood to Finn","location":"hillside","target":"finn"}
 		},
-		# TODO: the locations of Mrs Smith and Bob below are guesses, set them to where their scenes are
+		# TODO: Bob's location below is a guess, set it to where his scene is
 		{
 			"requires":{"wood_delivered":true},
 			"forbids":{"met_mrs_smith":true},
-			"task":{"name":"Get the engine parts from Mr Smith","location":"town_one","target":"mrs_smith"}
+			"task":{"name":"Get the engine parts from Mrs Smith","location":"farm","target":"mrs_smith"}
 		},
 		{
 			"requires":{"met_mrs_smith":true},
 			"forbids":{"parts_game":"won"},
-			"task":{"name":"Collect the engine parts","location":"town_one","target":"mrs_smith"}
+			"task":{"name":"Find the engine parts in the maze","location":"farm","target":"maze"}
 		},
 		{
 			"requires":{"parts_game":"won"},
@@ -451,6 +468,9 @@ func execute(on_finish: Dictionary) -> void:
 					move_npc(move.npc, move.location, move.position)
 			"give":
 				received.append_array(on_finish["give"])
+			"take":
+				for item_name in on_finish["take"]:
+					remove_item(item_name)
 			"flag", "not_equal":
 				pass  # read by should_run
 			_:
