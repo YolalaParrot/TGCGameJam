@@ -52,8 +52,7 @@ const trial_stages := {
 	"final": {
 		"flags": {"met_jim":true, "seen_town1_intro":true, "met_ken":true, "met_willy":true,
 			"dance_battle":"won", "got_wood":true, "wood_delivered":true, "met_mrs_smith":true,
-			"parts_game":"won", "parts_delivered":true,"met_bob":true,"rps_game":"won",
-	"engine_failed":true},"items": [fuel]
+			"parts_game":"won", "parts_delivered":true,"met_bob":true,"rps_game":"won"},"items": [fuel]
 	},
 }
 
