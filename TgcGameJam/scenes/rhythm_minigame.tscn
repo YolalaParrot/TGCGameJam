@@ -1,16 +1,17 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://4p1vsaeh4xa7"]
 
-[ext_resource type="Script" path="res://scripts/rhythm_minigame.gd" id="1_rhythm"]
+[ext_resource type="Script" uid="uid://bl2r26ntj2doo" path="res://scripts/rhythm_minigame.gd" id="1_rhythm"]
+[ext_resource type="Texture2D" uid="uid://dgpq0p8gwnhc0" path="res://assets/Props/dance-export.png" id="2_hn3na"]
 [ext_resource type="PackedScene" uid="uid://b8f1ign6hpicr" path="res://scenes/game_level.tscn" id="2_level"]
 [ext_resource type="SpriteFrames" path="res://resources/dance_player.tres" id="3_dance_player"]
 [ext_resource type="SpriteFrames" path="res://resources/dance_willy.tres" id="4_dance_willy"]
-[ext_resource type="Script" path="res://scripts/dancer.gd" id="5_dancer"]
+[ext_resource type="Script" uid="uid://s6gfcd4d5xkx" path="res://scripts/dancer.gd" id="5_dancer"]
 
-[node name="RhythmMinigame" type="CanvasLayer"]
+[node name="RhythmMinigame" type="CanvasLayer" unique_id=901584298]
 layer = 10
 script = ExtResource("1_rhythm")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="." unique_id=1985213337]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -19,29 +20,34 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
-[node name="Container" type="SubViewportContainer" parent="."]
+[node name="Container" type="SubViewportContainer" parent="." unique_id=673593621]
 offset_right = 1152.0
 offset_bottom = 648.0
 mouse_filter = 2
 
-[node name="SubViewport" type="SubViewport" parent="Container"]
-use_hdr_2d = true
+[node name="SubViewport" type="SubViewport" parent="Container" unique_id=1022007467]
 handle_input_locally = false
+use_hdr_2d = true
 size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
-[node name="GameLevel" parent="Container/SubViewport" instance=ExtResource("2_level")]
+[node name="StageBackground" type="Sprite2D" parent="Container/SubViewport" unique_id=1369054605]
+z_index = -10
+texture_filter = 1
+scale = Vector2(5.76, 6.48)
+texture = ExtResource("2_hn3na")
 
-[node name="PlayerDancer" type="AnimatedSprite2D" parent="Container/SubViewport"]
+[node name="GameLevel" parent="Container/SubViewport" unique_id=412619025 instance=ExtResource("2_level")]
+
+[node name="PlayerDancer" type="AnimatedSprite2D" parent="Container/SubViewport" unique_id=1305177689]
 texture_filter = 1
 position = Vector2(-380, 150)
 scale = Vector2(6, 6)
 sprite_frames = ExtResource("3_dance_player")
 animation = &"idle"
 script = ExtResource("5_dancer")
-follow = "press"
 
-[node name="WillyDancer" type="AnimatedSprite2D" parent="Container/SubViewport"]
+[node name="WillyDancer" type="AnimatedSprite2D" parent="Container/SubViewport" unique_id=552070554]
 texture_filter = 1
 position = Vector2(380, 150)
 scale = Vector2(6, 6)

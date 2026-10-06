@@ -43,6 +43,10 @@ func play(scene_path: String, result_flag: String, on_won: Dictionary = {}, on_l
 
 	await Transition.fade_in(0.5)
 
+	if GameState.flags.get(result_flag) == "won":
+		playing = false
+		return
+
 	var on_finish: Dictionary = (on_won if passed else on_lost).duplicate(true)
 	var to_set := {result_flag: "won" if passed else "lost"}
 	to_set.merge(on_finish.get("set", {}))

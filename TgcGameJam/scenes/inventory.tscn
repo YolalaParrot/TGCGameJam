@@ -44,6 +44,11 @@ font = ExtResource("2_font")
 font_size = 30
 font_color = Color(1, 0.956863, 0.854902, 0.55)
 
+[sub_resource type="LabelSettings" id="LabelSettings_name"]
+font = ExtResource("2_font")
+font_size = 32
+font_color = Color(1, 0.956863, 0.854902, 1)
+
 [node name="Inventory" type="CanvasLayer" unique_id=1033314266]
 layer = 20
 script = ExtResource("1_inv")
@@ -71,14 +76,17 @@ horizontal_alignment = 1
 [node name="Slots" type="HBoxContainer" parent="Panel/VBox" unique_id=1531922753]
 layout_mode = 2
 theme_override_constants/separation = 18
+alignment = 1
 
 [node name="Slot1" type="VBoxContainer" parent="Panel/VBox/Slots" unique_id=1007331690]
 layout_mode = 2
+custom_minimum_size = Vector2(150, 0)
 
 [node name="Frame" type="PanelContainer" parent="Panel/VBox/Slots/Slot1" unique_id=1960400336]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_slot")
+size_flags_horizontal = 4
 
 [node name="Icon" type="TextureRect" parent="Panel/VBox/Slots/Slot1/Frame" unique_id=1484547689]
 layout_mode = 2
@@ -87,16 +95,20 @@ stretch_mode = 5
 
 [node name="Name" type="Label" parent="Panel/VBox/Slots/Slot1" unique_id=1108943634]
 layout_mode = 2
-label_settings = SubResource("LabelSettings_text")
+label_settings = SubResource("LabelSettings_name")
+custom_minimum_size = Vector2(150, 0)
 horizontal_alignment = 1
+autowrap_mode = 3
 
 [node name="Slot2" type="VBoxContainer" parent="Panel/VBox/Slots" unique_id=988868257]
 layout_mode = 2
+custom_minimum_size = Vector2(150, 0)
 
 [node name="Frame" type="PanelContainer" parent="Panel/VBox/Slots/Slot2" unique_id=545516538]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_slot")
+size_flags_horizontal = 4
 
 [node name="Icon" type="TextureRect" parent="Panel/VBox/Slots/Slot2/Frame" unique_id=1029700260]
 layout_mode = 2
@@ -105,16 +117,20 @@ stretch_mode = 5
 
 [node name="Name" type="Label" parent="Panel/VBox/Slots/Slot2" unique_id=1870192807]
 layout_mode = 2
-label_settings = SubResource("LabelSettings_text")
+label_settings = SubResource("LabelSettings_name")
+custom_minimum_size = Vector2(150, 0)
 horizontal_alignment = 1
+autowrap_mode = 3
 
 [node name="Slot3" type="VBoxContainer" parent="Panel/VBox/Slots" unique_id=612349183]
 layout_mode = 2
+custom_minimum_size = Vector2(150, 0)
 
 [node name="Frame" type="PanelContainer" parent="Panel/VBox/Slots/Slot3" unique_id=436806969]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_slot")
+size_flags_horizontal = 4
 
 [node name="Icon" type="TextureRect" parent="Panel/VBox/Slots/Slot3/Frame" unique_id=1570219387]
 layout_mode = 2
@@ -123,8 +139,10 @@ stretch_mode = 5
 
 [node name="Name" type="Label" parent="Panel/VBox/Slots/Slot3" unique_id=1517615994]
 layout_mode = 2
-label_settings = SubResource("LabelSettings_text")
+label_settings = SubResource("LabelSettings_name")
+custom_minimum_size = Vector2(150, 0)
 horizontal_alignment = 1
+autowrap_mode = 3
 
 [node name="Separator" type="HSeparator" parent="Panel/VBox"]
 layout_mode = 2

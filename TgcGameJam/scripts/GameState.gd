@@ -55,7 +55,33 @@ const trial_stages := {
 	},
 }
 
+const high_score_file := "user://high_scores.cfg"
+var high_scores := {}
+
+func load_high_scores() -> void:
+	var config := ConfigFile.new()
+	if config.load(high_score_file) == OK:
+		for game in config.get_section_keys("high_scores"):
+			high_scores[game] = config.get_value("high_scores", game, 0)
+
+
+func get_high_score(game: String) -> int:
+	return high_scores.get(game, 0)
+
+
+func submit_score(game: String, score: int) -> bool:
+	if score <= get_high_score(game):
+		return false
+	high_scores[game] = score
+	var config := ConfigFile.new()
+	for key in high_scores:
+		config.set_value("high_scores", key, high_scores[key])
+	config.save(high_score_file)
+	return true
+
+
 func _ready() -> void:
+	load_high_scores()
 	if trial_stage != "":
 		start_trial(trial_stage)
 	apply_world_rules.call_deferred()
@@ -81,7 +107,7 @@ func remove_item(item_name: String) -> void:
 			break
 	Inventory.refresh()
 
-const wood := {"name":"Wood","image":"res://assets-temp/wood_planks.jpg"}
+const wood := {"name":"Wood","image":"res://assets-temp/wood.png"}
 const engine_parts := {"name":"Engine Parts","image":"res://assets-temp/engine_parts.png"}
 const fuel := {"name":"Fuel","image":"res://assets-temp/fuel.png"}
 
@@ -473,6 +499,23 @@ var dialogues := {
 					[
 						{"Gary":"Six hours! SIX! I can hear it humming up there. Cant you hear it?"},
 						{"Player":"...Thats a bee, Gary."}
+					],
+					[
+						{"Gary":"I updated the sign. It now says THE END IS NEARER."}
+					]
+				]
+			},
+			# After Willy's buffet invitation
+			{
+				"requires":{"willy_convinced":true},
+				"forbids":{"parts_delivered":true},
+				"on_finish":{},
+				"lines":[
+					[
+						{"Gary":"Uncle Willys throwing a buffet! I brought my sign. People keep putting plates on it."}
+					],
+					[
+						{"Gary":"For the first time today... I dont feel scared. Is that weird?"}
 					]
 				]
 			},
@@ -485,6 +528,11 @@ var dialogues := {
 					[
 						{"Gary":"Eleven hours... Ive been counting since sunrise. Counting helps."},
 						{"Gary":"One... two... please dont leave me alone out here."}
+					],
+					[
+						{"Gary":"Is it true youre building a rocket? Is there... room for one more?"},
+						{"Player":"Ill ask Ken."},
+						{"Gary":"Ken scares me more than the comet."}
 					]
 				]
 			},
@@ -512,6 +560,81 @@ var dialogues := {
 					],
 					[
 						{"Gary":"Do you think it hurts? Getting hit by a space rock?"}
+					]
+				]
+			},
+		]
+	},
+	"mabel":{"dialogues":[
+			# 30 mins left
+			{
+				"requires":{"rps_game":"won"},
+				"forbids":{},
+				"on_finish":{},
+				"lines":[
+					[
+						{"Mabel":"Thirty minutes. Ive made tea. You always make tea at the end of things, dear."}
+					]
+				]
+			},
+			# 6 hours left
+			{
+				"requires":{"parts_delivered":true},
+				"forbids":{},
+				"on_finish":{},
+				"lines":[
+					[
+						{"Mabel":"Six hours. I finally finished the scarf I started in 1972."},
+						{"Mabel":"Its very long, dear. Its very, very long."}
+					]
+				]
+			},
+			# After Willy's buffet invitation
+			{
+				"requires":{"willy_convinced":true},
+				"forbids":{},
+				"on_finish":{},
+				"lines":[
+					[
+						{"Mabel":"Willy throwing a party! I havent seen him smile since Martha passed."},
+						{"Mabel":"Whatever you said to him, dear... thank you."}
+					]
+				]
+			},
+			# 11 hours left
+			{
+				"requires":{"wood_delivered":true},
+				"forbids":{},
+				"on_finish":{},
+				"lines":[
+					[
+						{"Mabel":"Eleven hours, the radio says. I should water the roses anyway. They dont know."}
+					]
+				]
+			},
+			# 16 hours left
+			{
+				"requires":{"met_ken":true},
+				"forbids":{},
+				"on_finish":{},
+				"lines":[
+					[
+						{"Mabel":"Sixteen hours! At my age, dear, thats practically a lifetime."}
+					],
+					[
+						{"Mabel":"That Ken boy came by and called himself king. I gave him a biscuit. He bowed."}
+					]
+				]
+			},
+			# Before anyone knows
+			{
+				"requires":{"start":true},
+				"forbids":{},
+				"on_finish":{},
+				"lines":[
+					[
+						{"Mabel":"Oh, Joe! Everyones running around like headless chickens today."},
+						{"Mabel":"In my day, the end of the world came with a proper announcement."}
 					]
 				]
 			},
@@ -562,6 +685,21 @@ var dialogues := {
 					]
 				]
 			},
+			# After Willy's buffet invitation
+			{
+				"requires":{"willy_convinced":true},
+				"forbids":{},
+				"on_finish":{},
+				"lines":[
+					[
+						{"Bob":"Willy invited me to his buffet. Says the world's ending, so we're square."},
+						{"Bob":"...Best potato salad I ever had. Dont tell him I said that."}
+					],
+					[
+						{"Bob":"Thirty years I fought with that man over a fence line. Feels silly now."}
+					]
+				]
+			},
 			# 11 hours left
 			{
 				"requires":{"wood_delivered":true},
@@ -570,6 +708,9 @@ var dialogues := {
 				"lines":[
 					[
 						{"Bob":"Radio says eleven hours. Still not giving anything away for free."}
+					],
+					[
+						{"Bob":"My dog hid under the porch this morning. Smart dog. Smarter than this town."}
 					]
 				]
 			},
@@ -581,6 +722,9 @@ var dialogues := {
 				"lines":[
 					[
 						{"Bob":"Sixteen hours, they say. Plenty of time to mind my own business."}
+					],
+					[
+						{"Bob":"Rocket? You? Hah! You couldnt build a birdhouse, kid."}
 					]
 				]
 			},

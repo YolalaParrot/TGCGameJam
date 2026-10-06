@@ -21,7 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://dmi2ryhd4nvik" path="res://scenes/minigameArea.tscn" id="20_utxq6"]
 [ext_resource type="AudioStream" uid="uid://b44kmsh6wej3r" path="res://music/1. Moonspire.mp3" id="21_3hh41"]
 [ext_resource type="PackedScene" path="res://scenes/blueprint.tscn" id="bp_scene"]
-[ext_resource type="Texture2D" uid="uid://conwbkcmnfarw" path="res://assets/Entities/npc2-idle-down.png" id="gary_tex"]
+[ext_resource type="Texture2D" uid="uid://t8u1c5de6wvy" path="res://assets/Entities/gary-idle-down.png" id="gary_tex"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_urit4"]
 texture = ExtResource("1_lgm8x")

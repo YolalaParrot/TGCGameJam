@@ -80,7 +80,13 @@ func _on_flag_changed(flag: String, value) -> void:
 func _process(delta: float) -> void:
 	if not leaving:
 		return
-	anim.flip_h = leave_x < position.x
+	var going_left := leave_x < position.x
+	if anim.sprite_frames.has_animation("walk_left"):
+		if anim.animation != "walk_left":
+			anim.play("walk_left")
+		anim.flip_h = not going_left
+	else:
+		anim.flip_h = going_left
 	position.x = move_toward(position.x, leave_x, leave_speed * delta)
 	if position.x == leave_x:
 		queue_free()

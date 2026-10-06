@@ -25,8 +25,39 @@ var shown: Array[TextureRect] = []
 var shown_sides: Array[ComicPanel.Side] = []
 
 
+const full_screen := Rect2(0, 0, 1, 1)
+
+
 func _ready() -> void:
 	background.color = Color.BLACK
+	add_arrow_button("<", true)
+	add_arrow_button(">", false)
+
+
+func add_arrow_button(text: String, left: bool) -> void:
+	var button := Button.new()
+	button.text = text
+	button.flat = true
+	button.focus_mode = Control.FOCUS_NONE
+	button.add_theme_font_size_override("font_size", 40)
+	button.add_theme_color_override("font_color", Color(1, 1, 1, 0.55))
+	button.add_theme_color_override("font_hover_color", Color(1, 0.85, 0.4))
+	button.set_anchors_preset(Control.PRESET_BOTTOM_LEFT if left else Control.PRESET_BOTTOM_RIGHT)
+	button.custom_minimum_size = Vector2(64, 64)
+	button.position = Vector2(12, -76) if left else Vector2(-76, -76)
+	button.grow_horizontal = Control.GROW_DIRECTION_END if left else Control.GROW_DIRECTION_BEGIN
+	button.z_index = 2
+	button.pressed.connect(_on_arrow_pressed.bind(left))
+	add_child(button)
+
+
+func _on_arrow_pressed(back: bool) -> void:
+	if animating or not visible:
+		return
+	if back:
+		await _back()
+	else:
+		await _advance()
 
 
 func play() -> void:
@@ -120,7 +151,7 @@ func _enter_panel() -> void:
 	var panel := TextureRect.new()
 	panel.texture = data.texture
 	panel.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	panel.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	panel.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED if data.rect == full_screen else TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	panel.size = data.rect.size * area
 
@@ -202,20 +233,23 @@ func _build_pages() -> Array[ComicPage]:
 	if not built.is_empty():
 		return built
 
+	var images := sequence.filter(func(texture): return texture != null)
 	var i := 0
-	while i < sequence.size():
+	while i < images.size():
 		var page := ComicPage.new()
-		var has_pair := i + 1 < sequence.size() and _is_wide(sequence[i]) and _is_wide(sequence[i + 1])
+		var has_pair := i + 1 < images.size() and _is_wide(images[i]) and _is_wide(images[i + 1])
 
 		var first := ComicPanel.new()
-		first.texture = sequence[i]
+		first.texture = images[i]
 		first.rect = Rect2(0.05, 0.04, 0.9, 0.44) if has_pair else Rect2(0.05, 0.05, 0.9, 0.9)
+		if not has_pair and images[i].get_width() >= 400:
+			first.rect = full_screen
 		first.enter_from = ComicPanel.Side.LEFT
 		page.panels.append(first)
 
 		if has_pair:
 			var second := ComicPanel.new()
-			second.texture = sequence[i + 1]
+			second.texture = images[i + 1]
 			second.rect = Rect2(0.05, 0.52, 0.9, 0.44)
 			second.enter_from = ComicPanel.Side.RIGHT
 			page.panels.append(second)

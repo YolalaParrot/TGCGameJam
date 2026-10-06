@@ -14,8 +14,10 @@
 [ext_resource type="AudioStream" uid="uid://b44kmsh6wej3r" path="res://music/1. Moonspire.mp3" id="12_atlej"]
 [ext_resource type="Texture2D" uid="uid://b3olitbxff2yf" path="res://final-assets/Entities/ken/ken-idle-right.png" id="12_pwq0p"]
 [ext_resource type="Texture2D" uid="uid://bvcdloydumcmd" path="res://final-assets/Entities/finn/finn-idle-right.png" id="13_33sov"]
+[ext_resource type="Script" uid="uid://ce6epryof7loe" path="res://scripts/flag_visible.gd" id="flag_visible"]
 [ext_resource type="Texture2D" uid="uid://c87i8wjw3wftt" path="res://final-assets/Entities/jim/jim-idle-left.png" id="hill_jim_tex"]
 [ext_resource type="Texture2D" uid="uid://dpblmwhdkcm76" path="res://final-assets/Entities/unclewilly/unclewilly-idle-down.png" id="hill_willy_tex"]
+[ext_resource type="Texture2D" uid="uid://dvnkj50buu6eq" path="res://assets/Props/rocket.png" id="rocket_tex"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_atlej"]
 texture = ExtResource("2_2dp04")
@@ -4778,6 +4780,13 @@ NPC_Name = "willy"
 sprite_frames = SubResource("SpriteFrames_hillwilly")
 animation = &"idle"
 autoplay = "idle"
+
+[node name="rocket" type="Sprite2D" parent="." unique_id=1288114093]
+texture_filter = 1
+position = Vector2(396, 58)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("rocket_tex")
+script = ExtResource("flag_visible")
 
 [editable path="player"]
 [editable path="ken"]

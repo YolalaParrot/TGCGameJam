@@ -11,9 +11,6 @@ script = ExtResource("1_ke0tu")
 requires = {
 "met_willy": true
 }
-forbids = {
-"dance_battle": "won"
-}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=823786623]
 position = Vector2(40.5, 6)

@@ -20,7 +20,8 @@ const portraits := {
 	"Ken": {"sheet": "res://final-assets/Entities/ken/ken-idle-right.png", "size": Vector2(26, 27), "flip": true},
 	"Finn": {"sheet": "res://final-assets/Entities/finn/finn-idle-right.png", "size": Vector2(26, 27), "flip": true},
 	"Willy": {"sheet": "res://final-assets/Entities/unclewilly/unclewilly-idle-down.png", "size": Vector2(26, 27), "flip": false},
-	"Gary": {"sheet": "res://assets/Entities/npc2-idle-down.png", "size": Vector2(26, 41), "flip": false},
+	"Gary": {"sheet": "res://assets/Entities/gary-idle-down.png", "size": Vector2(26, 41), "flip": false},
+	"Bob": {"sheet": "res://assets/Entities/npc2-idle-down.png", "size": Vector2(26, 41), "flip": false},
 }
 const portrait_fps := 5.0
 

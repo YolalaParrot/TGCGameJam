@@ -22,6 +22,9 @@ var custom_font2 = preload("res://art/Atop-R99O3.ttf")
 var score_node: Control
 var combo_node: Control
 var result_node: Control
+var best_node: Label
+
+const high_score_key := "dance"
 
 func _ready():
 	Signals.IncrementScore.connect(IncrementScore)
@@ -45,8 +48,23 @@ func _ready():
 		
 	if result_node:
 		result_node.visible = false
-		
+
+	add_best_label()
 	ResetCombo()
+
+
+func add_best_label() -> void:
+	if score_node == null:
+		return
+	best_node = Label.new()
+	best_node.text = " Best: %d pts" % GameState.get_high_score(high_score_key)
+	best_node.add_theme_font_override("font", custom_font)
+	best_node.add_theme_font_size_override("font_size", 18)
+	best_node.add_theme_color_override("font_color", Color(1, 0.85, 0.4))
+	best_node.add_theme_color_override("font_outline_color", Color.BLACK)
+	best_node.add_theme_constant_override("outline_size", 6)
+	best_node.position = score_node.position + Vector2(0, 54)
+	score_node.get_parent().add_child(best_node)
 	
 func _on_update_countdown(text: String) -> void:
 	if result_node:
@@ -99,6 +117,10 @@ func _on_level_finished():
 	var passed: bool = average_score >= target_average_score
 	var formatted_avg: String = "%.2f" % average_score
 	
+	var new_best: bool = GameState.submit_score(high_score_key, score)
+	if best_node:
+		best_node.text = " Best: %d pts" % GameState.get_high_score(high_score_key)
+
 	if result_node:
 		result_node.visible = true
 		if passed:
@@ -107,6 +129,8 @@ func _on_level_finished():
 		else:
 			result_node.text = "STAGE FAILED!"
 			result_node.modulate = Color("e22525")
+		if new_best:
+			result_node.text += "\nNEW HIGH SCORE!"
 	else:
 		print("ERROR: Could not find CountdownLabel node!")
 
