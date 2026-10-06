@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://chuvimfq0blnm" path="res://scenes/npc.tscn" id="5_3fmpw"]
 [ext_resource type="Texture2D" uid="uid://cvcc2sducawnn" path="res://assets-temp/boy_idle_4x1.png" id="6_onjpk"]
 [ext_resource type="PackedScene" uid="uid://dmi2ryhd4nvik" path="res://scenes/minigameArea.tscn" id="8_dq7sv"]
+[ext_resource type="AudioStream" uid="uid://b44kmsh6wej3r" path="res://music/1. Moonspire.mp3" id="9_4qe0f"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m6nlh"]
 texture = ExtResource("2_m6nlh")
@@ -117,5 +118,9 @@ frames = SubResource("SpriteFrames_dq7sv")
 
 [node name="shop" parent="." unique_id=479663280 instance=ExtResource("8_dq7sv")]
 position = Vector2(147, 251)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1745213103]
+stream = ExtResource("9_4qe0f")
+autoplay = true
 
 [editable path="player"]

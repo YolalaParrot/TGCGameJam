@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://ud5668jvt607" path="res://final-assets/Environment/Props/Static/Trees/Model_02/Size_05.png" id="6_t6cyu"]
 [ext_resource type="Texture2D" uid="uid://6pj1ddavu86f" path="res://final-assets/Environment/Props/Static/Vegetation.png" id="7_ogo75"]
 [ext_resource type="Texture2D" uid="uid://cb8v1khnk56pu" path="res://final-assets/Environment/blehh-new-tilesets/Trees_seperated.png" id="10_uvgno"]
+[ext_resource type="AudioStream" uid="uid://b44kmsh6wej3r" path="res://music/1. Moonspire.mp3" id="12_atlej"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_atlej"]
 texture = ExtResource("2_2dp04")
@@ -4697,5 +4698,9 @@ cutscene_id = "scene_5"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CutsceneTrigger_scene5" unique_id=965984873]
 position = Vector2(82, 46)
 shape = SubResource("RectangleShape2D_qv2pw")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=792626088]
+stream = ExtResource("12_atlej")
+autoplay = true
 
 [editable path="player"]

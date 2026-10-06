@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://b2tgnnv4gioki" path="res://final-assets/Environment/Tilesets/Dungeon_Tiles.png" id="4_buhsa"]
 [ext_resource type="Texture2D" uid="uid://ssknvwfwaqcp" path="res://final-assets/Environment/Props/Static/Rocks.png" id="4_w12is"]
 [ext_resource type="PackedScene" uid="uid://crykne6f6i830" path="res://scenes/parts.tscn" id="8_774kp"]
+[ext_resource type="AudioStream" uid="uid://488lpoxqd3my" path="res://music/Action 3.mp3" id="12_cdsof"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_c1gba"]
 font = ExtResource("4_28ae0")
@@ -2177,5 +2178,9 @@ tile_set = SubResource("TileSet_51nrd")
 [node name="worldBoreder" type="CollisionShape2D" parent="StaticBody2D" unique_id=1100554604]
 position = Vector2(20, -251)
 shape = SubResource("RectangleShape2D_bde3n")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1713693897]
+stream = ExtResource("12_cdsof")
+autoplay = true
 
 [editable path="player"]

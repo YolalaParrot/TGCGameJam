@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b8auqu36vjor" path="res://scripts/credits.gd" id="1_spvsy"]
 [ext_resource type="FontFile" uid="uid://vyu311wfu6mh" path="res://final-assets/fonts/PixelOperator8-Bold.ttf" id="2_gw1d4"]
+[ext_resource type="AudioStream" uid="uid://bxgxy466jdqvt" path="res://music/endcredits.mp3" id="3_gw1d4"]
 
 [node name="Credits" type="Control" unique_id=670197097]
 layout_mode = 3
@@ -49,3 +50,6 @@ THANK YOU FOR PLAYING!"
 fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1758762376]
+stream = ExtResource("3_gw1d4")

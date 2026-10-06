@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b63o6p1047kl1" path="res://final-assets/Environment/Structures/Buildings/Interior/Interior_Walls_01.png" id="4_h0cye"]
 [ext_resource type="Texture2D" uid="uid://c03qpvd4mi1u8" path="res://final-assets/Environment/Props/Static/Furniture.png" id="4_t32w7"]
 [ext_resource type="PackedScene" uid="uid://bt3lpqrk2xw4e" path="res://scenes/teleporter.tscn" id="4_t6268"]
+[ext_resource type="AudioStream" uid="uid://b44kmsh6wej3r" path="res://music/1. Moonspire.mp3" id="7_t6268"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yhmgt"]
 texture = ExtResource("1_t32w7")
@@ -2064,5 +2065,9 @@ shape = SubResource("RectangleShape2D_640lt")
 
 [node name="Spawn_From_Town1_To_Player_House" type="Marker2D" parent="." unique_id=1791811874]
 position = Vector2(257.725, 143.49509)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1565855777]
+stream = ExtResource("7_t6268")
+autoplay = true
 
 [editable path="player"]

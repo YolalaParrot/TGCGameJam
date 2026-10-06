@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://cgjxe8sakyxat" path="res://final-assets/Environment/Tilesets/Wall_Variations.png" id="11_ruo0b"]
 [ext_resource type="Texture2D" uid="uid://2m3tey2rk6y5" path="res://final-assets/shourin/Town 1/bigfence.png" id="12_t4c7y"]
 [ext_resource type="PackedScene" uid="uid://dmi2ryhd4nvik" path="res://scenes/minigameArea.tscn" id="20_utxq6"]
+[ext_resource type="AudioStream" uid="uid://b44kmsh6wej3r" path="res://music/1. Moonspire.mp3" id="21_3hh41"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_urit4"]
 texture = ExtResource("1_lgm8x")
@@ -7069,6 +7070,10 @@ shape = SubResource("RectangleShape2D_4qe0f")
 [node name="CollisionShape2D" parent="maze/Interactable" parent_id_path=PackedInt32Array(479663280, 1013346451) index="0" unique_id=1513148442]
 position = Vector2(35.5, 10.5)
 shape = SubResource("RectangleShape2D_4qe0f")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2120764313]
+stream = ExtResource("21_3hh41")
+autoplay = true
 
 [editable path="player"]
 [editable path="maze"]
