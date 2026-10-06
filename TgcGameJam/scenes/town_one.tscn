@@ -3,7 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://chuvimfq0blnm" path="res://scenes/npc.tscn" id="1_kfime"]
 [ext_resource type="Texture2D" uid="uid://cvcc2sducawnn" path="res://assets-temp/boy_idle_4x1.png" id="2_wu7dk"]
 [ext_resource type="PackedScene" uid="uid://j54lupoylhq8" path="res://scenes/player.tscn" id="3_kfime"]
-[ext_resource type="Script" uid="uid://0dsu1akojwp0" path="res://scripts/cutscene_trigger.gd" id="4_187fi"]
 [ext_resource type="PackedScene" uid="uid://bt3lpqrk2xw4e" path="res://scenes/teleporter.tscn" id="4_wu7dk"]
 [ext_resource type="Texture2D" uid="uid://dwf6d2vctj603" path="res://assets/shourin's drawn assets/stone-house.png" id="12_6jiit"]
 [ext_resource type="TileSet" uid="uid://pwde6d78hm5t" path="res://tilesets/trees.tres" id="14_1cqgc"]
@@ -2266,9 +2265,6 @@ texture = ExtResource("23_52kwb")
 [sub_resource type="TileSet" id="TileSet_1absy"]
 sources/0 = SubResource("TileSetAtlasSource_eqmw0")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_euywh"]
-size = Vector2(40, 33)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_kfime"]
 atlas = ExtResource("2_wu7dk")
 region = Rect2(0, 0, 16, 16)
@@ -2568,15 +2564,6 @@ tile_set = SubResource("TileSet_1absy")
 y_sort_enabled = true
 tile_map_data = PackedByteArray("AADZ/xsADwADAAYAAADZ/xwADwADAAYAAADY/x0ADwADAAYAAADW/x0ADwADAAYAAADU/x0ADwADAAYAAADS/x0ADwAAAAYAAADN/x0ADwAAAAYAAADP/x0ADwAAAAYAAADB/x0ADwAAAAYAAADC/x0ADwAAAAYAAADG/x0ADwAAAAYAAADH/x0ADwAAAAYAAADU//j/DwAAAAYAAADS//j/DwAAAAYAAAAdABsAAgABAAAAAAAeABsAAgAAAAAAAAAiABsAAgAAAAAAAAAlABoAAgAAAAAAAAAhABwAAgABAAAAAAAlABwAAgAAAAAAAAAqABsAAgABAAAAAAAnABsAAgABAAAAAAAuABwAAgABAAAAAAAxABwAAgAAAAAAAAA0ABsAAgABAAAAAAA1AB0AAgABAAAAAAA3ABsAAgABAAAAAAA5ABwAAgABAAAAAAA7ABsAAgABAAAAAAA+AB0AAgABAAAAAABBABsAAgAAAAAAAAA6ABwAAgAAAAAAAAAzABwAAgAAAAAAAAArABwAAgAAAAAAAAAWABoAAgAAAAAAAAAYABwAAgAAAAAAAAAZABkAAgAAAAAAAAASAB0AAgAAAAAAAAAbAB0AAgAAAAAAAAANABwAAgAAAAAAAAAJAB0AAgAAAAAAAAALABsAAgAAAAAAAAAGABsAAgAAAAAAAAAFAB4AAgAAAAAAAAACAB0AAgAAAAAAAAD9/x0AAgAAAAAAAAD//x8AAgAAAAAAAAD5/x0AAgAAAAAAAADz/xwAAgAAAAAAAAD2/x4AAgAAAAAAAADw/x0AAgAAAAAAAADr/xsAAgAAAAAAAADu/x4AAgAAAAAAAADb/x8AAgAAAAAAAADe/x0AAgAAAAAAAADh/xsAAgAAAAAAAADj/x4AAgAAAAAAAADh/x4AAgAAAAAAAADm/xwAAgAAAAAAAADm/x0AAgABAAAAAADq/x4AAgABAAAAAADo/yAAAgABAAAAAADg/xwAAgABAAAAAADd/xwAAgABAAAAAADu/xsAAgABAAAAAADY/xwAAgABAAAAAADb/xsAAgABAAAAAAD3/xsAAgABAAAAAAD7/xwAAgABAAAAAADf/xkADgABAAAAAADz/xkADgABAAAAAAAIABoADgABAAAAAAAVABgADgABAAAAAAAQABsADgABAAAAAAAFAPb/DwAAAAYAAAAHAPb/DwAAAAYAAAAJAPb/DwAAAAYAAAALAPb/DwAAAAYAAAAWAPb/DwAAAAYAAAAYAPb/DwAAAAYAAAAaAPb/DwAAAAYAAAAcAPb/DwAAAAYAAAADAPX/DwAAAAYAAAAoAPb/DwAAAAYAAAAqAPX/DwAAAAYAAAArAPP/DwAAAAYAAAArAPH/DwAAAAYAAAArAPD/DwAAAAYAAAArAO7/DwAAAAYAAAAVAPT/DwAAAAYAAAAWAPX/DwAAAAYAAAAVAPP/DwAAAAYAAAAVAPL/DwAAAAYAAAABAPP/DwAAAAYAAAACAPP/DwAAAAYAAAAOAPT/DwAAAAYAAAANAPX/DwAAAAYAAAAGAPH/DwAAAAYAAAAIAPH/DwAAAAYAAAAFAPL/DwADAAYAAAADAPL/DwADAAYAAAAHAPP/DwADAAYAAAAFAPP/DwADAAYAAAAFAPT/DwADAAYAAAAHAPX/DwADAAYAAAAEAPP/DwADAAYAAAAbAPX/DwADAAYAAAAZAPX/DwADAAYAAAAXAPT/DwADAAYAAAAXAPP/DwADAAYAAAAZAPP/DwADAAYAAAAaAPT/DwADAAYAAAAqAPL/DwADAAYAAAApAPD/DwADAAYAAAAqAO//DwADAAYAAAApAO7/DwADAAYAAAA=")
 tile_set = ExtResource("14_1cqgc")
-
-[node name="CutsceneTrigger" type="Area2D" parent="." unique_id=969233625]
-position = Vector2(-1, 0)
-script = ExtResource("4_187fi")
-cutscene_id = "town1_intro"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CutsceneTrigger" unique_id=1965274357]
-position = Vector2(249, -135)
-shape = SubResource("RectangleShape2D_euywh")
 
 [node name="bob" parent="." unique_id=1402557311 instance=ExtResource("1_kfime")]
 position = Vector2(-209, -203)

@@ -4,21 +4,20 @@ extends Area2D
 @onready var parent = $".."
 @onready var is_npc: bool = parent.is_in_group("npc")
 
-const glow_color := Color(1.0, 0.85, 0.25)
-const glow_min := 0.2
-const glow_max := 0.7
-const glow_period := 0.9
+const outline_color := Color(1.0, 0.88, 0.45, 0.55)
+const outline_width := 2.0
 
 signal interacted
 
 var focused := false
-var glow_tween: Tween
+var outlined := false
 
 
 func _ready() -> void:
 	if not is_npc:
-		modulate.a = 0.0
 		GameState.flag_changed.connect(_on_flag_changed)
+		GameState.task_changed.connect(refresh_label)
+		refresh_label()
 
 
 func focus():
@@ -37,7 +36,9 @@ func refresh_label():
 		else:
 			label.text = parent.marker_text()
 	else:
-		set_glow(focused and (not parent.has_method("can_interact") or parent.can_interact()))
+		var available: bool = not parent.has_method("can_interact") or parent.can_interact()
+		var task_target: bool = GameState.get_current_tasks().get("target", "") == parent.name
+		set_outline(available and (focused or task_target))
 
 func interact():
 	interacted.emit()
@@ -47,25 +48,18 @@ func _on_flag_changed(_flag: String, _value) -> void:
 	refresh_label()
 
 
-func set_glow(on: bool) -> void:
-	if glow_tween:
-		glow_tween.kill()
-	if not on:
-		modulate.a = 0.0
-		return
-	modulate.a = glow_min
-	glow_tween = create_tween().set_loops()
-	glow_tween.tween_property(self, "modulate:a", glow_max, glow_period / 2.0)
-	glow_tween.tween_property(self, "modulate:a", glow_min, glow_period / 2.0)
+func set_outline(on: bool) -> void:
+	outlined = on
+	queue_redraw()
 
 
 func _draw() -> void:
-	if is_npc:
+	if is_npc or not outlined:
 		return
 	for child in get_children():
 		if child is CollisionShape2D:
 			var shape: Shape2D = child.shape
 			if shape is RectangleShape2D:
-				draw_rect(Rect2(child.position - shape.size / 2.0, shape.size), glow_color)
+				draw_rect(Rect2(child.position - shape.size / 2.0, shape.size), outline_color, false, outline_width)
 			elif shape is CircleShape2D:
-				draw_circle(child.position, shape.radius, glow_color)
+				draw_arc(child.position, shape.radius, 0.0, TAU, 48, outline_color, outline_width)

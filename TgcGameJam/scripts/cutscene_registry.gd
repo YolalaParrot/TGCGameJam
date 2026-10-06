@@ -4,6 +4,7 @@ var cutscenes: Dictionary = {
 	"town1_intro": {
 		"scene": "res://scenes/cutscenes/town1_intro.tscn",
 		"npc": "jim",
+		"autoplay": "town_one",
 		"requires": {"start": true},
 		"forbids": {"met_jim": true},
 		"on_finish": GameState.meet_jim  # same effects as Jim's first dialogue
@@ -41,6 +42,8 @@ var cutscenes: Dictionary = {
 	"scene_5": {
 		"scene": "res://scenes/cutscenes/scene_5.tscn",
 		"npc": "ken",
+		"autoplay": "hillside",
+		"autoplay_forbids": {"willy_on_hill": true},
 		"requires": {"rps_game": "won"},
 		"forbids": {"engine_failed": true},
 		"on_finish": {"set": {"engine_failed": true}, "take": ["Fuel"], "next": "scene_hailey", "flash": true}
@@ -82,6 +85,16 @@ func get_cutscene(cutscene_id: String) -> Dictionary:
 
 func conditions_ok(cutscene_id: String) -> bool:
 	return has_cutscene(cutscene_id) and GameState.conditions_met(cutscenes[cutscene_id])
+
+
+func find_autoplay(map: String) -> String:
+	for cutscene_id in cutscenes:
+		var cutscene: Dictionary = cutscenes[cutscene_id]
+		if cutscene.get("autoplay", "") != map or GameState.cutscene_seen(cutscene_id):
+			continue
+		if conditions_ok(cutscene_id) and GameState.conditions_met({"forbids": cutscene.get("autoplay_forbids", {})}):
+			return cutscene_id
+	return ""
 
 
 func find_for_npc(npc_name: String) -> String:

@@ -53,3 +53,4 @@ vertical_alignment = 1
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1758762376]
 stream = ExtResource("3_gw1d4")
+autoplay = true

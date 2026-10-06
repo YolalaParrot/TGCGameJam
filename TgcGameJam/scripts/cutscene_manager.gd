@@ -3,6 +3,7 @@ extends Node
 var playing := false
 
 const flash_pause := 2.0
+const autoplay_delay := 0.6
 const flash_fade := 1.5
 
 
@@ -77,15 +78,29 @@ func play_cutscene(cutscene_id: String, extra_on_finish: Dictionary = {}, faded 
 	playing = false
 
 
+func autoplay(map: String) -> void:
+	await get_tree().create_timer(autoplay_delay).timeout
+	var scene := get_tree().current_scene
+	if scene == null or scene.scene_file_path.get_file().get_basename() != map:
+		return
+	var cutscene_id := CutsceneRegistry.find_autoplay(map)
+	if cutscene_id != "":
+		play_cutscene(cutscene_id)
+
+
 func flash_white() -> void:
+	flash(Color.WHITE, flash_fade)
+
+
+func flash(color: Color, fade: float) -> void:
 	var layer := CanvasLayer.new()
 	layer.layer = 30
-	var white := ColorRect.new()
-	white.color = Color.WHITE
-	white.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	white.set_anchors_preset(Control.PRESET_FULL_RECT)
-	layer.add_child(white)
+	var rect := ColorRect.new()
+	rect.color = color
+	rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	rect.set_anchors_preset(Control.PRESET_FULL_RECT)
+	layer.add_child(rect)
 	get_tree().root.add_child(layer)
-	var tween := white.create_tween()
-	tween.tween_property(white, "modulate:a", 0.0, flash_fade)
+	var tween := rect.create_tween()
+	tween.tween_property(rect, "modulate:a", 0.0, fade)
 	tween.tween_callback(layer.queue_free)

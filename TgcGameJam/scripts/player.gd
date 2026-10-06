@@ -24,6 +24,7 @@ func _ready() -> void:
 	if minigame_player:
 		return
 	apply_text_sizes.call_deferred()
+	CutsceneManager.autoplay(current_location())
 
 func apply_text_sizes() -> void:
 	DialogueBox.set_font_size(dialogue_font_size)

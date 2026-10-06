@@ -1,0 +1,17 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/blueprint.gd" id="1_bp"]
+[ext_resource type="Texture2D" path="res://assets-temp/blueprint.png" id="2_bp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bp"]
+radius = 14.0
+
+[node name="blueprint" type="Area2D"]
+script = ExtResource("1_bp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_bp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_bp")

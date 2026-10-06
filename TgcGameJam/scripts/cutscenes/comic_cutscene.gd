@@ -60,6 +60,35 @@ func _unhandled_input(event: InputEvent) -> void:
 		if animating:
 			return
 		await _advance()
+	elif event.is_action_pressed("back_cutscene"):
+		get_viewport().set_input_as_handled()
+		if animating:
+			return
+		await _back()
+
+
+func _back() -> void:
+	animating = true
+	if panel_index > 0:
+		await _leave_last_panel()
+		panel_index -= 1
+	elif page_index > 0:
+		await _leave_page()
+		await get_tree().create_timer(panel_gap).timeout
+		page_index -= 1
+		var count := page_list[page_index].panels.size()
+		for i in count:
+			panel_index = i
+			await _enter_panel()
+	animating = false
+
+
+func _leave_last_panel() -> void:
+	var panel: TextureRect = shown.pop_back()
+	var side: ComicPanel.Side = shown_sides.pop_back()
+	var target := panel.position + _offscreen_offset(side, panel.position, panel.size, _screen_size())
+	await _move_panel(panel, target, panel_animation_time).finished
+	panel.queue_free()
 
 
 func _advance() -> void:
@@ -173,9 +202,10 @@ func _build_pages() -> Array[ComicPage]:
 	if not built.is_empty():
 		return built
 
-	for i in range(0, sequence.size(), 2):
+	var i := 0
+	while i < sequence.size():
 		var page := ComicPage.new()
-		var has_pair := i + 1 < sequence.size()
+		var has_pair := i + 1 < sequence.size() and _is_wide(sequence[i]) and _is_wide(sequence[i + 1])
 
 		var first := ComicPanel.new()
 		first.texture = sequence[i]
@@ -191,5 +221,10 @@ func _build_pages() -> Array[ComicPage]:
 			page.panels.append(second)
 
 		built.append(page)
+		i += 2 if has_pair else 1
 
 	return built
+
+
+func _is_wide(texture: Texture2D) -> bool:
+	return texture.get_width() >= texture.get_height() * 1.5

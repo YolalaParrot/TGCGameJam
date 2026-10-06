@@ -9,7 +9,6 @@ extends Node
 	"dance_battle":"not_started",
 	"got_wood":false,
 	"wood_delivered":false,
-	"met_mrs_smith":false,
 	"parts_game":"not_started",
 	"parts_delivered":false,
 	"met_bob":false,
@@ -42,16 +41,16 @@ const trial_stages := {
 	},
 	"light_minigame": {
 		"flags": {"met_jim":true, "seen_town1_intro":true, "met_ken":true, "met_willy":true,
-			"dance_battle":"won", "got_wood":true,"wood_delivered":true,"met_mrs_smith":true},
+			"dance_battle":"won", "got_wood":true,"wood_delivered":true},
 	},
 	"bob": {
 		"flags": {"met_jim":true, "seen_town1_intro":true, "met_ken":true, "met_willy":true,
-			"dance_battle":"won", "got_wood":true, "wood_delivered":true, "met_mrs_smith":true,
+			"dance_battle":"won", "got_wood":true, "wood_delivered":true,
 			"parts_game":"won", "parts_delivered":true},
 	},
 	"final": {
 		"flags": {"met_jim":true, "seen_town1_intro":true, "met_ken":true, "met_willy":true,
-			"dance_battle":"won", "got_wood":true, "wood_delivered":true, "met_mrs_smith":true,
+			"dance_battle":"won", "got_wood":true, "wood_delivered":true,
 			"parts_game":"won", "parts_delivered":true,"met_bob":true,"rps_game":"won"},"items": [fuel]
 	},
 }
@@ -59,6 +58,7 @@ const trial_stages := {
 func _ready() -> void:
 	if trial_stage != "":
 		start_trial(trial_stage)
+	apply_world_rules.call_deferred()
 	announce_task.call_deferred()
 
 
@@ -113,8 +113,29 @@ const Map := {
 }
 
 var npc_state := {
-	"jim": {"loc": "town_one", "pos": Vector2(80, 50)},
+	"jim": {"loc": "town_one", "pos": null},
+	"willy": {"loc": "town_two", "pos": null},
 }
+
+const achievements := {
+	"buffet_into_space": {"name": "Buffet Into Space", "description": "Convince Uncle Willy to come along to space"},
+}
+
+# Checked after every change to the game state: each runs once, as soon as its requires/forbids pass.
+const world_rules := [
+	# Jim runs off to the hill after meeting the player
+	{
+		"requires": {"met_jim": true},
+		"forbids": {"jim_on_hill": true},
+		"on_finish": {"set": {"jim_on_hill": true}, "move": [{"npc": "jim", "location": "hillside"}]},
+	},
+	# Uncle Willy joins the boys once he is convinced and Bob's fuel is in (whichever happens last)
+	{
+		"requires": {"willy_convinced": true, "rps_game": "won"},
+		"forbids": {"willy_on_hill": true},
+		"on_finish": {"set": {"willy_on_hill": true}, "move": [{"npc": "willy", "location": "hillside"}]},
+	},
+]
 
 func npc_map(npc_name: String) -> String:
 	if not npc_state.has(npc_name):
@@ -132,6 +153,62 @@ const meet_jim := {
 
 var dialogues := {
 	"jim":{"dialogues":[
+			# Hill: the fuel is in
+			{
+				"requires":{"rps_game":"won"},
+				"forbids":{},
+				"on_finish":{},
+				"lines":[
+					[
+						{"Jim":"Engines done? Oh boy. Kens gonna be unbearable."}
+					]
+				]
+			},
+			# Hill: 6 hours left
+			{
+				"requires":{"parts_delivered":true},
+				"forbids":{},
+				"on_finish":{},
+				"lines":[
+					[
+						{"Jim":"Six hours... Joe, are we really doing this?"},
+						{"Player":"We are. Together."}
+					]
+				]
+			},
+			# Hill: 11 hours left
+			{
+				"requires":{"wood_delivered":true},
+				"forbids":{},
+				"on_finish":{},
+				"lines":[
+					[
+						{"Jim":"Finns got that look again. The I-read-it-in-a-book look."}
+					]
+				]
+			},
+			# Hill: 16 hours left
+			{
+				"requires":{"met_ken":true},
+				"forbids":{},
+				"on_finish":{},
+				"lines":[
+					[
+						{"Jim":"Told ya the boys had a plan. ...Kinda."}
+					]
+				]
+			},
+			# Hill: waiting for the player (after he ran off from town one)
+			{
+				"requires":{"met_jim":true},
+				"forbids":{},
+				"on_finish":{},
+				"lines":[
+					[
+						{"Jim":"Kens waiting for you. Whatever he says, dont kneel."}
+					]
+				]
+			},
 			# Town one: Jim meets the player (after the intro cutscene)
 			{
 				"requires":{"start":true},
@@ -152,7 +229,63 @@ var dialogues := {
 		]
 	},
 	"willy":{"dialogues":[
-			# Wood handed over: a reminder
+			# On the hill with the boys (after the buffet, waiting for the rocket)
+			{
+				"requires":{"willy_on_hill":true},
+				"forbids":{},
+				"on_finish":{},
+				"lines":[
+					[
+						{"Willy":"Brought what was left of the buffet. Cant fly to space on an empty stomach!"},
+						{"Willy":"Martha wouldve loved this view, kid."}
+					],
+					[
+						{"Willy":"Window seat. You promised."}
+					]
+				]
+			},
+			# Convinced: waiting for the rocket
+			{
+				"requires":{"willy_convinced":true},
+				"forbids":{},
+				"on_finish":{},
+				"lines":[
+					[
+						{"Willy":"Buffets still going, kid! Grab a plate before Bob eats it all."}
+					],
+					[
+						{"Willy":"Dont you dare leave without me, Joe."}
+					]
+				]
+			},
+			# Side quest: Buffet Into Space (any time after the wood reaches Finn)
+			{
+				"requires":{"wood_delivered":true},
+				"forbids":{"willy_convinced":true},
+				"on_finish":{"set":{"willy_convinced":true},"achievement":"buffet_into_space"},
+				"lines":[
+					[
+						{"Willy":"You again? I told ya, the woods all yours. What now?"},
+						{"Player":"Nothing. Just... wanted to check on you, Uncle Willy."},
+						{"Willy":"Check on me? Hah! Im fine. Im always fine."},
+						{"Willy":"..."},
+						{"Willy":"Martha used to say that. Always fine, Willy. Right up till she wasnt."},
+						{"Willy":"Tried calling my daughter today. Every line in the country is busy."},
+						{"Willy":"Six years we didnt talk, kid. Over a fence. A stupid fence."},
+						{"Willy":"And my boy... built this shop for him. He moved to the city. Never came back."},
+						{"Player":"Uncle Willy..."},
+						{"Willy":"*sniff* Bah! Look at me, getting all misty over nothing."},
+						{"Willy":"*wipes his eyes* You know what? If the worlds ending, its ending on a full stomach!"},
+						{"Willy":"Im throwing a buffet! The whole town is invited. Even that grump Bob."},
+						{"Player":"Willy... no matter what happens, Im making sure youre on that rocket with us."},
+						{"Willy":"Me? On a rocket? Kid, I can barely get up the stairs."},
+						{"Player":"Youre coming to space, Uncle Willy. Thats final."},
+						{"Willy":"..."},
+						{"Willy":"Alright, kid. Save me a window seat. And Im bringing the leftovers."}
+					]
+				]
+			},
+			# Wood handed over: a reminder (16 hours left)
 			{
 				"requires":{"got_wood":true},
 				"forbids":{},
@@ -186,6 +319,9 @@ var dialogues := {
 					[
 						{"Willy":"Hah! Guess i really had a young soul all along!! Beat it kid you aint getting anything from this store."},
 						{"Ken":"Get back and bring us the stuff!!!!!!"}
+					],
+					[
+						{"Willy":"You call that dancing? My hip moves better, and its made of metal!"}
 					]
 				]
 			},
@@ -236,7 +372,18 @@ var dialogues := {
 		]
 	},
 	"finn":{"dialogues":[
-			# Parts delivered: a reminder
+			# Fuel is in: send the player to Ken
+			{
+				"requires":{"rps_game":"won"},
+				"forbids":{},
+				"on_finish":{},
+				"lines":[
+					[
+						{"Finn":"Ken wants to see the engine. Go talk to him. Its... uh... ready. I think."}
+					]
+				]
+			},
+			# Parts delivered: a reminder (6 hours left)
 			{
 				"requires":{"parts_delivered":true},
 				"forbids":{},
@@ -260,14 +407,14 @@ var dialogues := {
 					]
 				]
 			},
-			# Wood delivered: a reminder
+			# Wood delivered: a reminder (11 hours left)
 			{
 				"requires":{"wood_delivered":true},
 				"forbids":{},
 				"on_finish":{},
 				"lines":[
 					[
-						{"Finn":"Did you get the parts from Mrs Smith yet? I cant build an engine out of wood!"}
+						{"Finn":"Did you find the parts in the farm maze yet? I cant build an engine out of wood!"}
 					]
 				]
 			},
@@ -281,7 +428,7 @@ var dialogues := {
 						{"Finn":"This should do. Lets get to work."},
 						{"Finn":"Were going to need an engine. Youll have to get these parts. Heres a list."},
 						{"Player":"Are you sure this will work? I never thought this is all it took to reach space."},
-						{"Finn":"I know what im doing! Just get to work Joe. Mrs Smith should have this stuff."},
+						{"Finn":"I know what im doing! Just get to work Joe. The old maze on the farm should have this stuff."},
 						{"Ken":"Just get what he says Joe! Humanity depends on this!"},
 						{"Player":"Alright! Alright!"}
 					]
@@ -304,77 +451,74 @@ var dialogues := {
 			},
 		]
 	},
-	"mrs_smith":{"dialogues":[
-			# WIN: the parts were found in the maze
+	"gary":{"dialogues":[
+			# 30 mins left
 			{
-				"requires":{"parts_game":"won"},
+				"requires":{"rps_game":"won"},
 				"forbids":{},
 				"on_finish":{},
 				"lines":[
 					[
-						{"Mrs Smith":"Found everything on that list? Good luck with whatever you're building, Joe!"}
+						{"Gary":"Thirty minutes. I wrote it on the sign. Nobody reads the sign."},
+						{"Gary":"If you see my mom... tell her I fed the cat."}
 					]
 				]
 			},
-			# LOST: not every part was found in time
+			# 6 hours left
 			{
-				"requires":{"met_mrs_smith":true,"parts_game":"lost"},
+				"requires":{"parts_delivered":true},
 				"forbids":{},
 				"on_finish":{},
 				"lines":[
 					[
-						{"Player":"Finn said we're gonna need all the parts to build the engine!"},
-						{"Mrs Smith":"Sure go ahead, have another look inside."}
+						{"Gary":"Six hours! SIX! I can hear it humming up there. Cant you hear it?"},
+						{"Player":"...Thats a bee, Gary."}
 					]
 				]
 			},
-			# Sent into the maze: a reminder
-			{
-				"requires":{"met_mrs_smith":true},
-				"forbids":{},
-				"on_finish":{},
-				"lines":[
-					[
-						{"Mrs Smith":"Everything on that list should be inside. Go on in, Joe!"}
-					]
-				]
-			},
-			# Before the parts
+			# 11 hours left
 			{
 				"requires":{"wood_delivered":true},
 				"forbids":{},
-				"on_finish":{"set":{"met_mrs_smith":true}},
+				"on_finish":{},
 				"lines":[
 					[
-						{"Mrs Smith":"Oh he's inside doing god knows what!"},
-						{"Mrs Smith":"Hey Joe what ya need?"},
-						{"Player":"Hey Mrs Smith i have this list here."},
-						{"Mrs Smith":"Well uh. Thats a lot of stuff.."},
-						{"Mrs Smith":"Ya know what? I trust ya son. Just go inside and take what you need!"}
+						{"Gary":"Eleven hours... Ive been counting since sunrise. Counting helps."},
+						{"Gary":"One... two... please dont leave me alone out here."}
 					]
 				]
 			},
-			# Small talk before the story reaches Mrs Smith
+			# 16 hours left
+			{
+				"requires":{"met_ken":true},
+				"forbids":{},
+				"on_finish":{},
+				"lines":[
+					[
+						{"Gary":"Sixteen hours. The radio said sixteen hours. So I made a sign."},
+						{"Player":"Nice sign."},
+						{"Gary":"THANK you. Nobody ever says that."}
+					]
+				]
+			},
+			# Before anyone knows
 			{
 				"requires":{"start":true},
 				"forbids":{},
 				"on_finish":{},
 				"lines":[
 					[
-						{"Mrs Smith":"Oh Joe! Have you seen how chaotic the town is today?"},
-						{"Mrs Smith":"Mr Smith locked himself in the workshop the minute he heard the news."},
-						{"Player":"What news?"},
-						{"Mrs Smith":"Ask your friends dear, I dont want to think about it."}
+						{"Gary":"THE END IS NEAR! ...Sorry. Im practicing."}
 					],
 					[
-						{"Mrs Smith":"The crops wont water themselves, end of the world or not!"}
+						{"Gary":"Do you think it hurts? Getting hit by a space rock?"}
 					]
 				]
 			},
 		]
 	},
 	"bob":{"dialogues":[
-			# WIN: Bob handed over the fuel
+			# WIN: Bob handed over the fuel (30 mins left)
 			{
 				"requires":{"rps_game":"won"},
 				"forbids":{},
@@ -382,6 +526,9 @@ var dialogues := {
 				"lines":[
 					[
 						{"Bob":"Beaten by a kid.. Go on, take the fuel and get out of here."}
+					],
+					[
+						{"Bob":"Thirty minutes and you kids are still running around. ...Good luck, kid."}
 					]
 				]
 			},
@@ -393,6 +540,9 @@ var dialogues := {
 				"lines":[
 					[
 						{"Bob":"Back for more? Alright, one more round!"}
+					],
+					[
+						{"Bob":"I can read you like the morning paper, kid. Again!"}
 					]
 				]
 			},
@@ -409,6 +559,28 @@ var dialogues := {
 						{"Bob":"Hmm.."},
 						{"Bob":"I have some extra but i aint giving it away just like that."},
 						{"Bob":"Ya know what? Lets have a challenge! Beat me in rock paper scissors!"}
+					]
+				]
+			},
+			# 11 hours left
+			{
+				"requires":{"wood_delivered":true},
+				"forbids":{},
+				"on_finish":{},
+				"lines":[
+					[
+						{"Bob":"Radio says eleven hours. Still not giving anything away for free."}
+					]
+				]
+			},
+			# 16 hours left
+			{
+				"requires":{"met_ken":true},
+				"forbids":{},
+				"on_finish":{},
+				"lines":[
+					[
+						{"Bob":"Sixteen hours, they say. Plenty of time to mind my own business."}
 					]
 				]
 			},
@@ -472,7 +644,29 @@ var dialogues := {
 					]
 				]
 			},
-			# After the rocket plan: a reminder
+			# 6 hours left
+			{
+				"requires":{"parts_delivered":true},
+				"forbids":{},
+				"on_finish":{},
+				"lines":[
+					[
+						{"Ken":"Six hours, subject! The royal engine needs its royal fuel. Go!"}
+					]
+				]
+			},
+			# 11 hours left
+			{
+				"requires":{"wood_delivered":true},
+				"forbids":{},
+				"on_finish":{},
+				"lines":[
+					[
+						{"Ken":"Eleven hours! Faster, subject! Your king grows impatient."}
+					]
+				]
+			},
+			# After the rocket plan: a reminder (16 hours left)
 			{
 				"requires":{"met_ken":true},
 				"forbids":{},
@@ -562,11 +756,6 @@ const Tasks := {
 		},
 		{
 			"requires":{"wood_delivered":true},
-			"forbids":{"met_mrs_smith":true},
-			"task":{"name":"Get the engine parts from Mrs Smith","location":"farm","target":"mrs_smith"}
-		},
-		{
-			"requires":{"met_mrs_smith":true},
 			"forbids":{"parts_game":"won"},
 			"task":{"name":"Find the engine parts in the maze","location":"farm","target":"maze"}
 		},
@@ -589,6 +778,17 @@ const Tasks := {
 			"requires":{"rps_game":"won"},
 			"forbids":{"game_complete":true},
 			"task":{"name":"Check on the engine","location":"hillside","target":"ken"}
+		}
+	],
+	# Side quests: shown in the inventory once requires/forbids pass, and marked done by done_flag.
+	# The target NPC shows "..." while the quest is open.
+	"side":[
+		# Uncle Willy opens up once the wood is delivered
+		{
+			"requires":{"wood_delivered":true},
+			"forbids":{},
+			"done_flag":"willy_convinced",
+			"task":{"name":"Buffet Into Space","hint":"Uncle Willy seems down. Go see how he is","location":"town_two","target":"willy"}
 		}
 	]
 }
@@ -619,7 +819,9 @@ func execute(on_finish: Dictionary) -> void:
 	if not should_run(on_finish):
 		return
 	var task_before: String = get_current_tasks().get("name", "")
+	var comet_before := comet_time()
 	var received: Array = []
+	var achievement := ""
 	for section in on_finish:
 		match section:
 			"set":
@@ -631,7 +833,7 @@ func execute(on_finish: Dictionary) -> void:
 						flag_changed.emit(flag, value)
 			"move":
 				for move in on_finish["move"]:
-					move_npc(move.npc, move.location, move.position)
+					move_npc(move.npc, move.location, move.get("position"))
 			"give":
 				received.append_array(on_finish["give"])
 			"take":
@@ -641,6 +843,8 @@ func execute(on_finish: Dictionary) -> void:
 				var game: Dictionary = on_finish["minigame"]
 				MinigameManager.play.call_deferred(game.scene, game.result_flag,
 					game.get("on_won", {}), game.get("on_lost", {}))
+			"achievement":
+				achievement = on_finish["achievement"]
 			"credits":
 				get_tree().change_scene_to_file.call_deferred("res://scenes/Credits.tscn")
 			"flag", "not_equal", "next", "flash":
@@ -648,10 +852,15 @@ func execute(on_finish: Dictionary) -> void:
 			_:
 				push_warning("Unknown on_finish section: " + str(section))
 	var task_moved: bool = get_current_tasks().get("name", "") != task_before
+	if comet_time() != comet_before:
+		task_moved = true
 	if not received.is_empty():
 		receive_items(received, task_moved)
 	elif task_moved:
 		announce_task()
+	if achievement != "":
+		show_achievement(achievement)
+	apply_world_rules()
 
 
 func receive_items(new_items: Array, announce_after: bool) -> void:
@@ -665,16 +874,48 @@ func receive_items(new_items: Array, announce_after: bool) -> void:
 		announce_task()
 
 
-func move_npc(npc_name: String, location: String, position: Vector2) -> void:
+func move_npc(npc_name: String, location: String, position = null) -> void:
 	var old_map := npc_map(npc_name)
 	npc_state[npc_name] = {"loc": location, "pos": position}
-	var npc := get_tree().current_scene.find_child(npc_name, true, false) as Node2D
+	var scene := get_tree().current_scene
+	var npc := scene.find_child(npc_name, true, false) as Node2D if scene else null
 	if npc == null:
 		return
 	if location == old_map:
-		npc.position = position
-	else:
+		if position != null:
+			npc.position = position
+	elif not npc.get("leaving"):
 		npc.queue_free()
+
+
+func apply_world_rules() -> void:
+	for rule in world_rules:
+		if conditions_met(rule):
+			execute(rule.on_finish)
+
+
+func show_achievement(id: String) -> void:
+	var achievement: Dictionary = achievements[id]
+	flags["achievement_" + id] = true
+	CutsceneManager.flash(Color(1.0, 0.82, 0.25, 0.3), 0.8)
+	display_task("Achievement: %s - %s" % [achievement.name, achievement.description], 3.5)
+
+
+func side_quest_for(npc_name: String) -> Dictionary:
+	for quest in Tasks.side:
+		if quest.task.target == npc_name and conditions_met(quest) and not flags.get(quest.done_flag, false):
+			return quest.task
+	return {}
+
+
+func side_quest_lines() -> Array:
+	var lines := []
+	for quest in Tasks.side:
+		if flags.get(quest.done_flag, false):
+			lines.append("- %s (done)" % quest.task.name)
+		elif conditions_met(quest):
+			lines.append("- %s: %s" % [quest.task.name, quest.task.hint])
+	return lines
 
 
 func cutscene_seen(cutscene_id: String) -> bool:
@@ -688,13 +929,16 @@ func announce_task() -> void:
 	task_changed.emit()
 	var task := get_current_tasks()
 	if not task.is_empty():
-		display_task(task.name)
+		display_task(task.name, task_show_time, comet_text())
 
 
-func display_task(text: String, show_time := task_show_time) -> void:
+func display_task(text: String, show_time := task_show_time, comet := "") -> void:
 	var panel: Control = TaskOverlay.get_node("Panel")
-	var label: Label = panel.get_node("Label")
+	var label: Label = panel.get_node("Row/Label")
 	label.text = text
+	var comet_label: Label = panel.get_node("Row/Comet")
+	comet_label.text = comet
+	comet_label.visible = comet != ""
 	if task_tween:
 		task_tween.kill()
 	panel.visible = true
@@ -708,8 +952,26 @@ func display_task(text: String, show_time := task_show_time) -> void:
 
 func clear_task_display() -> void:
 	var panel: Control = TaskOverlay.get_node("Panel")
-	panel.get_node("Label").text = ""
+	panel.get_node("Row/Label").text = ""
+	panel.get_node("Row/Comet").text = ""
 	panel.visible = false
+
+
+func comet_time() -> String:
+	if flags.get("rps_game") == "won":
+		return "30 mins"
+	if flags.get("parts_delivered", false):
+		return "6 hours"
+	if flags.get("wood_delivered", false):
+		return "11 hours"
+	if flags.get("met_ken", false):
+		return "16 hours"
+	return ""
+
+
+func comet_text() -> String:
+	var time := comet_time()
+	return "" if time == "" else "%s till the Comet Impact" % time
 
 
 func get_current_tasks()->Dictionary:

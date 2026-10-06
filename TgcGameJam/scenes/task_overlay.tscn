@@ -23,6 +23,11 @@ font = ExtResource("1_font")
 font_size = 42
 font_color = Color(1, 0.956863, 0.854902, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_comet"]
+font = ExtResource("1_font")
+font_size = 42
+font_color = Color(0.95, 0.27, 0.22, 1)
+
 [node name="TaskOverlay" type="CanvasLayer"]
 layer = 15
 
@@ -34,6 +39,15 @@ offset_top = 12.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
-[node name="Label" type="Label" parent="Panel"]
+[node name="Row" type="HBoxContainer" parent="Panel"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Label" type="Label" parent="Panel/Row"]
 layout_mode = 2
 label_settings = SubResource("LabelSettings_text")
+
+[node name="Comet" type="Label" parent="Panel/Row"]
+visible = false
+layout_mode = 2
+label_settings = SubResource("LabelSettings_comet")

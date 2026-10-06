@@ -7,6 +7,15 @@
 font = ExtResource("2_giuoe")
 font_size = 42
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gold"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(0.24, 0.19, 0.07, 0.78)
+border_width_top = 2
+border_color = Color(1, 0.85, 0.4, 0.35)
+
 [node name="CanvasLayer" type="CanvasLayer" unique_id=784457619]
 script = ExtResource("1_r2og1")
 
@@ -15,19 +24,39 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -120.0
+offset_top = -130.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_gold")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=1761871527]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer" unique_id=1505287618]
 layout_mode = 2
+theme_override_constants/separation = 16
 
-[node name="Name" type="Label" parent="PanelContainer/VBoxContainer"]
+[node name="PortraitLeft" type="TextureRect" parent="PanelContainer/HBoxContainer" unique_id=1799463298]
+texture_filter = 1
+custom_minimum_size = Vector2(110, 114)
 layout_mode = 2
-label_settings = SubResource("LabelSettings_r2og1")
+expand_mode = 1
+stretch_mode = 5
 
-[node name="Dialogue" type="Label" parent="PanelContainer/VBoxContainer" unique_id=570708492]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer" unique_id=1761871527]
 layout_mode = 2
 size_flags_horizontal = 3
-autowrap_mode = 3
+
+[node name="Name" type="Label" parent="PanelContainer/HBoxContainer/VBoxContainer" unique_id=547441687]
+layout_mode = 2
 label_settings = SubResource("LabelSettings_r2og1")
+
+[node name="Dialogue" type="Label" parent="PanelContainer/HBoxContainer/VBoxContainer" unique_id=570708492]
+layout_mode = 2
+size_flags_horizontal = 3
+label_settings = SubResource("LabelSettings_r2og1")
+autowrap_mode = 3
+
+[node name="PortraitRight" type="TextureRect" parent="PanelContainer/HBoxContainer" unique_id=1823512690]
+texture_filter = 1
+custom_minimum_size = Vector2(110, 114)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5

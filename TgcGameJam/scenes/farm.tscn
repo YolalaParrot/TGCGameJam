@@ -20,6 +20,8 @@
 [ext_resource type="Texture2D" uid="uid://2m3tey2rk6y5" path="res://final-assets/shourin/Town 1/bigfence.png" id="12_t4c7y"]
 [ext_resource type="PackedScene" uid="uid://dmi2ryhd4nvik" path="res://scenes/minigameArea.tscn" id="20_utxq6"]
 [ext_resource type="AudioStream" uid="uid://b44kmsh6wej3r" path="res://music/1. Moonspire.mp3" id="21_3hh41"]
+[ext_resource type="PackedScene" path="res://scenes/blueprint.tscn" id="bp_scene"]
+[ext_resource type="Texture2D" uid="uid://conwbkcmnfarw" path="res://assets/Entities/npc2-idle-down.png" id="gary_tex"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_urit4"]
 texture = ExtResource("1_lgm8x")
@@ -6956,36 +6958,33 @@ sources/4 = SubResource("TileSetAtlasSource_3hh41")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1038h"]
 size = Vector2(232.00006, 331.99997)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_kfime"]
-region = Rect2(0, 0, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_gary0"]
+atlas = ExtResource("gary_tex")
+region = Rect2(0, 0, 26, 41)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wu7dk"]
-region = Rect2(16, 0, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_gary1"]
+atlas = ExtResource("gary_tex")
+region = Rect2(26, 0, 26, 41)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_55ilf"]
-region = Rect2(32, 0, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_gary2"]
+atlas = ExtResource("gary_tex")
+region = Rect2(52, 0, 26, 41)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_d5g2i"]
-region = Rect2(48, 0, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_fq2vd"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_gary"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_kfime")
+"texture": SubResource("AtlasTexture_gary0")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_wu7dk")
+"texture": SubResource("AtlasTexture_gary1")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_55ilf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_d5g2i")
+"texture": SubResource("AtlasTexture_gary2")
 }],
 "loop": 1,
 "name": &"idle",
-"speed": 5.0
+"speed": 4.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4qe0f"]
@@ -7036,17 +7035,28 @@ shape = SubResource("RectangleShape2D_1038h")
 [node name="Spawn_From_Town1_To_Farm" type="Marker2D" parent="." unique_id=968893700]
 position = Vector2(881, 69)
 
-[node name="mrs_smith" parent="." unique_id=987617997 instance=ExtResource("5_5q3ck")]
+[node name="gary" parent="." unique_id=987617997 instance=ExtResource("5_5q3ck")]
 position = Vector2(80, 50)
-NPC_Name = "mrs_smith"
-frames = SubResource("SpriteFrames_fq2vd")
+NPC_Name = "gary"
+
+[node name="AnimatedSprite2D" parent="gary" index="1" unique_id=236355110]
+position = Vector2(0, -42)
+sprite_frames = SubResource("SpriteFrames_gary")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="blueprint" parent="." unique_id=1561203347 instance=ExtResource("bp_scene")]
+position = Vector2(136, 315)
+flag = "found_blueprint_2"
+item_name = "Blueprint (Ken?)"
+line = "Another blueprint! ...Its just a drawing of Ken wearing a crown. Signed: Ken."
 
 [node name="maze" parent="." unique_id=479663280 instance=ExtResource("20_utxq6")]
 position = Vector2(-926, -409)
 minigame_scene = "res://scenes/minigame_light.tscn"
 result_flag = "parts_game"
 requires = {
-"met_mrs_smith": true
+"wood_delivered": true
 }
 forbids = {
 "parts_game": "won"
@@ -7073,4 +7083,5 @@ autoplay = true
 [node name="Environment" type="Node2D" parent="." unique_id=673364191]
 
 [editable path="player"]
+[editable path="gary"]
 [editable path="maze"]

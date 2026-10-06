@@ -11,12 +11,15 @@ extends AnimatableBody2D
 var leaving := false
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 
+const outline_shader := preload("res://shaders/outline.gdshader")
+var outline: ShaderMaterial
+
 func _ready() -> void:
 	var map := GameState.npc_map(NPC_Name)
 	if map != "" and map != current_map():
 		queue_free()
 		return
-	if map != "":
+	if map != "" and GameState.npc_pos(NPC_Name) != null:
 		position = GameState.npc_pos(NPC_Name)
 	if leave_flag != "":
 		if GameState.flags.get(leave_flag, false):
@@ -25,14 +28,33 @@ func _ready() -> void:
 		GameState.flag_changed.connect(_on_flag_changed)
 	interactable.interacted.connect(_on_interacted)
 	GameState.task_changed.connect(interactable.refresh_label)
+	GameState.task_changed.connect(update_outline)
+	GameState.flag_changed.connect(_on_any_flag_changed)
 	interactable.refresh_label()
 	if frames:
 		anim.sprite_frames = frames
 		anim.play("idle")
+	outline = ShaderMaterial.new()
+	outline.shader = outline_shader
+	update_outline()
+
+
+func update_outline() -> void:
+	anim.material = outline if is_task_target() and not leaving else null
+
+
+func _on_any_flag_changed(_flag: String, _value) -> void:
+	interactable.refresh_label()
+
+
+func is_task_target() -> bool:
+	return GameState.get_current_tasks().get("target", "") == NPC_Name
 
 
 func marker_text() -> String:
-	return "!" if GameState.get_current_tasks().get("target", "") == NPC_Name else ""
+	if is_task_target():
+		return "!"
+	return "..." if not GameState.side_quest_for(NPC_Name).is_empty() else ""
 
 func pending_cutscene() -> String:
 	return CutsceneRegistry.find_for_npc(NPC_Name)
@@ -52,6 +74,7 @@ func _on_flag_changed(flag: String, value) -> void:
 	if flag == leave_flag and value == true:
 		leaving = true
 		interactable.refresh_label()
+		update_outline()
 
 
 func _process(delta: float) -> void:

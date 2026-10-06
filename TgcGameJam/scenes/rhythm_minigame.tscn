@@ -2,6 +2,9 @@
 
 [ext_resource type="Script" path="res://scripts/rhythm_minigame.gd" id="1_rhythm"]
 [ext_resource type="PackedScene" uid="uid://b8f1ign6hpicr" path="res://scenes/game_level.tscn" id="2_level"]
+[ext_resource type="SpriteFrames" path="res://resources/dance_player.tres" id="3_dance_player"]
+[ext_resource type="SpriteFrames" path="res://resources/dance_willy.tres" id="4_dance_willy"]
+[ext_resource type="Script" path="res://scripts/dancer.gd" id="5_dancer"]
 
 [node name="RhythmMinigame" type="CanvasLayer"]
 layer = 10
@@ -28,3 +31,21 @@ size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
 [node name="GameLevel" parent="Container/SubViewport" instance=ExtResource("2_level")]
+
+[node name="PlayerDancer" type="AnimatedSprite2D" parent="Container/SubViewport"]
+texture_filter = 1
+position = Vector2(-380, 150)
+scale = Vector2(6, 6)
+sprite_frames = ExtResource("3_dance_player")
+animation = &"idle"
+script = ExtResource("5_dancer")
+follow = "press"
+
+[node name="WillyDancer" type="AnimatedSprite2D" parent="Container/SubViewport"]
+texture_filter = 1
+position = Vector2(380, 150)
+scale = Vector2(6, 6)
+sprite_frames = ExtResource("4_dance_willy")
+animation = &"idle"
+script = ExtResource("5_dancer")
+follow = "note"
