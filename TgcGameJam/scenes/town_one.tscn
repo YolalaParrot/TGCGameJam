@@ -2605,6 +2605,10 @@ frame_progress = 0.45706463
 [node name="player" parent="." unique_id=1772785746 instance=ExtResource("3_kfime")]
 position = Vector2(272, -72)
 
+[node name="AnimatedSprite2D" parent="player" index="0" unique_id=1108039948]
+animation = &"side_walk"
+frame_progress = 0.0
+
 [node name="Camera2D" parent="player" index="2" unique_id=1036130193]
 zoom = Vector2(1.5, 1.5)
 limit_top = -500
