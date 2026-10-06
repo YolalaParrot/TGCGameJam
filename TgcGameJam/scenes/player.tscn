@@ -206,33 +206,42 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_a8ls1")
 }, {
+<<<<<<< Updated upstream
 "duration": 1.0,
+=======
+"frames": [{
+"duration": 0.5,
+>>>>>>> Stashed changes
 "texture": SubResource("AtlasTexture_qfm1y")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_fulsm")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_4r5pv")
 }],
 "loop": 1,
 "name": &"front_idle",
 "speed": 5.0
 }, {
+<<<<<<< Updated upstream
 "frames": [{
 "duration": 1.0,
+=======
+"duration": 0.5,
+>>>>>>> Stashed changes
 "texture": SubResource("AtlasTexture_60mlk")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_i4ail")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_a38lo")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_4ni07")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_l71n6")
 }, {
 "duration": 1.0,
@@ -249,33 +258,42 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_31cv2")
 }, {
+<<<<<<< Updated upstream
 "duration": 1.0,
+=======
+"frames": [{
+"duration": 0.5,
+>>>>>>> Stashed changes
 "texture": SubResource("AtlasTexture_pf23h")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_dt7fs")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_wqfne")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_wnwbv")
 }],
 "loop": 1,
 "name": &"side_idle",
 "speed": 5.0
 }, {
+<<<<<<< Updated upstream
 "frames": [{
 "duration": 1.0,
+=======
+"duration": 0.5,
+>>>>>>> Stashed changes
 "texture": SubResource("AtlasTexture_gl8cc")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_487ah")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_md1ol")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_bj30b")
 }, {
 "duration": 1.0,
@@ -283,6 +301,41 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_hax0n")
+<<<<<<< Updated upstream
+=======
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t4otl")
+}],
+"loop": 1,
+"name": &"side_idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_j2b1d")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_cs1tg")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_2dvfe")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_giy8y")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_fdfoy")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_hhpqf")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_g5jhy")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_holxr")
+>>>>>>> Stashed changes
 }],
 "loop": 1,
 "name": &"side_walk",
