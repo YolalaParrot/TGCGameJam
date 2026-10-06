@@ -533,7 +533,7 @@ const Tasks := {
 		{
 			"requires":{"start":true},
 			"forbids":{"met_jim":true},
-			"task":{"name":"Talk to Jim","location":"town_one","target":"jim"}
+			"task":{"name":"Talk with Jim (click H for Controls)","location":"town_one","target":"jim"}
 		},
 		{
 			"requires":{"met_jim":true},

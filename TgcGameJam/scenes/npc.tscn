@@ -14,7 +14,7 @@ outline_size = 3
 outline_color = Color(0.30738604, 0.0709007, 0.055149846, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qhqgy"]
-size = Vector2(42, 60)
+size = Vector2(42, 18)
 
 [node name="npc" type="AnimatableBody2D" unique_id=987617997 groups=["npc"]]
 scale = Vector2(0.5, 0.5)
@@ -42,4 +42,5 @@ scale = Vector2(3.75, 4.3125)
 autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=643911397]
+position = Vector2(0, 21)
 shape = SubResource("RectangleShape2D_qhqgy")

@@ -7,7 +7,7 @@ extends AnimatableBody2D
 @export_group("Leaving")
 @export var leave_flag := ""
 @export var leave_x := 150.0
-@export var leave_speed := 20.0
+@export var leave_speed := 50.0
 var leaving := false
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 

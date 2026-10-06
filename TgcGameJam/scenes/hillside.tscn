@@ -3661,45 +3661,6 @@ sources/4 = SubResource("TileSetAtlasSource_t6cyu")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t6cyu"]
 size = Vector2(266, 706)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qbud2"]
-load_path = "res://.godot/imported/boy_idle_4x1.png-fdd496391b92e10edba6fd7659028a97.ctex"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kfime"]
-atlas = SubResource("CompressedTexture2D_qbud2")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wu7dk"]
-atlas = SubResource("CompressedTexture2D_qbud2")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_55ilf"]
-atlas = SubResource("CompressedTexture2D_qbud2")
-region = Rect2(32, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_d5g2i"]
-atlas = SubResource("CompressedTexture2D_qbud2")
-region = Rect2(48, 0, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_rl0pi"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kfime")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wu7dk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_55ilf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_d5g2i")
-}],
-"loop": 1,
-"name": &"idle",
-"speed": 5.0
-}]
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_5bn4y"]
 atlas = ExtResource("12_pwq0p")
 region = Rect2(0, 0, 26, 27)
