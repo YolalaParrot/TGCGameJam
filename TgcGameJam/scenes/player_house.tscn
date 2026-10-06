@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://bt3lpqrk2xw4e" path="res://scenes/teleporter.tscn" id="4_t6268"]
 [ext_resource type="Texture2D" uid="uid://c2ncuafimabl7" path="res://assets/Environment/Structures/Buildings/Walls.png" id="4_ubi7a"]
 [ext_resource type="AudioStream" uid="uid://b44kmsh6wej3r" path="res://music/1. Moonspire.mp3" id="7_t6268"]
+[ext_resource type="AudioStream" uid="uid://caow1lj2223vu" path="res://music/knockknock2.mp3" id="9_yhmgt"]
+[ext_resource type="Script" uid="uid://cbf8jb5qkm4rj" path="res://scripts/knock_player.gd" id="10_640lt"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yhmgt"]
 texture = ExtResource("1_t32w7")
@@ -3794,7 +3796,7 @@ size = Vector2(22, 79)
 size = Vector2(18.000004, 46.000023)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kk36w"]
-size = Vector2(19, 61.000046)
+size = Vector2(10, 61.000046)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7k15u"]
 size = Vector2(48.000004, 31.999908)
@@ -3857,7 +3859,7 @@ shape = SubResource("RectangleShape2D_640lt")
 [node name="Spawn_From_Town1_To_Player_House" type="Marker2D" parent="." unique_id=1791811874]
 position = Vector2(257.725, 143.49509)
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1565855777]
+[node name="Ambience" type="AudioStreamPlayer" parent="." unique_id=1565855777]
 stream = ExtResource("7_t6268")
 autoplay = true
 
@@ -3868,7 +3870,7 @@ position = Vector2(182.00002, 136.00005)
 shape = SubResource("RectangleShape2D_srfah")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=284006783]
-position = Vector2(199.50002, 48.50006)
+position = Vector2(204.00002, 48.500046)
 shape = SubResource("RectangleShape2D_kk36w")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D" unique_id=1791484133]
@@ -3878,5 +3880,14 @@ shape = SubResource("RectangleShape2D_7k15u")
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D" unique_id=144776148]
 position = Vector2(230.00003, 240.00005)
 shape = SubResource("RectangleShape2D_bhaeq")
+
+[node name="KnockPlayer" type="AudioStreamPlayer" parent="." unique_id=1219741047]
+stream = ExtResource("9_yhmgt")
+script = ExtResource("10_640lt")
+
+[node name="KnockTimer" type="Timer" parent="." unique_id=689646172]
+wait_time = 3.0
+one_shot = true
+autostart = true
 
 [editable path="player"]
