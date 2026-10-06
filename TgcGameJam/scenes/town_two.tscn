@@ -272,10 +272,10 @@ format = 2
 position = Vector2(66, 131)
 
 [node name="Camera2D" parent="player" index="2" unique_id=1036130193]
-limit_left = -1160
+limit_left = -1159
 limit_top = -644
 limit_right = 840
-limit_bottom = 356
+limit_bottom = 343
 
 [node name="collisions" type="StaticBody2D" parent="." unique_id=534276912]
 

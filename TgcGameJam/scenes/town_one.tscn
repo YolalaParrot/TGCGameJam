@@ -5384,7 +5384,7 @@ position = Vector2(272, -72)
 
 [node name="Camera2D" parent="player" index="2" unique_id=1036130193]
 limit_top = -500
-limit_bottom = 500
+limit_bottom = 487
 
 [node name="bob" parent="." unique_id=1402557311 instance=ExtResource("1_kfime")]
 position = Vector2(160, 50)
@@ -5404,7 +5404,7 @@ position = Vector2(-1.9999999, -38)
 sprite_frames = SubResource("SpriteFrames_pwq0p")
 animation = &"right_idle"
 autoplay = "right_idle"
-frame_progress = 0.40005717
+frame_progress = 0.45706463
 
 [node name="collisions" type="StaticBody2D" parent="." unique_id=852483241]
 
