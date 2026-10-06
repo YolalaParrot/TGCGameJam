@@ -7070,5 +7070,7 @@ shape = SubResource("RectangleShape2D_4qe0f")
 position = Vector2(35.5, 10.5)
 shape = SubResource("RectangleShape2D_4qe0f")
 
+[node name="Environment" type="Node2D" parent="." unique_id=673364191]
+
 [editable path="player"]
 [editable path="maze"]

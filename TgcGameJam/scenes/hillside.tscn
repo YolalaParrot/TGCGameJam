@@ -4699,3 +4699,5 @@ position = Vector2(82, 46)
 shape = SubResource("RectangleShape2D_qv2pw")
 
 [editable path="player"]
+[editable path="ken"]
+[editable path="finn"]
