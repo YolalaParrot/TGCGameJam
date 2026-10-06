@@ -8,12 +8,13 @@
 [ext_resource type="PackedScene" uid="uid://chuvimfq0blnm" path="res://scenes/npc.tscn" id="5_jimnpc"]
 [ext_resource type="Script" uid="uid://0dsu1akojwp0" path="res://scripts/cutscene_trigger.gd" id="5_ogo75"]
 [ext_resource type="Texture2D" uid="uid://buyr6va8k7305" path="res://final-assets/Environment/Tilesets/Water_tiles.png" id="5_uvgno"]
-[ext_resource type="Texture2D" uid="uid://cvcc2sducawnn" path="res://assets-temp/boy_idle_4x1.png" id="6_jimtex"]
 [ext_resource type="Texture2D" uid="uid://clx1hr4pltej3" path="res://final-assets/Environment/blehh-new-tilesets/WaterTiles-6frames.png" id="6_qv2pw"]
 [ext_resource type="Texture2D" uid="uid://ud5668jvt607" path="res://final-assets/Environment/Props/Static/Trees/Model_02/Size_05.png" id="6_t6cyu"]
 [ext_resource type="Texture2D" uid="uid://6pj1ddavu86f" path="res://final-assets/Environment/Props/Static/Vegetation.png" id="7_ogo75"]
 [ext_resource type="Texture2D" uid="uid://cb8v1khnk56pu" path="res://final-assets/Environment/blehh-new-tilesets/Trees_seperated.png" id="10_uvgno"]
 [ext_resource type="AudioStream" uid="uid://b44kmsh6wej3r" path="res://music/1. Moonspire.mp3" id="12_atlej"]
+[ext_resource type="Texture2D" uid="uid://b3olitbxff2yf" path="res://final-assets/Entities/ken/ken-idle-right.png" id="12_pwq0p"]
+[ext_resource type="Texture2D" uid="uid://bvcdloydumcmd" path="res://final-assets/Entities/finn/finn-idle-right.png" id="13_33sov"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_atlej"]
 texture = ExtResource("2_2dp04")
@@ -3660,20 +3661,23 @@ sources/4 = SubResource("TileSetAtlasSource_t6cyu")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t6cyu"]
 size = Vector2(266, 706)
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qbud2"]
+load_path = "res://.godot/imported/boy_idle_4x1.png-fdd496391b92e10edba6fd7659028a97.ctex"
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_kfime"]
-atlas = ExtResource("6_jimtex")
+atlas = SubResource("CompressedTexture2D_qbud2")
 region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wu7dk"]
-atlas = ExtResource("6_jimtex")
+atlas = SubResource("CompressedTexture2D_qbud2")
 region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_55ilf"]
-atlas = ExtResource("6_jimtex")
+atlas = SubResource("CompressedTexture2D_qbud2")
 region = Rect2(32, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d5g2i"]
-atlas = ExtResource("6_jimtex")
+atlas = SubResource("CompressedTexture2D_qbud2")
 region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_rl0pi"]
@@ -3693,6 +3697,64 @@ animations = [{
 }],
 "loop": 1,
 "name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5bn4y"]
+atlas = ExtResource("12_pwq0p")
+region = Rect2(0, 0, 26, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oac4e"]
+atlas = ExtResource("12_pwq0p")
+region = Rect2(26, 0, 26, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g1pt6"]
+atlas = ExtResource("12_pwq0p")
+region = Rect2(52, 0, 26, 27)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7whs7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5bn4y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oac4e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g1pt6")
+}],
+"loop": 1,
+"name": &"right_idle",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yy8p0"]
+atlas = ExtResource("13_33sov")
+region = Rect2(0, 0, 26, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e3uf1"]
+atlas = ExtResource("13_33sov")
+region = Rect2(26, 0, 26, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8wp3g"]
+atlas = ExtResource("13_33sov")
+region = Rect2(52, 0, 26, 27)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kau5r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yy8p0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e3uf1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8wp3g")
+}],
+"loop": 1,
+"name": &"right_idle",
 "speed": 5.0
 }]
 
@@ -4614,8 +4676,8 @@ position = Vector2(186, 225)
 [node name="Camera2D" parent="player" index="2" unique_id=1036130193]
 limit_left = -1156
 limit_top = -644
-limit_right = 844
-limit_bottom = 348
+limit_right = 839
+limit_bottom = 343
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1271637062]
 position = Vector2(-996, -500)
@@ -4627,7 +4689,7 @@ position = Vector2(-1034.858, -517.7665)
 
 [node name="map_boundary" type="CollisionPolygon2D" parent="collisions" unique_id=2013982631]
 position = Vector2(32.03731, 15.703709)
-polygon = PackedVector2Array(2.8206787, 2.0627441, 2002.8207, 2.0627441, 2002.8207, 119.062744, 2002.8207, 225.06274, 2002.8207, 323.06274, 2002.8207, 569.06274, 2002.8207, 637.06274, 2003.8207, 715.06274, 2002.8207, 991.06274, 1434.8207, 992.06274, 1427.8207, 1252.0627, 738.8207, 1247.0627, 756.8207, 992.06274, 690.8207, 990.06274, 602.8207, 991.06274, 513.8207, 990.06274, 0.8206787, 992.06274, 2.8206787, 0.06274414, 3.8206787, -5.937256, -8.179321, -3.9372559, -48.17932, 1063.0627, 716.8207, 1017.06274, 721.8207, 1282.0627, 1465.8207, 1303.0627, 1449.8207, 1019.06274, 2030.8207, 1015.06274, 2009.8207, -5.937256, 3.8206787, -4.937256)
+polygon = PackedVector2Array(2.8206787, 2.0627441, 2002.8207, 2.0627441, 2002.8207, 119.062744, 2002.8207, 225.06274, 2002.8207, 323.06274, 2002.8207, 569.06274, 2002.8207, 637.06274, 2003.8207, 715.06274, 2002.8207, 991.06274, 1434.8207, 992.06274, 1427.8207, 1252.0627, 738.8207, 1247.0627, 756.8207, 992.06274, 690.8207, 990.06274, 602.8207, 991.06274, 513.8207, 990.06274, 7.8206787, 992.06274, 7.8206787, 727.06274, 7.8206787, 361.06274, 2.8206787, 0.06274414, 3.8206787, -5.937256, -8.179321, -3.9372559, -48.17932, 1063.0627, 716.8207, 1017.06274, 721.8207, 1282.0627, 1465.8207, 1303.0627, 1449.8207, 1019.06274, 2030.8207, 1015.06274, 2009.8207, -5.937256, 3.8206787, -4.937256)
 
 [node name="town_two_transition" parent="." unique_id=62904960 instance=ExtResource("4_2dp04")]
 destination_scene = "uid://cnofrbn6kspow"
@@ -4644,12 +4706,21 @@ position = Vector2(88, 360)
 [node name="ken" parent="." unique_id=987617997 instance=ExtResource("5_jimnpc")]
 position = Vector2(101, 97)
 NPC_Name = "ken"
-frames = SubResource("SpriteFrames_rl0pi")
+
+[node name="AnimatedSprite2D" parent="ken" index="1" unique_id=236355110]
+sprite_frames = SubResource("SpriteFrames_7whs7")
+animation = &"right_idle"
+autoplay = ""
+frame_progress = 0.7578066
 
 [node name="finn" parent="." unique_id=1820279140 instance=ExtResource("5_jimnpc")]
 position = Vector2(152, 81)
 NPC_Name = "finn"
-frames = SubResource("SpriteFrames_rl0pi")
+
+[node name="AnimatedSprite2D" parent="finn" index="1" unique_id=236355110]
+sprite_frames = SubResource("SpriteFrames_kau5r")
+animation = &"right_idle"
+autoplay = ""
 
 [node name="TileMapLayer2" type="TileMapLayer" parent="." unique_id=1873934383]
 z_index = 6
@@ -4704,3 +4775,5 @@ stream = ExtResource("12_atlej")
 autoplay = true
 
 [editable path="player"]
+[editable path="ken"]
+[editable path="finn"]

@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://2g2skpvsvp3n" path="res://final-assets/Environment/Props/Static/Farm.png" id="4_y5vk0"]
 [ext_resource type="PackedScene" uid="uid://chuvimfq0blnm" path="res://scenes/npc.tscn" id="5_5q3ck"]
 [ext_resource type="Texture2D" uid="uid://c03qpvd4mi1u8" path="res://final-assets/Environment/Props/Static/Furniture.png" id="5_q12fp"]
-[ext_resource type="Texture2D" uid="uid://cvcc2sducawnn" path="res://assets-temp/boy_idle_4x1.png" id="6_6buwl"]
 [ext_resource type="Texture2D" uid="uid://ca4ap2epuxaat" path="res://final-assets/shourin/Town 1/fence.png" id="6_vnlei"]
 [ext_resource type="Texture2D" uid="uid://ga0rac3dlphy" path="res://final-assets/Texture/Extra/TX Props with Shadow.png" id="7_ji0l8"]
 [ext_resource type="Texture2D" uid="uid://b6xnj8fq8xrdi" path="res://final-assets/Environment/Props/Static/Resources.png" id="7_utxq6"]
@@ -6958,19 +6957,15 @@ sources/4 = SubResource("TileSetAtlasSource_3hh41")
 size = Vector2(232.00006, 331.99997)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kfime"]
-atlas = ExtResource("6_6buwl")
 region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wu7dk"]
-atlas = ExtResource("6_6buwl")
 region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_55ilf"]
-atlas = ExtResource("6_6buwl")
 region = Rect2(32, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d5g2i"]
-atlas = ExtResource("6_6buwl")
 region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_fq2vd"]
@@ -7017,10 +7012,10 @@ tile_set = SubResource("TileSet_giyli")
 position = Vector2(796, -19)
 
 [node name="Camera2D" parent="player" index="2" unique_id=1036130193]
-limit_left = -1006
-limit_top = -507
-limit_right = 1015
-limit_bottom = 499
+limit_left = -1001
+limit_top = -501
+limit_right = 1001
+limit_bottom = 486
 
 [node name="collisions" type="StaticBody2D" parent="." unique_id=707520541]
 

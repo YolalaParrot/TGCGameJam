@@ -33,7 +33,7 @@ const task_fade_out := 0.5
 const item_show_time := 1.25
 var task_tween: Tween
 
-var trial_stage := "final"
+var trial_stage := ""
 const trial_stages := {
 	"got_wood": {
 		"flags": {"met_jim":true, "seen_town1_intro":true, "met_ken":true, "met_willy":true,

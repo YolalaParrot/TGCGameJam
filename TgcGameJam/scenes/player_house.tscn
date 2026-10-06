@@ -2040,12 +2040,15 @@ rotation = -1.5707964
 scale = Vector2(1, 1)
 speed = 5000.0
 
+[node name="AnimatedSprite2D" parent="player" index="0" unique_id=1108039948]
+position = Vector2(0, -1)
+
 [node name="Camera2D" parent="player" index="2" unique_id=1036130193]
 zoom = Vector2(5, 5)
-limit_left = -131
-limit_top = -135
-limit_right = 132
-limit_bottom = 132
+limit_left = -128
+limit_top = -127
+limit_right = 128
+limit_bottom = 124
 
 [node name="collisions" type="StaticBody2D" parent="." unique_id=1116281962]
 

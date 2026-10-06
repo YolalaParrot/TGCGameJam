@@ -3,7 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://dy3jyjuis3www" path="res://final-assets/Backgrounds/town1_ground.png" id="1_55ilf"]
 [ext_resource type="PackedScene" uid="uid://chuvimfq0blnm" path="res://scenes/npc.tscn" id="1_kfime"]
 [ext_resource type="Texture2D" uid="uid://6pj1ddavu86f" path="res://final-assets/Environment/Props/Static/Vegetation.png" id="2_55ilf"]
-[ext_resource type="Texture2D" uid="uid://cvcc2sducawnn" path="res://assets-temp/boy_idle_4x1.png" id="2_wu7dk"]
 [ext_resource type="Texture2D" uid="uid://ssknvwfwaqcp" path="res://final-assets/Environment/Props/Static/Rocks.png" id="3_d5g2i"]
 [ext_resource type="PackedScene" uid="uid://j54lupoylhq8" path="res://scenes/player.tscn" id="3_kfime"]
 [ext_resource type="Texture2D" uid="uid://vitnrm183v6" path="res://final-assets/Environment/Props/Static/Trees/Model_03/Size_03.png" id="4_6jiit"]
@@ -21,6 +20,9 @@
 [ext_resource type="Texture2D" uid="uid://2m3tey2rk6y5" path="res://final-assets/shourin/Town 1/bigfence.png" id="9_fpxkt"]
 [ext_resource type="Texture2D" uid="uid://n8g2fup1enpl" path="res://final-assets/Environment/Props/Static/Trees/Model_02/Size_04.png" id="10_da5a8"]
 [ext_resource type="AudioStream" uid="uid://b44kmsh6wej3r" path="res://music/1. Moonspire.mp3" id="21_da5a8"]
+[ext_resource type="Texture2D" uid="uid://c87i8wjw3wftt" path="res://final-assets/Entities/jim/jim-idle-left.png" id="21_52kwb"]
+[ext_resource type="Texture2D" uid="uid://078cvcv8f0b3" path="res://final-assets/Entities/jim/jim-idle-right.png" id="22_u30bh"]
+[ext_resource type="Texture2D" uid="uid://crijivd077oce" path="res://final-assets/Entities/jim/jim-walk-left.png" id="23_qjpvo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8dvuo"]
 texture = ExtResource("7_8dvuo")
@@ -5198,32 +5200,23 @@ sources/15 = SubResource("TileSetAtlasSource_1fb2n")
 sources/16 = SubResource("TileSetAtlasSource_0xkdy")
 sources/17 = SubResource("TileSetAtlasSource_bk37s")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_euywh"]
-size = Vector2(40, 33)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_giyli"]
-size = Vector2(127, 205)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nplr6"]
-size = Vector2(13, 14)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bde3n"]
-size = Vector2(189, 213)
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qbud2"]
+load_path = "res://.godot/imported/boy_idle_4x1.png-fdd496391b92e10edba6fd7659028a97.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kfime"]
-atlas = ExtResource("2_wu7dk")
+atlas = SubResource("CompressedTexture2D_qbud2")
 region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wu7dk"]
-atlas = ExtResource("2_wu7dk")
+atlas = SubResource("CompressedTexture2D_qbud2")
 region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_55ilf"]
-atlas = ExtResource("2_wu7dk")
+atlas = SubResource("CompressedTexture2D_qbud2")
 region = Rect2(32, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d5g2i"]
-atlas = ExtResource("2_wu7dk")
+atlas = SubResource("CompressedTexture2D_qbud2")
 region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_wu7dk"]
@@ -5246,8 +5239,135 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_t15wj"]
+atlas = ExtResource("21_52kwb")
+region = Rect2(0, 0, 26, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_epk76"]
+atlas = ExtResource("21_52kwb")
+region = Rect2(26, 0, 26, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lv6t6"]
+atlas = ExtResource("21_52kwb")
+region = Rect2(52, 0, 26, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hpfi4"]
+atlas = ExtResource("22_u30bh")
+region = Rect2(0, 0, 26, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_117d7"]
+atlas = ExtResource("22_u30bh")
+region = Rect2(26, 0, 26, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1fb2n"]
+atlas = ExtResource("22_u30bh")
+region = Rect2(52, 0, 26, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0xkdy"]
+atlas = ExtResource("23_qjpvo")
+region = Rect2(0, 0, 26, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bk37s"]
+atlas = ExtResource("23_qjpvo")
+region = Rect2(26, 0, 26, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eqmw0"]
+atlas = ExtResource("23_qjpvo")
+region = Rect2(52, 0, 26, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mlrl7"]
+atlas = ExtResource("23_qjpvo")
+region = Rect2(78, 0, 26, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xexyu"]
+atlas = ExtResource("23_qjpvo")
+region = Rect2(104, 0, 26, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wjiec"]
+atlas = ExtResource("23_qjpvo")
+region = Rect2(130, 0, 26, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e4cdw"]
+atlas = ExtResource("23_qjpvo")
+region = Rect2(156, 0, 26, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0cx6y"]
+atlas = ExtResource("23_qjpvo")
+region = Rect2(182, 0, 26, 27)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pwq0p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t15wj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_epk76")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lv6t6")
+}],
+"loop": 1,
+"name": &"left_idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hpfi4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_117d7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1fb2n")
+}],
+"loop": 1,
+"name": &"right_idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0xkdy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bk37s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eqmw0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mlrl7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xexyu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wjiec")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e4cdw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0cx6y")
+}],
+"loop": 1,
+"name": &"walk_left",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_euywh"]
+size = Vector2(40, 33)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_giyli"]
+size = Vector2(127, 205)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nplr6"]
+size = Vector2(13, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bde3n"]
+size = Vector2(189, 213)
+
 [node name="town_one" type="Node2D" unique_id=399076867]
-y_sort_enabled = true
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1943603470]
 tile_set = SubResource("TileSet_giyli")
@@ -5265,7 +5385,26 @@ position = Vector2(272, -72)
 
 [node name="Camera2D" parent="player" index="2" unique_id=1036130193]
 limit_top = -500
-limit_bottom = 500
+limit_bottom = 487
+
+[node name="bob" parent="." unique_id=1402557311 instance=ExtResource("1_kfime")]
+position = Vector2(160, 50)
+NPC_Name = "bob"
+frames = SubResource("SpriteFrames_wu7dk")
+
+[node name="jim" parent="." unique_id=987617997 instance=ExtResource("1_kfime")]
+position = Vector2(80, 50)
+NPC_Name = "jim"
+leave_flag = "met_jim"
+leave_x = 1050.0
+leave_speed = 150.0
+
+[node name="AnimatedSprite2D" parent="jim" index="1" unique_id=236355110]
+position = Vector2(-1.9999999, -38)
+sprite_frames = SubResource("SpriteFrames_pwq0p")
+animation = &"right_idle"
+autoplay = "right_idle"
+frame_progress = 0.45706463
 
 [node name="collisions" type="StaticBody2D" parent="." unique_id=852483241]
 
@@ -5292,6 +5431,7 @@ position = Vector2(1063.5, -4.5)
 shape = SubResource("RectangleShape2D_giyli")
 
 [node name="player_house_transition" parent="." unique_id=1469502787 groups=["teleporter"] instance=ExtResource("4_wu7dk")]
+position = Vector2(41, -83)
 destination_scene = "uid://thnfd4qqt5ua"
 destination_spawn = "Spawn_From_Town1_To_Player_House"
 
@@ -5316,21 +5456,9 @@ position = Vector2(-943, 0)
 [node name="Spawn_From_Player_House" type="Marker2D" parent="." unique_id=1742597027]
 position = Vector2(8, -81)
 
-[node name="jim" parent="." unique_id=987617997 instance=ExtResource("1_kfime")]
-position = Vector2(80, 50)
-NPC_Name = "jim"
-frames = SubResource("SpriteFrames_wu7dk")
-leave_flag = "met_jim"
-leave_x = 1050.0
-leave_speed = 150.0
-
-[node name="bob" parent="." unique_id=1402557311 instance=ExtResource("1_kfime")]
-position = Vector2(160, 50)
-NPC_Name = "bob"
-frames = SubResource("SpriteFrames_wu7dk")
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=795554816]
 stream = ExtResource("21_da5a8")
 autoplay = true
 
 [editable path="player"]
+[editable path="jim"]
