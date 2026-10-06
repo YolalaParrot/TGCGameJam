@@ -71,7 +71,7 @@ sources/5 = SubResource("TileSetAtlasSource_p50ne")
 sources/6 = SubResource("TileSetAtlasSource_8dvuo")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nplr6"]
-size = Vector2(13, 14)
+size = Vector2(83, 21.5)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eqmw0"]
 texture = ExtResource("23_52kwb")
@@ -971,9 +971,6 @@ size = Vector2(180, 164)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_srfah"]
 size = Vector2(186.5, 87)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kk36w"]
-size = Vector2(197.5, 84)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7k15u"]
 size = Vector2(111, 109)
 
@@ -1025,7 +1022,7 @@ tile_set = ExtResource("17_fpxkt")
 [node name="map_boundary" type="CollisionPolygon2D" parent="collisions" unique_id=830799348]
 position = Vector2(-1021.88635, -490)
 scale = Vector2(7.6389737, 3.8080354)
-polygon = PackedVector2Array(2.865097, -1.0503998, 2.9960022, -2.6260223, 14.646782, -2.6260223, 45.67189, -2.888626, 90.57321, -2.6260223, 152.09981, -2.6260223, 205.90285, -2.1008148, 265.07312, -2.6260223, 264.9422, 1.050415, 264.54947, 18.382187, 264.54947, 67.22627, 264.81128, 101.10202, 279.6101, 101.49072, 278.6101, 150.49072, 264.68036, 154.41035, 264.68036, 181.45842, 264.68036, 187.23569, 264.54947, 220.84882, 264.68036, 238.7058, 264.68036, 257.08798, 230.6101, 256.49072, 153.6101, 256.49072, 89.61011, 256.49072, 47.610107, 256.49072, 3.519638, 257.3506, 2.9960022, 257.3506, 2.865097, 194.06335, 2.865097, 159.925, -12.389893, 159.49072, -21.389893, 158.49072, -21.389893, 103.49072, 2.9960022, 104.25325, 2.865097, 37.28958, 2.9960022, -13.917938, -9.389893, 40.490723, -7.3898926, 96.49072, -27.389893, 98.49072, -26.389893, 162.49072, -5.3898926, 167.49072, -4.3898926, 266.49072, 270.1785, 265.75385, 267.95306, 158.3494, 287.6101, 153.49072, 279.6101, 88.49072, 265.204, 90.33531, 265.46582, -7.6154633, 2.734192, -5.777252)
+polygon = PackedVector2Array(2.865097, -1.0503998, 2.9960022, -2.6260223, 14.646782, -2.6260223, 1.556015, 15.493561, 3.388733, 28.886292, 3.1269073, 56.45957, 5.0905304, 56.196968, 34.152023, 55.934364, 91.620476, 58.560394, 94.50044, 77.730385, 98.03495, 78.255585, 98.03495, 81.66942, 98.29677, 67.75148, 114.2675, 68.53929, 114.79113, 75.892166, 115.44566, 77.20518, 117.40928, 77.20518, 119.372894, 77.20518, 137.30724, 77.46778, 159.43063, 79.83121, 163.09604, 80.09381, 162.70332, 73.79134, 170.9505, 73.26614, 176.71045, 73.26614, 177.6268, 81.93202, 192.28845, 75.62956, 263.63312, 77.99298, 264.02582, 31.512321, 264.28766, 31.774925, 264.54947, 67.22627, 264.81128, 101.10202, 279.6101, 101.49072, 278.6101, 150.49072, 273.713, 152.83473, 270.1785, 152.04692, 259.9677, 150.20871, 264.68036, 181.45842, 264.68036, 187.23569, 264.54947, 220.84882, 258.135, 149.9461, 258.135, 190.12431, 192.55026, 189.86171, 192.41936, 196.16417, 134.68909, 195.63896, 134.55818, 211.92032, 132.59457, 212.18292, 132.20184, 209.5569, 130.36914, 209.03171, 129.19096, 211.65771, 127.48917, 212.44553, 126.04919, 211.65771, 122.121956, 210.86992, 120.42016, 209.03171, 118.58745, 209.8195, 117.802, 211.92032, 113.35114, 211.39511, 111.25662, 205.09265, 106.80576, 202.46663, 104.449425, 205.35526, 102.09309, 208.7691, 104.449425, 209.5569, 70.02071, 209.5569, 70.02071, 195.63896, 61.380814, 195.37636, 58.762657, 192.48773, 57.191765, 195.63896, 56.668137, 185.92267, 53.526352, 177.51938, 45.017357, 181.19582, 42.922836, 192.22513, 40.697403, 194.85117, 39.257423, 192.48773, 36.639267, 194.85117, 34.93747, 192.48773, 32.188408, 195.11375, 30.74842, 192.75034, 28.130272, 194.06335, 25.643028, 192.22513, 23.941223, 195.11375, 21.715797, 187.23569, 18.83583, 185.92267, 16.34858, 190.91211, 15.694046, 188.8113, 14.254059, 186.44788, 12.159538, 187.23569, 9.017754, 191.96252, 6.268692, 190.12431, 4.5668945, 192.48773, 3.9123535, 195.90157, 2.865097, 194.06335, 2.865097, 159.925, -12.389893, 159.49072, -21.389893, 158.49072, -21.389893, 103.49072, 2.9960022, 104.25325, 2.865097, 37.28958, 2.9960022, -13.917938, -9.389893, 40.490723, -7.3898926, 96.49072, -27.389893, 98.49072, -26.389893, 162.49072, -5.3898926, 167.49072, -4.3898926, 266.49072, 270.1785, 265.75385, 267.95306, 158.3494, 287.6101, 153.49072, 279.6101, 88.49072, 265.204, 90.33531, 265.46582, -7.6154633, 2.734192, -5.777252)
 
 [node name="town_two_transition" parent="." unique_id=707145697 groups=["teleporter"] instance=ExtResource("4_wu7dk")]
 destination_scene = "uid://cnofrbn6kspow"
@@ -1050,7 +1047,7 @@ position = Vector2(936, 0)
 position = Vector2(-956, 0)
 
 [node name="Spawn_From_Player_House" type="Marker2D" parent="." unique_id=1742597027]
-position = Vector2(278, -196)
+position = Vector2(258, -119)
 
 [node name="fence2" type="TileMapLayer" parent="." unique_id=121984587]
 y_sort_enabled = true
@@ -1072,7 +1069,7 @@ destination_scene = "uid://thnfd4qqt5ua"
 destination_spawn = "Spawn_From_Town1_To_Player_House"
 
 [node name="trigger_player_house" type="CollisionShape2D" parent="player_house_transition" unique_id=1627067096]
-position = Vector2(317, -203)
+position = Vector2(283.5, -200.25)
 shape = SubResource("RectangleShape2D_nplr6")
 
 [node name="church" type="TileMapLayer" parent="." unique_id=834822559]
@@ -1083,6 +1080,15 @@ tile_set = SubResource("TileSet_1absy")
 y_sort_enabled = true
 tile_map_data = PackedByteArray("AADZ/xsADwADAAYAAADZ/xwADwADAAYAAADY/x0ADwADAAYAAADW/x0ADwADAAYAAADU/x0ADwADAAYAAADS/x0ADwAAAAYAAADN/x0ADwAAAAYAAADP/x0ADwAAAAYAAADB/x0ADwAAAAYAAADC/x0ADwAAAAYAAADG/x0ADwAAAAYAAADH/x0ADwAAAAYAAADU//j/DwAAAAYAAADS//j/DwAAAAYAAAAdABsAAgABAAAAAAAeABsAAgAAAAAAAAAiABsAAgAAAAAAAAAlABoAAgAAAAAAAAAhABwAAgABAAAAAAAlABwAAgAAAAAAAAAqABsAAgABAAAAAAAnABsAAgABAAAAAAAuABwAAgABAAAAAAAxABwAAgAAAAAAAAA0ABsAAgABAAAAAAA1AB0AAgABAAAAAAA3ABsAAgABAAAAAAA5ABwAAgABAAAAAAA7ABsAAgABAAAAAAA+AB0AAgABAAAAAABBABsAAgAAAAAAAAA6ABwAAgAAAAAAAAAzABwAAgAAAAAAAAArABwAAgAAAAAAAAAWABoAAgAAAAAAAAAYABwAAgAAAAAAAAAZABkAAgAAAAAAAAASAB0AAgAAAAAAAAAbAB0AAgAAAAAAAAANABwAAgAAAAAAAAAJAB0AAgAAAAAAAAALABsAAgAAAAAAAAAGABsAAgAAAAAAAAAFAB4AAgAAAAAAAAACAB0AAgAAAAAAAAD9/x0AAgAAAAAAAAD//x8AAgAAAAAAAAD5/x0AAgAAAAAAAADz/xwAAgAAAAAAAAD2/x4AAgAAAAAAAADw/x0AAgAAAAAAAADr/xsAAgAAAAAAAADu/x4AAgAAAAAAAADb/x8AAgAAAAAAAADe/x0AAgAAAAAAAADh/xsAAgAAAAAAAADj/x4AAgAAAAAAAADh/x4AAgAAAAAAAADm/xwAAgAAAAAAAADm/x0AAgABAAAAAADq/x4AAgABAAAAAADo/yAAAgABAAAAAADg/xwAAgABAAAAAADd/xwAAgABAAAAAADu/xsAAgABAAAAAADY/xwAAgABAAAAAADb/xsAAgABAAAAAAD3/xsAAgABAAAAAAD7/xwAAgABAAAAAADf/xkADgABAAAAAADz/xkADgABAAAAAAAIABoADgABAAAAAAAVABgADgABAAAAAAAQABsADgABAAAAAAAFAPb/DwAAAAYAAAAHAPb/DwAAAAYAAAAJAPb/DwAAAAYAAAALAPb/DwAAAAYAAAAWAPb/DwAAAAYAAAAYAPb/DwAAAAYAAAAaAPb/DwAAAAYAAAAcAPb/DwAAAAYAAAADAPX/DwAAAAYAAAAoAPb/DwAAAAYAAAAqAPX/DwAAAAYAAAArAPP/DwAAAAYAAAArAPH/DwAAAAYAAAArAPD/DwAAAAYAAAArAO7/DwAAAAYAAAAVAPT/DwAAAAYAAAAWAPX/DwAAAAYAAAAVAPP/DwAAAAYAAAAVAPL/DwAAAAYAAAABAPP/DwAAAAYAAAACAPP/DwAAAAYAAAAOAPT/DwAAAAYAAAANAPX/DwAAAAYAAAAGAPH/DwAAAAYAAAAIAPH/DwAAAAYAAAAFAPL/DwADAAYAAAADAPL/DwADAAYAAAAHAPP/DwADAAYAAAAFAPP/DwADAAYAAAAFAPT/DwADAAYAAAAHAPX/DwADAAYAAAAEAPP/DwADAAYAAAAbAPX/DwADAAYAAAAZAPX/DwADAAYAAAAXAPT/DwADAAYAAAAXAPP/DwADAAYAAAAZAPP/DwADAAYAAAAaAPT/DwADAAYAAAAqAPL/DwADAAYAAAApAPD/DwADAAYAAAAqAO//DwADAAYAAAApAO7/DwADAAYAAAA=")
 tile_set = ExtResource("14_1cqgc")
+
+[node name="CutsceneTrigger" type="Area2D" parent="." unique_id=969233625]
+position = Vector2(-1, 0)
+script = ExtResource("4_187fi")
+cutscene_id = "town1_intro"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CutsceneTrigger" unique_id=1965274357]
+position = Vector2(265, -122)
+shape = SubResource("RectangleShape2D_euywh")
 
 [node name="bob" parent="." unique_id=1402557311 instance=ExtResource("1_kfime")]
 position = Vector2(-209, -203)
@@ -1095,18 +1101,27 @@ sprite_frames = SubResource("SpriteFrames_1cehi")
 autoplay = "default"
 
 [node name="jim" parent="." unique_id=987617997 instance=ExtResource("1_kfime")]
-position = Vector2(248, -154)
+position = Vector2(250, -156)
 NPC_Name = "jim"
 leave_flag = "met_jim"
 leave_x = 1050.0
 leave_speed = 150.0
 
+[node name="Interactable" parent="jim" index="0" unique_id=1725258466]
+position = Vector2(2, 4)
+
+[node name="CollisionShape2D" parent="jim/Interactable" index="0" unique_id=818352050]
+position = Vector2(14, 70)
+
 [node name="AnimatedSprite2D" parent="jim" index="1" unique_id=236355110]
-position = Vector2(-1.9999999, -38)
+position = Vector2(32.000004, 28.000015)
 sprite_frames = SubResource("SpriteFrames_pwq0p")
 animation = &"right_idle"
 autoplay = "right_idle"
 frame_progress = 0.45706463
+
+[node name="CollisionShape2D" parent="jim" index="2" unique_id=643911397]
+position = Vector2(22, 66)
 
 [node name="player" parent="." unique_id=1772785746 instance=ExtResource("3_kfime")]
 position = Vector2(272, -72)
@@ -1119,8 +1134,10 @@ frame_progress = 0.4116989
 
 [node name="Camera2D" parent="player" index="2" unique_id=1036130193]
 zoom = Vector2(1.5, 1.5)
-limit_top = -500
-limit_bottom = 487
+limit_left = -1003
+limit_top = -368
+limit_right = 1002
+limit_bottom = 476
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=519516328]
 
@@ -1132,12 +1149,8 @@ shape = SubResource("RectangleShape2D_1absy")
 position = Vector2(-912.25, -232.5)
 shape = SubResource("RectangleShape2D_srfah")
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D" unique_id=1262590725]
-position = Vector2(-207.75, -237)
-shape = SubResource("RectangleShape2D_kk36w")
-
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D" unique_id=59097665]
-position = Vector2(-564.5, -222)
+position = Vector2(-563, -252)
 shape = SubResource("RectangleShape2D_7k15u")
 
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="StaticBody2D" unique_id=875347361]
