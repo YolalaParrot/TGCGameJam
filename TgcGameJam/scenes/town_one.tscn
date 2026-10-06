@@ -7,18 +7,19 @@
 [ext_resource type="PackedScene" uid="uid://bt3lpqrk2xw4e" path="res://scenes/teleporter.tscn" id="4_wu7dk"]
 [ext_resource type="Texture2D" uid="uid://dwf6d2vctj603" path="res://assets/shourin's drawn assets/stone-house.png" id="12_6jiit"]
 [ext_resource type="TileSet" uid="uid://pwde6d78hm5t" path="res://tilesets/trees.tres" id="14_1cqgc"]
+[ext_resource type="Texture2D" uid="uid://conwbkcmnfarw" path="res://assets/Entities/npc2-idle-down.png" id="15_8dvuo"]
 [ext_resource type="TileSet" uid="uid://buqt6l2gysvji" path="res://tilesets/ground.tres" id="16_da5a8"]
 [ext_resource type="TileSet" uid="uid://bt6nxhmv35g0l" path="res://tilesets/fenceandwalls.tres" id="17_fpxkt"]
+[ext_resource type="Texture2D" uid="uid://c87i8wjw3wftt" path="res://final-assets/Entities/jim/jim-idle-left.png" id="21_52kwb"]
+[ext_resource type="AudioStream" uid="uid://b44kmsh6wej3r" path="res://music/1. Moonspire.mp3" id="21_da5a8"]
+[ext_resource type="Texture2D" uid="uid://078cvcv8f0b3" path="res://final-assets/Entities/jim/jim-idle-right.png" id="22_u30bh"]
 [ext_resource type="Texture2D" uid="uid://b7bswask0gskb" path="res://assets/shourin's drawn assets/church.png" id="23_52kwb"]
+[ext_resource type="Texture2D" uid="uid://crijivd077oce" path="res://final-assets/Entities/jim/jim-walk-left.png" id="23_qjpvo"]
 [ext_resource type="Texture2D" uid="uid://ckrf5bsinha0l" path="res://assets/shourin's drawn assets/playerhouse.png" id="23_t15wj"]
 [ext_resource type="Texture2D" uid="uid://dr2c17457egwr" path="res://assets/shourin's drawn assets/small_house2.png" id="24_epk76"]
 [ext_resource type="Texture2D" uid="uid://35cgx7rv7wpt" path="res://assets/shourin's drawn assets/shop1.png" id="24_lv6t6"]
 [ext_resource type="Texture2D" uid="uid://clugv4frgcxf0" path="res://assets/shourin's drawn assets/clustered_house.png" id="25_hpfi4"]
 [ext_resource type="Texture2D" uid="uid://clsagvphouefh" path="res://assets/shourin's drawn assets/small_house1.png" id="25_lv6t6"]
-[ext_resource type="AudioStream" uid="uid://b44kmsh6wej3r" path="res://music/1. Moonspire.mp3" id="21_da5a8"]
-[ext_resource type="Texture2D" uid="uid://c87i8wjw3wftt" path="res://final-assets/Entities/jim/jim-idle-left.png" id="21_52kwb"]
-[ext_resource type="Texture2D" uid="uid://078cvcv8f0b3" path="res://final-assets/Entities/jim/jim-idle-right.png" id="22_u30bh"]
-[ext_resource type="Texture2D" uid="uid://crijivd077oce" path="res://final-assets/Entities/jim/jim-walk-left.png" id="23_qjpvo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_giyli"]
 size = Vector2(127, 205)
@@ -2304,41 +2305,34 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1absy"]
-size = Vector2(180, 164)
+[sub_resource type="AtlasTexture" id="AtlasTexture_da5a8"]
+atlas = ExtResource("15_8dvuo")
+region = Rect2(0, 0, 26, 41)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_srfah"]
-size = Vector2(186.5, 87)
+[sub_resource type="AtlasTexture" id="AtlasTexture_fpxkt"]
+atlas = ExtResource("15_8dvuo")
+region = Rect2(26, 0, 26, 41)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kk36w"]
-size = Vector2(197.5, 84)
+[sub_resource type="AtlasTexture" id="AtlasTexture_52kwb"]
+atlas = ExtResource("15_8dvuo")
+region = Rect2(52, 0, 26, 41)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7k15u"]
-size = Vector2(111, 109)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bhaeq"]
-size = Vector2(123, 64)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hbweq"]
-size = Vector2(2173.5, 8)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vggcf"]
-size = Vector2(5.5, 97)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6xxan"]
-size = Vector2(10, 354)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cpgsk"]
-size = Vector2(516, 232)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1fyep"]
-size = Vector2(497, 170)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_c0f1n"]
-size = Vector2(1081, 239)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ke2di"]
-size = Vector2(474, 55)
+[sub_resource type="SpriteFrames" id="SpriteFrames_1cehi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_da5a8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fpxkt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_52kwb")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t15wj"]
 atlas = ExtResource("21_52kwb")
@@ -2456,6 +2450,42 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1absy"]
+size = Vector2(180, 164)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_srfah"]
+size = Vector2(186.5, 87)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kk36w"]
+size = Vector2(197.5, 84)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7k15u"]
+size = Vector2(111, 109)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bhaeq"]
+size = Vector2(123, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hbweq"]
+size = Vector2(2173.5, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vggcf"]
+size = Vector2(5.5, 97)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6xxan"]
+size = Vector2(10, 354)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cpgsk"]
+size = Vector2(516, 232)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1fyep"]
+size = Vector2(497, 170)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c0f1n"]
+size = Vector2(1081, 239)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ke2di"]
+size = Vector2(474, 55)
+
 [node name="town_one" type="Node2D" unique_id=399076867]
 
 [node name="ground" type="TileMapLayer" parent="." unique_id=1922859859]
@@ -2553,6 +2583,11 @@ position = Vector2(-209, -203)
 NPC_Name = "bob"
 frames = SubResource("SpriteFrames_wu7dk")
 
+[node name="AnimatedSprite2D" parent="bob" index="1" unique_id=236355110]
+position = Vector2(0, 6.2031155)
+scale = Vector2(3.75, 3.4245431)
+sprite_frames = SubResource("SpriteFrames_1cehi")
+
 [node name="jim" parent="." unique_id=987617997 instance=ExtResource("1_kfime")]
 position = Vector2(248, -154)
 NPC_Name = "jim"
@@ -2641,5 +2676,6 @@ shape = SubResource("RectangleShape2D_ke2di")
 stream = ExtResource("21_da5a8")
 autoplay = true
 
-[editable path="player"]
+[editable path="bob"]
 [editable path="jim"]
+[editable path="player"]
