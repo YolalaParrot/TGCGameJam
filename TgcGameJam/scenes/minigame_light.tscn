@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://clpn38u5xloj1" path="res://final-assets/Environment/Props/Static/Trees/Model_01/Size_02.png" id="5_tdjst"]
 [ext_resource type="Texture2D" uid="uid://i6vuxevq5i4k" path="res://final-assets/Environment/Props/Static/Trees/Model_01/Size_03.png" id="6_774kp"]
 [ext_resource type="PackedScene" uid="uid://crykne6f6i830" path="res://scenes/parts.tscn" id="8_774kp"]
+[ext_resource type="AudioStream" uid="uid://488lpoxqd3my" path="res://music/Action 3.mp3" id="12_cdsof"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_c1gba"]
 font = ExtResource("4_28ae0")
@@ -2543,5 +2544,9 @@ scale = Vector2(0.195, 0.195)
 
 [node name="TileMapLayer3" type="TileMapLayer" parent="." unique_id=1786250024]
 tile_set = SubResource("TileSet_51nrd")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1713693897]
+stream = ExtResource("12_cdsof")
+autoplay = true
 
 [editable path="player"]
