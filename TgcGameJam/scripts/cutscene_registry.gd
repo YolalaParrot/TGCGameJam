@@ -43,7 +43,7 @@ var cutscenes: Dictionary = {
 		"npc": "ken",
 		"requires": {"rps_game": "won"},
 		"forbids": {"engine_failed": true},
-		"on_finish": {"set": {"engine_failed": true}, "take": ["Fuel"], "next": "scene_hailey"}
+		"on_finish": {"set": {"engine_failed": true}, "take": ["Fuel"], "next": "scene_hailey", "flash": true}
 	},
 
 	"scene_hailey": {

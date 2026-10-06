@@ -33,7 +33,7 @@ const task_fade_out := 0.5
 const item_show_time := 1.25
 var task_tween: Tween
 
-var trial_stage := ""
+var trial_stage := "final"
 const trial_stages := {
 	"got_wood": {
 		"flags": {"met_jim":true, "seen_town1_intro":true, "met_ken":true, "met_willy":true,
@@ -53,9 +53,7 @@ const trial_stages := {
 		"flags": {"met_jim":true, "seen_town1_intro":true, "met_ken":true, "met_willy":true,
 			"dance_battle":"won", "got_wood":true, "wood_delivered":true, "met_mrs_smith":true,
 			"parts_game":"won", "parts_delivered":true,"met_bob":true,"rps_game":"won",
-	"engine_failed":true,
-	"comet_seen":true,
-	"game_complete":true},
+	"engine_failed":true},"items": [fuel]
 	},
 }
 
@@ -646,7 +644,7 @@ func execute(on_finish: Dictionary) -> void:
 					game.get("on_won", {}), game.get("on_lost", {}))
 			"credits":
 				get_tree().change_scene_to_file.call_deferred("res://scenes/Credits.tscn")
-			"flag", "not_equal", "next":
+			"flag", "not_equal", "next", "flash":
 				pass
 			_:
 				push_warning("Unknown on_finish section: " + str(section))

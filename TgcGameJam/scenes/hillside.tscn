@@ -1714,18 +1714,23 @@ texture = ExtResource("6_t6cyu")
 15:19/0 = 0
 0:0/size_in_atlas = Vector2i(6, 10)
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-10, 64, 10, 64, 10, 78, -10, 78)
 0:0/0/probability = 0.76
 6:0/size_in_atlas = Vector2i(6, 10)
 6:0/0 = 0
+6:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-10, 64, 10, 64, 10, 78, -10, 78)
 6:0/0/probability = 0.675
 0:10/size_in_atlas = Vector2i(6, 10)
 0:10/0 = 0
+0:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-10, 64, 10, 64, 10, 78, -10, 78)
 0:10/0/probability = 0.565
 6:10/size_in_atlas = Vector2i(6, 10)
 6:10/0 = 0
+6:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-10, 64, 10, 64, 10, 78, -10, 78)
 6:10/0/probability = 0.345
 
 [sub_resource type="TileSet" id="TileSet_sccup"]
+physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_5bn4y")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uvgno"]
