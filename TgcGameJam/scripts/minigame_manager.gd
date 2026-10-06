@@ -27,11 +27,16 @@ func play(scene_path: String, result_flag: String, on_won: Dictionary = {}, on_l
 	var host: Node = minigame if minigame is CanvasLayer else in_own_viewport(minigame)
 	get_tree().root.add_child(host)
 	var cover := black_cover()
+	var close_button: Node = null
+	if GameState.flags.get(result_flag) == "won":
+		close_button = add_close_button()
 	await fade(cover, 0.0)
 
 	var passed: bool = await Signals.GameOver
 	await get_tree().create_timer(result_pause).timeout
 
+	if close_button:
+		close_button.queue_free()
 	await fade(cover, 1.0)
 	host.queue_free()
 	cover.get_parent().queue_free()
@@ -97,3 +102,23 @@ func pause_map_music() -> Array:
 			player.stream_paused = true
 			paused.append(player)
 	return paused
+
+
+func add_close_button() -> CanvasLayer:
+	var layer := CanvasLayer.new()
+	layer.layer = 41
+	var button := Button.new()
+	button.text = "Close"
+	button.focus_mode = Control.FOCUS_NONE
+	button.add_theme_font_size_override("font_size", 28)
+	button.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+	button.position = Vector2(-140, 16)
+	button.custom_minimum_size = Vector2(120, 48)
+	button.pressed.connect(_on_close_pressed, CONNECT_ONE_SHOT)
+	layer.add_child(button)
+	get_tree().root.add_child(layer)
+	return layer
+
+
+func _on_close_pressed() -> void:
+	Signals.GameOver.emit(false)

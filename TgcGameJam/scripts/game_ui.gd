@@ -130,8 +130,23 @@ func _on_level_finished():
 			result_node.text = "STAGE FAILED!"
 			result_node.modulate = Color("e22525")
 		if new_best:
-			result_node.text += "\nNEW HIGH SCORE!"
+			show_new_best()
 	else:
 		print("ERROR: Could not find CountdownLabel node!")
 
 	Signals.GameOver.emit(passed)
+
+
+func show_new_best() -> void:
+	var label := Label.new()
+	label.text = "NEW HIGH SCORE!"
+	label.add_theme_font_override("font", custom_font)
+	label.add_theme_font_size_override("font_size", 28)
+	label.add_theme_color_override("font_color", Color(1, 0.85, 0.4))
+	label.add_theme_color_override("font_outline_color", Color.BLACK)
+	label.add_theme_constant_override("outline_size", 8)
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.set_anchors_preset(Control.PRESET_CENTER)
+	label.position = Vector2(-200, 70)
+	label.size = Vector2(400, 40)
+	result_node.get_parent().add_child(label)

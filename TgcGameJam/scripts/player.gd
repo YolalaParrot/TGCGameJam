@@ -173,7 +173,7 @@ func find_best_interactable():
 	var best:Area2D = null
 	for area in interactable_areas:
 		if area.is_in_group("interactable"):
-			if not (area.is_in_group("npc") and not area.parent.can_interact()):
+			if not (area.parent.has_method("can_interact") and not area.parent.can_interact()):
 				var d := global_position.distance_to(area.global_position)
 				if d<best_dist:
 					best_dist = d
