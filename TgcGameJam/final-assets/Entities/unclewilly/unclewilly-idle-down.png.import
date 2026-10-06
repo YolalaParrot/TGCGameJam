@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvcc2sducawnn"
-path="res://.godot/imported/boy_idle_4x1.png-fdd496391b92e10edba6fd7659028a97.ctex"
+uid="uid://dpblmwhdkcm76"
+path="res://.godot/imported/unclewilly-idle-down.png-b3d2d697a5d68cac1ba89a186618d5d2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets-temp/boy_idle_4x1.png"
-dest_files=["res://.godot/imported/boy_idle_4x1.png-fdd496391b92e10edba6fd7659028a97.ctex"]
+source_file="res://final-assets/Entities/unclewilly/unclewilly-idle-down.png"
+dest_files=["res://.godot/imported/unclewilly-idle-down.png-b3d2d697a5d68cac1ba89a186618d5d2.ctex"]
 
 [params]
 

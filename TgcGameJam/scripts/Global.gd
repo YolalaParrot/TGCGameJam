@@ -1,4 +1,3 @@
-	
 extends Node
 
 func teleport_player(scene_path: String, spawn_marker_name: String) -> void:

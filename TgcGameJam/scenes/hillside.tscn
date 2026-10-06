@@ -13,6 +13,8 @@
 [ext_resource type="Texture2D" uid="uid://ud5668jvt607" path="res://final-assets/Environment/Props/Static/Trees/Model_02/Size_05.png" id="6_t6cyu"]
 [ext_resource type="Texture2D" uid="uid://6pj1ddavu86f" path="res://final-assets/Environment/Props/Static/Vegetation.png" id="7_ogo75"]
 [ext_resource type="Texture2D" uid="uid://cb8v1khnk56pu" path="res://final-assets/Environment/blehh-new-tilesets/Trees_seperated.png" id="10_uvgno"]
+[ext_resource type="Texture2D" uid="uid://b3olitbxff2yf" path="res://final-assets/Entities/ken/ken-idle-right.png" id="12_pwq0p"]
+[ext_resource type="Texture2D" uid="uid://bvcdloydumcmd" path="res://final-assets/Entities/finn/finn-idle-right.png" id="13_33sov"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_atlej"]
 texture = ExtResource("2_2dp04")
@@ -3695,6 +3697,64 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_5bn4y"]
+atlas = ExtResource("12_pwq0p")
+region = Rect2(0, 0, 26, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oac4e"]
+atlas = ExtResource("12_pwq0p")
+region = Rect2(26, 0, 26, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g1pt6"]
+atlas = ExtResource("12_pwq0p")
+region = Rect2(52, 0, 26, 27)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7whs7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5bn4y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oac4e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g1pt6")
+}],
+"loop": 1,
+"name": &"right_idle",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yy8p0"]
+atlas = ExtResource("13_33sov")
+region = Rect2(0, 0, 26, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e3uf1"]
+atlas = ExtResource("13_33sov")
+region = Rect2(26, 0, 26, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8wp3g"]
+atlas = ExtResource("13_33sov")
+region = Rect2(52, 0, 26, 27)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kau5r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yy8p0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e3uf1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8wp3g")
+}],
+"loop": 1,
+"name": &"right_idle",
+"speed": 5.0
+}]
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5bn4y"]
 texture = ExtResource("6_t6cyu")
 14:0/0 = 0
@@ -4645,10 +4705,19 @@ position = Vector2(101, 97)
 NPC_Name = "ken"
 frames = SubResource("SpriteFrames_rl0pi")
 
+[node name="AnimatedSprite2D" parent="ken" index="1" unique_id=236355110]
+sprite_frames = SubResource("SpriteFrames_7whs7")
+animation = &"right_idle"
+frame_progress = 0.124693
+
 [node name="finn" parent="." unique_id=1820279140 instance=ExtResource("5_jimnpc")]
 position = Vector2(152, 81)
 NPC_Name = "finn"
 frames = SubResource("SpriteFrames_rl0pi")
+
+[node name="AnimatedSprite2D" parent="finn" index="1" unique_id=236355110]
+sprite_frames = SubResource("SpriteFrames_kau5r")
+animation = &"right_idle"
 
 [node name="TileMapLayer2" type="TileMapLayer" parent="." unique_id=1873934383]
 z_index = 6
@@ -4699,3 +4768,5 @@ position = Vector2(82, 46)
 shape = SubResource("RectangleShape2D_qv2pw")
 
 [editable path="player"]
+[editable path="ken"]
+[editable path="finn"]

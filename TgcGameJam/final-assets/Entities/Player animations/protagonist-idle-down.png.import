@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dkngq3bvfwfa"
-path="res://.godot/imported/boy_16x16.png-3bce20893ca1234f8503429716837d98.ctex"
+uid="uid://ca2ja0nwi2e7v"
+path="res://.godot/imported/protagonist-idle-down.png-eb9704638ceaefa6bfa3390ec758bc5b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets-temp/boy_16x16.png"
-dest_files=["res://.godot/imported/boy_16x16.png-3bce20893ca1234f8503429716837d98.ctex"]
+source_file="res://final-assets/Entities/Player animations/protagonist-idle-down.png"
+dest_files=["res://.godot/imported/protagonist-idle-down.png-eb9704638ceaefa6bfa3390ec758bc5b.ctex"]
 
 [params]
 

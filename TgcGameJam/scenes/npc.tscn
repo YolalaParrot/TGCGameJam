@@ -17,6 +17,7 @@ outline_color = Color(0.30738604, 0.0709007, 0.055149846, 1)
 size = Vector2(42, 60)
 
 [node name="npc" type="AnimatableBody2D" unique_id=987617997 groups=["npc"]]
+scale = Vector2(0.5, 0.5)
 script = ExtResource("1_abqhh")
 
 [node name="Interactable" type="Area2D" parent="." unique_id=1725258466 groups=["interactable", "npc"]]
