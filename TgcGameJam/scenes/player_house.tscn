@@ -3794,7 +3794,7 @@ size = Vector2(22, 79)
 size = Vector2(18.000004, 46.000023)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kk36w"]
-size = Vector2(10, 61.000046)
+size = Vector2(19, 61.000046)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7k15u"]
 size = Vector2(48.000004, 31.999908)
@@ -3834,17 +3834,16 @@ position = Vector2(0, 4.0000153)
 
 [node name="Camera2D" parent="player" index="2" unique_id=1036130193]
 zoom = Vector2(5, 5)
-limit_left = -128
-limit_top = -127
+limit_left = -127
+limit_top = -35
 limit_right = 128
-limit_bottom = 124
+limit_bottom = 125
 
 [node name="collisions" type="StaticBody2D" parent="." unique_id=1116281962]
 
-[node name="map_boundary" type="CollisionPolygon2D" parent="collisions" unique_id=1379533845]
-position = Vector2(32, 272)
-rotation = -1.5707964
-polygon = PackedVector2Array(-1.5258789e-05, 140.00003, 255.99998, 140.00003, 255.96269, 256.2963, 164.96269, 256.2963, 165.96269, 276.2963, 83.96269, 275.2963, 85.96269, 257.2963, 81.96269, 256.2963, 71.96269, 256.2963, -1.5258789e-05, 256.00003, -1.5258789e-05, 140.00003, -4.0000153, 136.00003, -5.0373116, 262.2963, 78.96269, 262.2963, 84.96269, 283.2963, 171.96269, 282.2963, 170.96269, 262.2963, 263.96268, 264.2963, 262, 134.00003, -4.0000153, 136.00003)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="collisions" unique_id=1674059975]
+position = Vector2(284.04926, 269.51447)
+polygon = PackedVector2Array(-0.049240112, -0.5144501, -109.04924, -1.5144424, -108.049255, -248.51443, -109.049255, -249.51443, -1.0492554, -248.51445, -1.0492554, -237.51445, 7.9507523, -236.51445, 7.9507523, -163.51445, 27.950752, -163.51445, 27.950752, -82.51445, 7.9507523, -82.51445, 8.950752, -1.5144501, 25.950752, 18.485558, 27.950752, -75.51445, 46.950752, -73.51445, 45.950752, -171.51445, 15.950752, -172.51445, 17.950752, -265.51443, -128.04926, -261.51443, -132.04924, 9.485558, 23.950752, 19.485558, 7.9507523, -0.5144501)
 
 [node name="town_one_transition" parent="." unique_id=1469502787 instance=ExtResource("4_t6268")]
 destination_scene = "uid://bxcmvk48bcfuv"
@@ -3869,7 +3868,7 @@ position = Vector2(182.00002, 136.00005)
 shape = SubResource("RectangleShape2D_srfah")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=284006783]
-position = Vector2(204.00002, 48.500046)
+position = Vector2(199.50002, 48.50006)
 shape = SubResource("RectangleShape2D_kk36w")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D" unique_id=1791484133]

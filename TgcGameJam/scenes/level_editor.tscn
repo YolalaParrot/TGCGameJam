@@ -6,7 +6,9 @@
 script = ExtResource("1_agvgh")
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=1075751334]
+volume_db = -10.0
 
 [node name="CountdownSFX" type="AudioStreamPlayer" parent="." unique_id=542057663]
+volume_db = -30.0
 
 [connection signal="finished" from="MusicPlayer" to="." method="_on_music_player_finished"]
