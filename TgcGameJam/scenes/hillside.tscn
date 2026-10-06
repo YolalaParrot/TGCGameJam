@@ -4735,6 +4735,24 @@ shape = SubResource("RectangleShape2D_qv2pw")
 stream = ExtResource("12_atlej")
 autoplay = true
 
+[node name="jim" parent="." unique_id=67707293 instance=ExtResource("5_jimnpc")]
+position = Vector2(101, 97)
+NPC_Name = "ken"
+
+[node name="CollisionShape2D" parent="jim/Interactable" parent_id_path=PackedInt32Array(67707293, 1725258466) index="0" unique_id=818352050]
+position = Vector2(226, 6)
+
+[node name="AnimatedSprite2D" parent="jim" index="1" unique_id=236355110]
+position = Vector2(222, -4.000002)
+sprite_frames = SubResource("SpriteFrames_7whs7")
+animation = &"right_idle"
+autoplay = ""
+frame_progress = 0.7578066
+
+[node name="CollisionShape2D" parent="jim" index="2" unique_id=643911397]
+position = Vector2(228, 40)
+
 [editable path="player"]
 [editable path="ken"]
 [editable path="finn"]
+[editable path="jim"]
